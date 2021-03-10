@@ -1,0 +1,577 @@
+global !p
+texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA', 'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG', 'AmsAS', 'AmsBS', 'AmsCS', 'AmsDS', 'AmsES', 'AmsFS', 'AmsGS' ]]
+texIgnoreMathZones = ['texMathText']
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+ignore = texIgnoreMathZoneIds[0]
+def math():
+	synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+	try:
+		first = next(i for i in reversed(synstackids) if i in texIgnoreMathZoneIds or i in texMathZoneIds)
+		return first != ignore
+	except StopIteration:
+		return False
+
+def create_row_placeholders(snip):
+    # count
+    placeholders_amount = int(snip.buffer[snip.line].strip())
+
+    # erase current line
+    snip.buffer[snip.line] = ''
+
+    # create anonymous snippet with expected content and number of tabstops
+    anon_snippet_body = ' & '.join(['$' + str(i+1)
+                                    for i in range(placeholders_amount)])
+
+    # expand anonymous snippet
+    snip.expand_anon(anon_snippet_body)
+
+def create_fig_minipages(snip):
+
+    # count
+    placeholders_amount = int(snip.buffer[snip.line].strip())
+
+    formatted_parts = "{:.2f}".format(1/placeholders_amount)
+
+    # erase current line
+    snip.buffer[snip.line] = ''
+
+    # create anonymous snippet with expected content and number of tabstops
+    anon_snippet_body = '\\begin{figure}[htb] \n  \centering\n'
+
+    for i in range(placeholders_amount):
+        anon_snippet_body += '  \\begin{minipage}{' + formatted_parts + '\\textwidth}\n    \centering\n'
+        anon_snippet_body += '\n    $' + str(i+3) + '\n  \end{minipage}%\n' 
+    
+
+    anon_snippet_body += '  \caption{$1}%\n  \label{fig:$2}\n\end{figure}'
+
+    # expand anonymous snippet
+    snip.expand_anon(anon_snippet_body)
+
+endglobal
+
+
+
+
+snippet " "latex quote" iA
+\`\`$1''$0
+endsnippet
+
+snippet beg "begin{} / end{}" bA
+\begin{$1}
+  $2
+\end{$1}
+$0
+endsnippet
+
+# sections etc
+snippet chp "chapter" bA
+\chapter{$1}
+$0
+endsnippet
+
+snippet sec "section" bA
+\section{$1}
+$0
+endsnippet
+
+snippet se* "section*" bA
+\section*{$1}
+$0
+endsnippet
+
+snippet ssec "subsection" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet sse* "subsection*" bA
+\subsection*{$1}
+$0
+endsnippet
+
+snippet sssec "subsubsection" bA
+\subsubsection{$1}
+$0
+endsnippet
+
+snippet ssse* "subsubsection*" bA
+\subsubsection*{$1}
+$0
+endsnippet
+
+ 
+# math
+context "not math()"
+snippet < "inline math" A
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+snippet \[ "display math" bA
+\[
+  $1
+\]
+$0
+endsnippet
+
+snippet ali "align*" b
+\begin{align*}
+  $1 & $2 \\\\
+  $3
+\end{align*}
+$0
+endsnippet
+
+context "math()"
+snippet :: "colon" iA
+\colon
+endsnippet
+
+context "math()"
+snippet fun "signature of function" iA
+$1 \colon $2 \to $3
+endsnippet
+
+snippet alifun "full definition of function" iA
+\begin{align*}
+  $1 \colon $2 & \to $3 \\\\
+  $4 & \mapsto $5
+\end{align*}
+$0
+endsnippet
+
+context "math()"
+snippet theset "{x \in X | p(X)}" iA
+\left\\{$1 \mid $2\right\\}
+endsnippet
+
+context "math()"
+snippet aset "{ ... }" iA
+\left\\{$1\\right\\}$0
+endsnippet
+
+context "math()"
+snippet \\\ "\setminus" iA
+\\setminus
+endsnippet
+
+context "math()"
+snippet uuu "\cup" iA
+\\cup
+endsnippet
+
+context "math()"
+snippet nnn "\cap" iA
+\\cap
+endsnippet
+
+
+context "math()"
+snippet __ "subscript block" iA
+_{$1}$0
+endsnippet
+
+
+context "math()"
+snippet ^^ "superscript block" iA
+^{$1}$0
+endsnippet
+
+context "math()"
+snippet // "frac" iA
+\frac{$1}{$2}$0
+endsnippet
+
+snippet frac "visual frac" i
+\\frac{${VISUAL}}{$1}$0
+endsnippet
+
+context "math()"
+snippet ceil "ceil" iA
+\left\lceil ${1:{VISUAL}} \right\rceil $0
+endsnippet
+
+context "math()"
+snippet floor "floor" iA
+\left\lfloor ${1:{VISUAL}} \right\rfloor $0
+endsnippet
+
+context "math()"
+snippet sym "symmetric nxn" iA
+  \textup{Sym}_{$1} \left( $3 \right)
+endsnippet
+
+context "math()"
+snippet => "Rightarrow" i
+\Rightarrow
+endsnippet
+
+context "math()"
+snippet <= "Leftarrow" i
+\Leftarrow
+endsnippet
+
+# visual brackets
+snippet lr "left( right)" i
+\left( ${1:${VISUAL}} \right)$0
+endsnippet
+
+snippet lr( "left( right)" i
+\left( ${1:${VISUAL}} \right)$0
+endsnippet
+
+snippet lr| "left| right|" i
+\left| ${1:${VISUAL}} \right|$0
+endsnippet
+
+snippet lr{ "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\}$0
+endsnippet
+
+snippet lr[ "left[ right]" i
+\left[ ${1:${VISUAL}} \right]$0
+endsnippet
+
+snippet lr< "left\langle right\rangle" i
+\left\langle ${1:${VISUAL}} \right\rangle$0
+endsnippet
+
+# other names for brackets (non-visual)
+context "math()"
+snippet big( "\left( \right)" iA
+\left( $1 \right)$0
+endsnippet
+
+context "math()"
+snippet big{ "\left\{ \right\}" iA
+\left\\{ $1 \right\\}$0
+endsnippet
+
+context "math()"
+snippet bigv "\left\vert \right\vert" iA
+\left\vert $1 \right\vert$0
+endsnippet
+
+context "math()"
+snippet bigV "\left\Vert \right\Vert" iA
+\left\Vert $1 \right\Vert$0
+endsnippet
+
+context "math()"
+snippet big< "\left\langle \right\langle" iA
+\left\langle $1 \right\rangle
+endsnippet
+
+context "math()"
+snippet << "\langle \rangle" iA
+\langle $1 \rangle$0
+endsnippet
+
+
+# big n-ary operators
+context "math()"
+snippet sum "sum" i
+\sum_{$1}^{$2} $0
+endsnippet
+
+context "math()"
+snippet prod "product" i
+\prod_{$1}^{$2} $0
+endsnippet
+
+context "math()"
+snippet int "integral" i
+\int_{$1}^{$2} $3 \, d$0
+endsnippet
+
+context "math()"
+snippet union "bigcup" i
+\bigcup_{$1}^{$2} $0
+endsnippet
+
+snippet inter "bigcap" i
+\bigcap_{$1}^{$2} $0
+endsnippet
+
+# lists
+context "math()"
+snippet some "finitely many" iA
+$1_{$2}, \dots, $1_{$3}$0
+endsnippet
+
+context "math()"
+snippet many "infinitely many" iA
+$1_{$2}, $1_{$3}, \dots$0
+endsnippet
+
+context "math()"
+snippet seq "sequence" wA
+{($1_{$2})}_{$3 \in \mathbb{N}}$0
+endsnippet
+
+context "math()"
+snippet homo "homogeneous coordinates" iA
+[$1_{$2} : \dots : $1_{$3}]
+endsnippet
+
+context "math()"
+snippet asandps "product of affine spaces with projective" iA
+\mathbb{A}^{n_1} \times \cdots \times \mathbb{A}^{n_\ell} \times
+\mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
+endsnippet
+
+context "math()"
+snippet mat "pmatrix" bA
+\begin{pmatrix}
+  $1
+\end{pmatrix}
+$0
+endsnippet
+
+# blackboard bold symbols
+context "math()"
+snippet NN "\mathbb{N}" iA
+\mathbb{N}$0
+endsnippet
+
+context "math()"
+snippet ZZ "\mathbb{Z}" iA
+\mathbb{Z}$0
+endsnippet
+
+context "math()"
+snippet QQ "\mathbb{Q}" iA
+\mathbb{Q}$0
+endsnippet
+
+context "math()"
+snippet RR "\mathbb{R}" iA
+\mathbb{R}$0
+endsnippet
+
+context "math()"
+snippet CC "\mathbb{C}" iA
+\mathbb{C}$0
+endsnippet
+
+context "math()"
+snippet HH "\mathbb{H}" iA
+\mathbb{H}$0
+endsnippet
+
+context "math()"
+snippet PP "\mathbb{P}" iA
+\mathbb{P}$0
+endsnippet
+
+context "math()"
+snippet AA "\mathbb{A}" iA
+\mathbb{A}
+endsnippet
+
+context "math()"
+snippet FF "\mathbb{F}" iA
+\mathbb{F}
+endsnippet
+
+context "math()"
+snippet ooo "infinity" iA
+\infty
+endsnippet
+
+# greek letters
+context "math()"
+snippet aaa "alpha" iA
+\alpha
+endsnippet
+
+context "math()"
+snippet lll "lambda" iA
+\lambda
+endsnippet
+
+context "math()"
+snippet mmm  "mu" iA
+\mu
+endsnippet
+
+context "math()"
+snippet sss  "sigma" iA
+\sigma
+endsnippet
+
+# numbering
+snippet enum "enumerate" b
+\begin{enumerate}[${1:first-item}]
+  \item $2
+\end{enumerate}
+$0
+endsnippet
+
+snippet item "itemize" b
+\begin{itemize}
+  \item $1
+\end{itemize}
+$0
+endsnippet
+
+snippet tab "table" b
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{$3}
+    $4
+  \end{tabular}
+  \caption{$1}%
+  \label{tab:$2}
+\end{table}
+$0
+endsnippet
+
+snippet tab* "table*" b
+\begin{table*}[htb]
+  \centering
+  \begin{tabular}{$1}
+    $2
+  \end{tabular}
+\end{table*}
+$0
+endsnippet
+
+# figures
+snippet fig "figure" b
+\begin{figure}[htb]
+  \centering
+  $3
+  \caption{$1}%
+  \label{fig:$2}
+\end{figure}
+$0
+endsnippet
+
+post_jump "create_fig_minipages(snip)"  
+snippet "fig(\d+)" "figure with n minipages" br
+`!p snip.rv = match.group(1)`
+endsnippet
+
+snippet inc "includegraphics" b
+\includegraphics{$0}
+endsnippet
+
+snippet tikz "tikzpicture" b
+\begin{tikzpicture}
+  $0
+\end{tikzpicture}
+endsnippet
+
+# templates
+snippet tempmain "template for a main document" b
+\documentclass[a4paper]{$1}
+
+\title{$2}
+\author{$3}
+\date{$4}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{enumerate}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+$0
+\end{document}
+endsnippet
+
+snippet temptikz "a standalone tikz file" b
+\documentclass[tikz]{standalone}
+
+\begin{document}
+\begin{tikzpicture}
+$0
+\end{tikzpicture}
+\end{document}
+endsnippet
+
+snippet tempcorr "corrections" b
+\documentclass[a4paper]{article}
+
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{enumerate}
+
+\title{Korrekturen Serie 12}
+\author{${2:name-student} \\\\        	korrigiert von Leandro Meier}
+
+
+\begin{document}
+\maketitle
+
+$0
+
+\begin{table*}[h]
+  \centering
+  \begin{tabular}{c | c | c | c | c }
+    1 & 2 & 3 & 4 & Total \\\\
+    \hline
+    ${4:ex1} & ${6:ex2} & ${8:ex3} & ${10:ex4} & ${11:total} \\\\
+  \end{tabular}
+\end{table*}
+
+\section*{Aufgabe 1}
+$3
+
+\section*{Aufgabe 2}
+$5
+
+\section*{Aufgabe 3}
+$7
+
+\section*{Aufgabe 4}
+$9
+
+
+\end{document}
+endsnippet
+
+
+post_jump "create_row_placeholders(snip)"
+snippet "tr(\d+)" "latex table row variable" br
+`!p snip.rv = match.group(1)`
+endsnippet
+
+
+
+#diverse
+snippet kinn "unverständlich" bA
+Kann ich nicht nachvollziehen.
+endsnippet
+
+snippet kab "keine Abgabe" bA
+keine Abgabe.
+endsnippet
+
+snippet diagbar "diagonalisierbar" bA
+diagonalisierbar
+endsnippet
