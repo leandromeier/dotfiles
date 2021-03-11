@@ -1,1 +1,0 @@
-/home/leandro/.vim
