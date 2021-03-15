@@ -2,14 +2,14 @@
 """""""""
 " vim-plug
 call plug#begin('~/.vim/plugged')
+" snippets
+Plug 'sirver/ultisnips'
 " a colorscheme
 Plug 'morhetz/gruvbox'
 " tree view
 Plug 'preservim/nerdtree'
 " show git status in nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" snippets
-Plug 'SirVer/ultisnips'
 " comment with gcc
 Plug 'tpope/vim-commentary'
 " change cwd to configured directory
