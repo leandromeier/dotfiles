@@ -221,6 +221,15 @@ snippet lr< "left\langle right\rangle" i
 \left\langle ${1:${VISUAL}} \right\rangle$0
 endsnippet
 
+snippet scp "scalar product / left\langle right\rangle" i
+\left\langle ${1:${VISUAL}} \right\rangle$0
+endsnippet
+
+context "math()"
+snippet normm "\| \|"
+\\| ${1:${VISUAL}} \\|
+endsnippet
+
 # other names for brackets (non-visual)
 context "math()"
 snippet big( "\left( \right)" iA
@@ -369,10 +378,58 @@ snippet ooo "infinity" iA
 \infty
 endsnippet
 
+#mathcal
+context "math()"
+snippet BB "\mathcal{B}" iA
+\mathcal{B}
+endsnippet
+
 #greek letters
 context "math()"
 snippet aaa "alpha" iA
 \alpha
+endsnippet
+
+context "math()"
+snippet lll "lambda" iA
+\lambda
+endsnippet
+
+#arrows
+context "math()"
+snippet rarrow "rightarrow" iA
+\rightarrow 
+endsnippet
+
+context "math()"
+snippet mpto "mapsto" iA
+\mapsto
+endsnippet
+
+context "math()"
+snippet Rarrow "Rightarrow" iA
+\Rightarrow 
+endsnippet
+
+context "math()"
+snippet Larrow "Leftarrow" iA
+\Leftarrow 
+endsnippet
+
+#special symbols
+context "math()"
+snippet tilde "tilde" iA
+\tilde{$1} $0
+endsnippet
+
+context "math()"
+snippet perp "perp" iA
+\perp $0
+endsnippet
+
+context "math()"
+snippet nrm "norm" iA
+\\| $1 \\| $0
 endsnippet
 
 # numbering
@@ -533,5 +590,3 @@ snippet "tr(\d+)" "latex table row variable" br
 `!p snip.rv = match.group(1)`
 endsnippet
 
-#nothing	
-#empty
