@@ -198,3 +198,6 @@ hide_edge_borders smart
 for_window [title="Battery Warning"] sticky enable] -L 80
 
 exec --no-startup-id nm-applet
+
+#start synoloy drive client
+exec_always synology-drive
