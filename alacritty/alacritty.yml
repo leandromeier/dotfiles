@@ -1,0 +1,12 @@
+key_bindings:
+  - { key: Escape,  mods: Control|Shift, action: SpawnNewInstance }
+    # Plus and Equals cannot be pressed without Shift on swiss keyboards
+  - { key: Plus,  mods: Control|Shift, action: IncreaseFontSize }
+  - { key: Equals,  mods: Control|Shift, action: ResetFontSize }
+    # alt+vim keys to scroll
+  - { key: K, mods: Alt, action: ScrollLineUp }
+  - { key: J, mods: Alt, action: ScrollLineDown }
+  - { key: U, mods: Alt, action: ScrollPageUp }
+  - { key: D, mods: Alt, action: ScrollPageDown }
+font:
+  size: 10.0
