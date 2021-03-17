@@ -183,7 +183,7 @@ snippet // "frac" iA
 endsnippet
 
 snippet frac "visual frac" i
-\\frac{${VISUAL}}{$1}$0
+\\frac{${1:{VISUAL}}}{$2}$0
 endsnippet
 
 context "math()"
@@ -194,6 +194,11 @@ endsnippet
 context "math()"
 snippet floor "floor" iA
 \left\lfloor ${1:{VISUAL}} \right\rfloor $0
+endsnippet
+
+context "math()"
+snippet sqrt "sqrt" iA
+\sqrt{${1:{VISUAL}}}$0
 endsnippet
 
 # visual brackets
