@@ -1,6 +1,16 @@
 # dotfiles
+alacritty links to ~/.config/alacritty
+
+fish links to ~/.config/fish
+
+nvim links to ~/.config/nvim
+
+zathura links to ~/.config/zathura
+
 gitconfig is at ~/.gitconfig
-folder i3 is at ~/.config/i3
+
+i3 links to ~/.config/i3
+
 polybar configs are at ~/.config/polybar
 
 #simlinks
