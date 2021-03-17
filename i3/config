@@ -2,6 +2,7 @@ set $terminal 'alacritty'
 set $browser 'firefox'
 set $filemanager 'alacritty -e ranger'
 set $mixer 'pavucontrol'
+set $signal 'signal-desktop'
 
 # i3 config file (v4)
 #
@@ -201,3 +202,6 @@ exec --no-startup-id nm-applet
 
 #start synoloy drive client
 exec_always synology-drive
+
+#start signal
+bindsym $mod+Shift+s exec $signal
