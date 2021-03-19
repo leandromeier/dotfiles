@@ -29,3 +29,6 @@ alias gP='git pull'
 
 # xournalpp
 alias xoup='xournalpp'
+
+# zathura
+alias z='zathura'
