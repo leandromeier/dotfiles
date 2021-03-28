@@ -32,3 +32,6 @@ alias xoup='xournalpp'
 
 # zathura
 alias z='zathura'
+
+# suspend bc I'm too lazy to type long stuff
+alias suspnow='systemctl suspend'
