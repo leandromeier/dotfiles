@@ -35,3 +35,4 @@ alias z='zathura'
 
 # suspend bc I'm too lazy to type long stuff
 alias suspnow='systemctl suspend'
+alias sn='systemctl suspend'
