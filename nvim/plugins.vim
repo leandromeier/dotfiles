@@ -11,12 +11,6 @@
 " vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
 " a colorscheme
-"SnipMate
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
-" Optional:
-"Plug 'honza/vim-snippets'"
 Plug 'morhetz/gruvbox'
 " tree view
 Plug 'preservim/nerdtree'
@@ -43,7 +37,7 @@ Plug 'itchyny/lightline.vim'
 " repeat surround commands
 Plug 'tpope/vim-repeat'
 " GitHub integration
-Plug 'tpope/vim-rhubarb'
+" Plug 'tpope/vim-rhubarb'
 " Rust support
 Plug 'rust-lang/rust.vim'
 " fish support
@@ -64,7 +58,8 @@ let NERDTreeRespectWildIgnore=1
 " vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
-" let g:vimtex_quickfix_mode=0
+" suppress the quickfix window opening automatically
+let g:vimtex_quickfix_mode=0
 " let g:vimtex_delim_stopline=2500
 let g:vimtex_compiler_progname = 'nvr'
 
