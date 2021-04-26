@@ -199,3 +199,5 @@ exec_always synology-drive
 
 #start signal
 bindsym $mod+Shift+s exec $signal
+
+exec_always unclutter & 
