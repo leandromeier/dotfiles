@@ -183,7 +183,7 @@ snippet // "frac" iA
 endsnippet
 
 snippet frac "visual frac" i
-\\frac{${1:{VISUAL}}}{$2}$0
+\\frac{${VISUAL}}{$1} $0
 endsnippet
 
 context "math()"
@@ -425,6 +425,11 @@ endsnippet
 context "math()"
 snippet Larrow "Leftarrow" iA
 \Leftarrow 
+endsnippet
+
+context "math()"
+snippet iff "if and only if" i
+\Leftrightarrow
 endsnippet
 
 #special symbols
