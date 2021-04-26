@@ -200,4 +200,5 @@ exec_always synology-drive
 #start signal
 bindsym $mod+Shift+s exec $signal
 
+#hide the mouse pointer if idle for >5 seconds
 exec_always unclutter & 
