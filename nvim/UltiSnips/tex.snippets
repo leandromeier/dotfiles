@@ -327,6 +327,28 @@ snippet mat "pmatrix" bA
 $0
 endsnippet
 
+context "math()"
+snippet Cpoly "polynomials in finite variables" iA
+\mathbb{C} \left[ $1_{$2}, \dots, $1_{$3} \right]$0
+endsnippet
+
+context "math()"
+snippet CCpoly "polynomials in infinite variables" iA
+\mathbb{C} \left[ $$1_{$2}, $1_{$3}, \dots \right] $0
+endsnippet
+
+#specific useful stuff
+context "not math()"
+snippet SymN "Sym(N)" A
+Sym$\mathbb{N}$$0
+endsnippet
+
+context "not math()"
+snippet symN "Sym(N)" A
+Sym$\mathbb{N}$$0
+endsnippet
+
+
 # blackboard bold symbols
 context "math()"
 snippet NN "\mathbb{N}" iA
@@ -404,6 +426,11 @@ endsnippet
 context "math()"
 snippet lll "lambda" iA
 \lambda
+endsnippet
+
+context "math()"
+snippet varp "varphi" iA
+\varphi
 endsnippet
 
 #arrows
@@ -602,6 +629,10 @@ $11
 \end{document}
 endsnippet
 
+#new word abbreviations
+snippet exx "example" i
+example
+endsnippet
 
 post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br
