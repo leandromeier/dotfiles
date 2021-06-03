@@ -3,6 +3,9 @@ set $browser 'firefox'
 set $filemanager 'alacritty -exec ranger'
 set $mixer 'pavucontrol'
 set $signal 'signal-desktop'
+set $xournal 'xournalpp'
+set $thunderbird 'thunderbird'
+set $zoom 'zoom'
 
 # i3 config file (v4)
 #
@@ -45,6 +48,7 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $terminal
 bindsym $mod+t exec $terminal 
 
 # kill focused window
@@ -185,6 +189,10 @@ bindsym Print exec maim -s -u | xclip -selection clipboard -t image/png -i
 bindsym $mod+b exec $browser
 bindsym $mod+v exec $filemanager
 bindsym $mod+m exec $mixer
+bindsym $mod+Shift+s exec $signal
+bindsym $mod+x exec $xournal
+bindsym $mod+shift+t exec $thunderbird
+bindsym $mod+z exec $zoom
 
 # using polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
@@ -193,12 +201,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 default_border pixel 3
 hide_edge_borders smart
 
-
 #start synoloy drive client
 exec_always synology-drive
-
-#start signal
-bindsym $mod+Shift+s exec $signal
 
 #hide the mouse pointer if idle for >5 seconds
 exec_always unclutter & 
