@@ -16,6 +16,7 @@ alias s='lsd -la'
 
 # ranger
 alias rng='ranger'
+alias r='ranger'
 
 # git
 alias ga='git add'
