@@ -445,7 +445,7 @@ snippet rarrow "rightarrow" iA
 endsnippet
 
 context "math()"
-snippet mpto "mapsto" iA
+snippet mapsto "mapsto" iA
 \mapsto
 endsnippet
 
@@ -463,6 +463,24 @@ context "math()"
 snippet iff "if and only if" i
 \Leftrightarrow
 endsnippet
+
+#dots
+context "math()"
+snippet dots "dots" iA
+\dots
+endsnippet
+
+context "math()"
+snippet vots "vdots" iA
+\vdots
+endsnippet
+
+context "math()"
+snippet cots "cdots" iA
+\cdots
+endsnippet
+
+
 
 #special symbols
 context "math()"
@@ -635,8 +653,29 @@ $11
 endsnippet
 
 #new word abbreviations
+context "not math()" 
+snippet thm "theorem" i
+theorem
+endsnippet
+
+context "not math()" 
+snippet prop "proposition" i
+proposition
+endsnippet
+
+context "not math()" 
+snippet def "definition" i
+definition
+endsnippet
+
+context "not math()" 
 snippet exx "example" i
 example
+endsnippet
+
+context "not math()" 
+snippet noth "noetherian" i
+Noetherian
 endsnippet
 
 post_jump "create_row_placeholders(snip)"
