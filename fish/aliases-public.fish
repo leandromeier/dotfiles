@@ -15,7 +15,6 @@ alias ls='lsd'
 alias s='lsd -la'
 
 # ranger
-alias rng='ranger'
 alias r='ranger'
 
 # git
@@ -35,5 +34,4 @@ alias xoup='xournalpp'
 alias z='zathura'
 
 # suspend bc I'm too lazy to type long stuff
-alias suspnow='systemctl suspend'
 alias sn='systemctl suspend'
