@@ -204,5 +204,9 @@ hide_edge_borders smart
 #start synoloy drive client
 exec_always synology-drive
 
+#start nm-applet (for wifi symbol)
+exec_always nm-applet
+
 #hide the mouse pointer if idle for >5 seconds
 exec_always unclutter & 
+
