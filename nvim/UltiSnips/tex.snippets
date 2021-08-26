@@ -47,6 +47,14 @@ endglobal
 
 
 
+snippet // "backslash" iA
+\\
+endsnippet
+
+snippet ö "backslash" iA
+\\
+endsnippet
+
 snippet && "backslash" iA
 \\
 endsnippet
@@ -102,6 +110,16 @@ endsnippet
 # math
 context "not math()"
 snippet < "inline math" A
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+context "not math()"
+snippet ä "inline math" A
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
 	snip.rv = ' '
@@ -170,6 +188,17 @@ endsnippet
 
 
 context "math()"
+snippet ccc "\subset" iA
+\\subseteq
+endsnippet
+
+context "math()"
+snippet ccr "\supset" iA
+\\supseteq
+endsnippet
+
+
+context "math()"
 snippet __ "subscript block" iA
 _{$1}$0
 endsnippet
@@ -181,12 +210,13 @@ snippet ^^ "superscript block" iA
 endsnippet
 
 context "math()"
-snippet // "frac" iA
-\frac{$1}{$2}$0
+snippet üü "superscript block" iA
+^{$1}$0
 endsnippet
 
-snippet frac "visual frac" i
-\\frac{${VISUAL}}{$1} $0
+context "math()"
+snippet frac "frac" iA
+\frac{$1}{$2}$0
 endsnippet
 
 context "math()"
@@ -439,16 +469,43 @@ snippet ooo "infinity" iA
 \infty
 endsnippet
 
-#mathcal
+context "math()"
+snippet vtrop "V trop" iA
+\mathcal{V}_{trop}\left( $1 \right) $0
+endsnippet
+
+snippet frac "visual frac" i
+\\frac{${VISUAL}}{$1} $0
+endsnippet
+
+snippet frac "visual frac" i
+\\frac{${VISUAL}}{$1} $0
+endsnippet
+
+#special fonts
 context "math()"
 snippet BB "\mathcal{B}" iA
 \mathcal{B}
 endsnippet
 
-#mathfrak
+context "math()"
+snippet mcc "\mathcal{}" iA
+\mathcal{$1} $0
+endsnippet
+
 context "math()"
 snippet mff "\mathfrak{}" iA
 \mathfrak{$1} $0
+endsnippet
+
+context "math()"
+snippet mrr "\mathrm{}" iA
+\mathrm{$1} $0
+endsnippet
+
+context "math()"
+snippet text "\text{}" iA
+\text{$1} $0
 endsnippet
 
 #greek letters
@@ -519,7 +576,11 @@ snippet cots "cdots" iA
 \cdots
 endsnippet
 
-
+#special lettering (cursive, ...)
+context "not math()"
+snippet emphh
+\emph{$1} $0
+endsnippet
 
 #special symbols
 context "math()"
