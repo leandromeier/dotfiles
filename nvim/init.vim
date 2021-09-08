@@ -1,5 +1,5 @@
 
-let g:snipMate = {'snippet_version': 1}
+"let g:snipMate = {'snippet_version': 1}
 
 let g:python3_host_prog =  '/usr/bin/python3.9'
 
@@ -24,8 +24,9 @@ set autoindent
 "line numbers
 set number
 "auto column border (try out what this does)
-"set cc=80
+set cc=80
 "auto-indenting depending on filetype
 "does not work yet, need to figure out plugins first
 "set filetype plugin indent on
-
+"folding by indent
+set foldmethod=indent
