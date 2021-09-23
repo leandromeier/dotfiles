@@ -508,6 +508,12 @@ snippet text "\text{}" iA
 \text{$1} $0
 endsnippet
 
+#symbols over letters
+context "math()"
+snippet ~ "\tilde{}" iA
+\tilde{$1} $0
+endsnippet
+
 #greek letters
 context "math()"
 snippet aaa "alpha" iA
@@ -540,22 +546,6 @@ snippet iff "if and only if" i
 \Leftrightarrow
 endsnippet
 
-#dots
-context "math()"
-snippet dots "dots" iA
-\dots
-endsnippet
-
-context "math()"
-snippet vots "vdots" iA
-\vdots
-endsnippet
-
-context "math()"
-snippet cots "cdots" iA
-\cdots
-endsnippet
-
 #special lettering (cursive, ...)
 context "not math()"
 snippet emphh
@@ -563,11 +553,6 @@ snippet emphh
 endsnippet
 
 #special symbols
-context "math()"
-snippet tilde "tilde" iA
-\tilde{$1} $0
-endsnippet
-
 context "math()"
 snippet perp "perp" iA
 \perp $0
