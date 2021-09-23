@@ -1,11 +1,11 @@
 set $terminal 'alacritty'
 set $browser 'firefox'
-set $filemanager 'alacritty -exec ranger'
 set $mixer 'pavucontrol'
 set $signal 'signal-desktop'
 set $xournal 'xournalpp'
 set $thunderbird 'thunderbird'
 set $zoom 'zoom'
+set $spotify 'spotify'
 
 # i3 config file (v4)
 #
@@ -187,12 +187,12 @@ bindsym Print exec maim -s -u | xclip -selection clipboard -t image/png -i
 
 # open applications keybindings
 bindsym $mod+b exec $browser
-bindsym $mod+v exec $filemanager
 bindsym $mod+m exec $mixer
 bindsym $mod+Shift+s exec $signal
 bindsym $mod+x exec $xournal
 bindsym $mod+shift+t exec $thunderbird
 bindsym $mod+z exec $zoom
+bindsym $mod+v exec $spotify
 
 # using polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
