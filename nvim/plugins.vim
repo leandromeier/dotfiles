@@ -63,6 +63,7 @@ let g:vimtex_quickfix_mode=0
 " let g:vimtex_delim_stopline=2500
 let g:vimtex_compiler_progname = 'nvr'
 
+
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
