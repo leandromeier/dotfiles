@@ -486,10 +486,10 @@ function MODEL:runLatex()
   if prefs.freeze_in_latex then
     success, errmsg, result, log = self.doc:runLatex(self.file_name) -- sync
   else
-    --ipeui.waitDialog(self.ui:win(),
-    --		function()
+    ipeui.waitDialog(self.ui:win(),
+    		function()
 		       success, errmsg, result, log = self.doc:runLatex(self.file_name, true) -- async 
---		end, "Compiling Latex")
+		end, "Compiling Latex")
     if success and success ~= true then
       self.doc:completeLatexRun(success) -- on ui thread
     end
