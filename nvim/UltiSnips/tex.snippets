@@ -394,6 +394,11 @@ snippet symN "Sym(N)" iA
 endsnippet
 
 context "math()"
+snippet symI "Sym(Inf)" iA
+\mathrm{Sym}\left(\infty \right)$0
+endsnippet
+
+context "math()"
 snippet incN "Inc(N)" iA
 \mathrm{Inc} \left( \mathbb{N} \right)$0
 endsnippet
@@ -650,6 +655,8 @@ snippet tempmain "template for a main document" b
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
+
+\usepackage{comment}
 
 \setlength\parindent{0pt}
 
