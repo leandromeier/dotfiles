@@ -685,6 +685,16 @@ $0
 \end{document}
 endsnippet
 
+snippet tempsub "template for a subfile" b
+\documentclass[${1:path/to/main.tex}]{subfiles}
+\graphicspath{{\subfix{${2:path/to/images}}}}
+
+\begin{document}
+
+$0
+\end{document}
+endsnippet
+
 snippet temptikz "a standalone tikz file" b
 \documentclass[tikz]{standalone}
 
