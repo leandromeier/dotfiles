@@ -21,3 +21,4 @@ set cursorline
 filetype plugin indent on " make vim recognize filetypes
 syntax on " syntax highlighting
 
+let g:vimtex_view_method = 'zathura'
