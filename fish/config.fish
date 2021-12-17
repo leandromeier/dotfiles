@@ -7,3 +7,6 @@ source ~/.config/fish/environment-vars.fish
 # aliases
 source ~/.config/fish/aliases-public.fish
 #source ~/.config/fish/aliases-private.fish
+
+#set neovim as default editor
+set -gx EDITOR nvim
