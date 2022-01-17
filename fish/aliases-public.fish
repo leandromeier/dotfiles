@@ -26,6 +26,7 @@ alias gb='git branch'
 alias gp='git push'
 alias gd='git diff'
 alias gP='git pull'
+alias gr='git rm'
 
 # xournalpp
 alias xoup='xournalpp'
