@@ -267,8 +267,13 @@ snippet scp "scalar product / left\langle right\rangle" i
 endsnippet
 
 context "math()"
-snippet normm "\| \|"
+snippet normm "\| \|" i
 \\| ${1:${VISUAL}} \\|
+endsnippet
+
+context "math()"
+snippet abss "| |" i
+| ${1:${VISUAL}} | $0
 endsnippet
 
 # other names for brackets (non-visual)
