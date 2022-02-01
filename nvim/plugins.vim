@@ -20,6 +20,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'SirVer/ultisnips'
 " comment with gcc
 Plug 'tpope/vim-commentary'
+"fat-finger: auto-correct common spelling mistakes
+Plug 'chip/vim-fat-finger'
 " change cwd to configured directory
 Plug 'airblade/vim-rooter'
 " show lines that change since last commit
@@ -42,8 +44,8 @@ Plug 'tpope/vim-repeat'
 Plug 'rust-lang/rust.vim'
 " fish support
 Plug 'dag/vim-fish'
+"
 call plug#end()
-
 " plugin configuration
 """"""""""""""""""""""
 
