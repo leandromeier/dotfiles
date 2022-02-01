@@ -47,3 +47,6 @@ inoremap <C-v> <C-r>+
 " autocomplete
 "inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-x><C-o>
+
+" remap :noh to ESC
+nnoremap <ESC> :nohlsearch<CR>
