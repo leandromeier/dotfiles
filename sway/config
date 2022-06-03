@@ -33,6 +33,12 @@ set $patchbay cadence
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $launcher rofi -show drun -show-icons -drun-match-fields name drun-display-format {name}
 
+set $signal 'signal-desktop'
+set $xournal 'xournalpp'
+set $thund 'thunderbird'
+set $zoom 'zoom'
+set $spot 'spotify'
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -79,12 +85,19 @@ input type:tablet_tool {
 #
     # Start applications
     bindsym $mod+Return exec $term    # Terminal
+    bindsym $mod+t exec $term         # Terminal
     bindsym $mod+b exec $browser      # Browser
     bindsym $mod+space exec $launcher # Launcher
     bindsym $mod+d exec $menu         # menu
     bindsym $mod+o exec $filemanager  # File manager
     bindsym $mod+m exec $mixer        # mixer
     bindsym $mod+p exec $patchbay     # patchbay
+    bindsym $mod+Shift+s exec $signal # signal
+    bindsym $mod+x exec $xournal      # xournalpp
+    bindsym $mod+shift+t exec $thund  # thunderbird 
+    bindsym $mod+z exec $zoom         # zoom
+    bindsym $mod+v exec $spot         # spotify
+
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -209,6 +222,15 @@ client.unfocused          $bg     $bg     $fg   $bg       $bg
 # Status Bar:
 #
 exec --no-startup-id waybar
+
+#start synoloy drive client
+exec_always synology-drive
+
+#start nm-applet (for wifi symbol)
+exec_always nm-applet
+
+#hide the mouse pointer if idle for >5 seconds
+exec_always unclutter & 
 
 #
 # Media keys
