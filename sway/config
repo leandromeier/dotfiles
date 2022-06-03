@@ -245,4 +245,7 @@ bindsym XF86MonBrightnessUp exec brightnessctl set +5%                        #b
 bindsym Shift+XF86MonBrightnessDown exec brightnessctl set 1%-                #brightness down fine
 bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #brightness up fine
 
+# screen sharing
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
 include /etc/sway/config.d/*
