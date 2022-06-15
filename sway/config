@@ -256,4 +256,10 @@ bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #b
 # screen sharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+# Take a screenshot with all output and save it into screenshots
+bindsym $mod+S exec grim -t jpeg ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+
+# Take a Screenshot with the region select
+bindsym $mod+shift+P exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+
 include /etc/sway/config.d/*
