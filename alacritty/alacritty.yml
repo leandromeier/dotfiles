@@ -9,4 +9,4 @@ key_bindings:
   - { key: U, mods: Alt, action: ScrollPageUp }
   - { key: D, mods: Alt, action: ScrollPageDown }
 font:
-  size: 13.0
+  size: 14.0
