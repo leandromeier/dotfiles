@@ -28,6 +28,9 @@ set $filemanager alacritty -e ranger
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $launcher rofi -show drun -show-icons -drun-match-fields name drun-display-format {name}
+# Your preferred mixing program
+set $mixer pavucontrol
+
 
 set $signal 'signal-desktop'
 set $xournal 'xournalpp'
@@ -46,9 +49,19 @@ set $right l
 
 ### Idle configuration
 # 
-# turns off the screen after 600 seconds of inactivity
-exec swayidle -w \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+
+#::::Inhibit Idle if a window is fullscreen:::;
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
+
+#::::::::::fullscreen apps:::::::::
+for_window [app_id="mpv"] fullscreen
+for_window [class="^(steam_app_*|steam)$"] fullscreen
+
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec swayidle -w timeout 300 'swaylock -C$HOME/.config/swaylock/config.idle' timeout 200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
+exec swayidle lock 'swaymsg "output * dpms on"&& swaylock' unlock 'kill -s 1 $(pgrep swaylock)'
+
 
 
 ### Input configuration
@@ -85,12 +98,16 @@ input type:tablet_tool {
     bindsym $mod+b exec $browser      # Browser
     bindsym $mod+space exec $launcher # Launcher
     bindsym $mod+d exec $menu         # menu
-    bindsym $mod+o exec $filemanager  # File manager
+    bindsym $mod+shift+f exec $filemanager  # File manager
     bindsym $mod+Shift+s exec $signal # signal
     bindsym $mod+x exec $xournal      # xournalpp
     bindsym $mod+shift+t exec $thund  # thunderbird 
     bindsym $mod+z exec $zoom         # zoom
     bindsym $mod+v exec $spot         # spotify
+    bindsym $mod+shift+v exec $mixer  # pavucontrol
+
+
+    bindsym $mod+o exec swaylock -C$HOME/.config/swaylock/config.idle # lock screen
 
 
     # Kill focused window
@@ -219,6 +236,9 @@ exec --no-startup-id waybar
 
 #start synoloy drive client
 exec_always synology-drive
+
+#start blueman (bluetooth manager)
+#exec_always blueman-manager
 
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
