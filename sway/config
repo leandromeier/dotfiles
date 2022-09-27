@@ -30,13 +30,18 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $launcher rofi -show drun -show-icons -drun-match-fields name drun-display-format {name}
 # Your preferred mixing program
 set $mixer pavucontrol
-
-
+# your preferred messenger application
 set $signal 'signal-desktop'
+# your preferred note-taking application
 set $xournal 'xournalpp'
+# your preferred email program
 set $thund 'thunderbird'
+# zoom
 set $zoom 'zoom'
+# spotify
 set $spot 'spotify'
+# antoher filemanager 
+set $guifileman 'nautilus'
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -93,25 +98,30 @@ input type:tablet_tool {
 # Basics:
 #
     # Start applications
-    bindsym $mod+Return exec $term    # Terminal
-    bindsym $mod+t exec $term         # Terminal
-    bindsym $mod+b exec $browser      # Browser
-    bindsym $mod+space exec $launcher # Launcher
-    bindsym $mod+d exec $menu         # menu
-    bindsym $mod+shift+f exec $filemanager  # File manager
-    bindsym $mod+Shift+s exec $signal # signal
-    bindsym $mod+x exec $xournal      # xournalpp
-    bindsym $mod+shift+t exec $thund  # thunderbird 
-    bindsym $mod+z exec $zoom         # zoom
-    bindsym $mod+v exec $spot         # spotify
-    bindsym $mod+shift+v exec $mixer  # pavucontrol
+    bindsym $mod+Return exec $term            # Terminal
+    bindsym $mod+b exec $browser              # Browser
+    bindsym $mod+space exec $launcher         # Launcher
+    bindsym $mod+d exec $menu                 # menu
 
+    bindsym $mod+Shift+f exec $filemanager    # File manager
+    bindsym $mod+t exec $guifileman           # Gnome GUI File manager
+    bindsym $mod+Shift+s exec $signal         # signal
+    bindsym $mod+x exec $xournal              # xournalpp
 
-    bindsym $mod+o exec swaylock -C$HOME/.config/swaylock/config.idle # lock screen
-
+    bindsym $mod+shift+t exec $thund          # thunderbird 
+    bindsym $mod+z exec $zoom                 # zoom
+    bindsym $mod+v exec $spot                 # spotify
+    bindsym $mod+shift+v exec $mixer          # pavucontrol
 
     # Kill focused window
     bindsym $mod+Shift+q kill
+
+    # Reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -120,11 +130,15 @@ input type:tablet_tool {
     # mouse button for dragging.
     floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+r reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    # Screenshots 
+    # full screen
+    bindsym $mod+S exec grim -t jpeg ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+    # region select
+    bindsym $mod+shift+P exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+
+    # Lock using swaylock
+    bindsym $mod+o exec swaylock -C$HOME/.config/swaylock/config.idle # lock screen
 #
 # Moving around:
 #
@@ -270,10 +284,5 @@ bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #b
 # screen sharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-# Take a screenshot with all output and save it into screenshots
-bindsym $mod+S exec grim -t jpeg ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
-
-# Take a Screenshot with the region select
-bindsym $mod+shift+P exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
 include /etc/sway/config.d/*
