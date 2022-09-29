@@ -34,8 +34,11 @@ alias xoup='xournalpp'
 # zathura
 alias z='zathura'
 
-# suspend bc I'm too lazy to type long stuff
-alias sn='systemctl suspend'
+# lock and suspend 
+alias sn='loginctl lock-session && systemctl suspend'
+
+# only lock
+alias lock='loginctl lock-session'
 
 # bluetoothctl
 alias bl='bluetoothctl'
