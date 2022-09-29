@@ -64,7 +64,7 @@ for_window [app_id="mpv"] fullscreen
 for_window [class="^(steam_app_*|steam)$"] fullscreen
 
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec swayidle -w timeout 600 'swaylock -C$HOME/.config/swaylock/config.idle' timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
+exec swayidle -w timeout 300 'swaylock -C$HOME/.config/swaylock/config.idle' timeout 240 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
 exec swayidle lock 'swaymsg "output * dpms on"&& swaylock' unlock 'kill -s 1 $(pgrep swaylock)'
 
 
@@ -138,7 +138,7 @@ input type:tablet_tool {
     bindsym $mod+shift+P exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
-    bindsym $mod+o exec swaylock -C$HOME/.config/swaylock/config.idle # lock screen
+    bindsym $mod+o exec swaylock -C$HOME/.config/swaylock/config # lock screen
 #
 # Moving around:
 #
