@@ -4,3 +4,7 @@ effect-blur=10x2
 indicator
 clock
 text-color=blue
+
+indicator
+clock
+color=29087c
