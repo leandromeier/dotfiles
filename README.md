@@ -30,3 +30,7 @@ The original has to be in the repo folder, otherwise git won't see the changes m
 
 # sage
 To get better colors for Linux, add the line '%colors Linux' to the file init.sage in ~/.sage folder, or create the file if it does not yet exist. 
+
+
+# swapping caps and escape
+Add the line 'Option "XkbOptions" "caps:swapescape" ' to the file 00-keyboard.conf in /etc/X11/xorg.conf
