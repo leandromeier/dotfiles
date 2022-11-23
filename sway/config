@@ -45,7 +45,9 @@ set $spot 'spotify'
 set $guifileman 'nautilus'
 
 # Logo key. Use Mod1 for Alt.
-set $mod Mod4
+# Logo key. Use Mod4 for super/windows key.
+# Logo key. Use Mod5 for Alt Gr.
+set $mod Mod5
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -66,11 +68,13 @@ for_window [class="^(steam_app_*|steam)$"] fullscreen
 
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec swayidle -w \
-	timeout 300 'swaylock -f -c 001b60' \
+	timeout 360 'swaylock -f -c 001b60' \
 	timeout 300 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"' \
-	before-sleep 'swaylock -f -c 001b60'
-exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60' unlock 'kill -s 1 $(pgrep swaylock)'
+	before-sleep 'swaylock -f \
+    -c 001b60 \
+    --inside-color 111111'
+exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
 
 #exec swayidle -w timeout 10 'swaylock -C$HOME/.config/swaylock/config.idle' timeout 100 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
 
@@ -106,12 +110,12 @@ input type:tablet_tool {
 #
     # Start applications
     bindsym $mod+Return exec $term            # Terminal
-    bindsym $mod+b exec $browser              # Browser
+    bindsym $mod+t exec $term                 # Terminal
     bindsym $mod+space exec $launcher         # Launcher
     bindsym $mod+d exec $menu                 # menu
 
+    bindsym $mod+b exec $browser              # Browser
     bindsym $mod+Shift+f exec $filemanager    # File manager
-    bindsym $mod+t exec $guifileman           # Gnome GUI File manager
     bindsym $mod+Shift+s exec $signal         # signal
     bindsym $mod+x exec $xournal              # xournalpp
 
