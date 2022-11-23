@@ -17,6 +17,10 @@ set laststatus=2 " make lightline appear
 set showcmd " show what command you're typing
 set smartindent
 set cursorline
+" new additions
+set showmatch " show matching brackets
+set autoindent " indent a new line the same amount as the line just typed
+
 
 filetype plugin indent on " make vim recognize filetypes
 syntax on " syntax highlighting
