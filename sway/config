@@ -47,7 +47,7 @@ set $guifileman 'nautilus'
 # Logo key. Use Mod1 for Alt.
 # Logo key. Use Mod4 for super/windows key.
 # Logo key. Use Mod5 for Alt Gr.
-set $mod Mod5
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
