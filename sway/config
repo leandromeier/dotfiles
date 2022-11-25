@@ -68,7 +68,7 @@ for_window [class="^(steam_app_*|steam)$"] fullscreen
 
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec swayidle -w \
-	timeout 360 'swaylock -f -c 001b60 -e' \
+	timeout 660 'swaylock -f -c 001b60 -e' \
 	timeout 300 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"' \
 	before-sleep 'swaylock -f \
