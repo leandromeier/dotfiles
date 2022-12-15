@@ -10,6 +10,8 @@
 """""""""
 " vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
+" macaulay2 in vim
+Plug '8d1h/vim-macaulay2'
 " a colorscheme
 Plug 'morhetz/gruvbox'
 " tree view
