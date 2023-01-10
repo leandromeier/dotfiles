@@ -101,8 +101,9 @@ input type:keyboard {
   xkb_options "caps:swapescape"
 }
 
+#change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
 input type:tablet_tool {
-  map_to_output eDP-1
+  map_to_output DP-3
 }
 
 ### Key bindings
