@@ -5,7 +5,7 @@ alias :q='exit'
 
 ### Launch programs
 #
-# vim
+# neovim
 # --servername VIM for it to work with reverse synctex
 alias v='nvim'
 alias vim='nvim '
