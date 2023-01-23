@@ -2,16 +2,19 @@
 
 ## How to compress and optionally encrypt (using 7zip)
 To compress to a zip file:
-7z a -tzip zipname.zip <files to compress>
+'7z a -tzip zipname.zip <files to compress>'
 
 To compress and password protect
-7z a -tzip -p{password} zipname.zip <files to compress>
+'7z a -tzip -p{password} zipname.zip <files to compress>'
 
 To set a password on a compressed file
-7za a -p{password} compressed-file.tar.7z
+'7za a -p{password} compressed-file.tar.7z'
 
 To decompress
-7z e zipname.zip (or another file tipe filename.filetpye)
+'7z x zipname.zip'
+
+The following decompresses as well but does not remember folder structure of the compressed content
+'7z e zipname.zip'
 
 
 ## How to connect a device to this laptop via bluetooth, using bluez

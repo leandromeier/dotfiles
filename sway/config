@@ -1,6 +1,6 @@
 #  
 #  sway config
-#  rawbacon, 2021
+#  leandromeier, 2021
 #  ~/.config/sway/config
 #
 
@@ -66,18 +66,24 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 for_window [app_id="mpv"] fullscreen
 for_window [class="^(steam_app_*|steam)$"] fullscreen
 
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec swayidle -w \
-	timeout 660 'swaylock -f -c 001b60 -e' \
-	timeout 300 'swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"' \
-	before-sleep 'swaylock -f \
-    -c 001b60 \
-    -e \
-    --inside-color 111111'
-exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 -e --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
 
+# screen before suspend. Use loginctl lock-session to lock your screen.
+set $locktime 660
+set $bltime 300
+
+exec swayidle -w \
+	timeout $locktime 'swaylock -f -e --grace 2 --fade-in 0.2' \
+	timeout $bltime 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -f -e --grace 2 --fade-in 0.2' \
+exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -e --grace 2 --fade-in 0.2' unlock 'kill -s 1 $(pgrep swaylock)'
+
+#old commands
 #exec swayidle -w timeout 10 'swaylock -C$HOME/.config/swaylock/config.idle' timeout 100 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
+	#timeout 660 'swaylock -f -c 001b60 -e' \
+#exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 -e --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
+
+#######################
 
 
 
@@ -103,7 +109,7 @@ input type:keyboard {
 
 #change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
 input type:tablet_tool {
-  map_to_output DP-3
+  map_to_output DP-4
 }
 
 ### Key bindings

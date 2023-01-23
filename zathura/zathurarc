@@ -3,3 +3,7 @@ set synctex true
 set synctex-editor-command "nvim +%{line} %{input}"
 
 unmap d
+
+map t toggle_index
+map s toggle_statusbar
+
