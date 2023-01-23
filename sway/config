@@ -1,6 +1,6 @@
 #  
 #  sway config
-#  rawbacon, 2021
+#  leandromeier, 2021
 #  ~/.config/sway/config
 #
 
@@ -66,15 +66,16 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 for_window [app_id="mpv"] fullscreen
 for_window [class="^(steam_app_*|steam)$"] fullscreen
 
+
 # screen before suspend. Use loginctl lock-session to lock your screen.
+set $locktime 660
+set $bltime 300
+
 exec swayidle -w \
-	timeout 660 'swaylock -f -e --grace 2 --fade-in 0.2' \
-	timeout 300 'swaymsg "output * dpms off"' \
+	timeout $locktime 'swaylock -f -e --grace 2 --fade-in 0.2' \
+	timeout $bltime 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"' \
-	before-sleep 'swaylock -f \
-    -e \
-    --grace 2 \
-    --fade-in 0.2 \
+	before-sleep 'swaylock -f -e --grace 2 --fade-in 0.2' \
 exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -e --grace 2 --fade-in 0.2' unlock 'kill -s 1 $(pgrep swaylock)'
 
 #old commands
