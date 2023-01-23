@@ -9,9 +9,9 @@ zathura links to ~/.config/zathura
 
 gitconfig is at ~/.gitconfig
 
-i3 links to ~/.config/i3
+sway links to ~/.config/sway
 and so on...
-polybar configs are at ~/.config/polybar
+waybar configs are at ~/.config/waybar
 
 #simlinks
 ln -s /absolute/path/to/original /abs/path/to/link
