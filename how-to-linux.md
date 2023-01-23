@@ -31,3 +31,9 @@ add good word: zg
 add bad word: zw
 get word suggestions: z=
 
+## How to compare two lines in vim (e.g. sha checksums)
+Select both lines, type the command ":sort u", if only one line remains, they were identical, otherwise not
+
+## How to burn an iso file to a USB stick
+run 'lsblk' before and after inserting the USB stick to learn its location
+sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
