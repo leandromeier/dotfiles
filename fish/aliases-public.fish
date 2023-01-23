@@ -35,8 +35,7 @@ alias xoup='xournalpp'
 alias z='zathura'
 
 # lock and suspend 
-#alias sn='loginctl lock-session && systemctl suspend'
-alias sn='swaylock && systemctl suspend'
+alias sn='loginctl lock-session && systemctl suspend'
 
 # only lock
 alias lock='loginctl lock-session'
