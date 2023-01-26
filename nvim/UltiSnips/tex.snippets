@@ -277,16 +277,6 @@ snippet scp "scalar product / left\langle right\rangle" i
 \left\langle ${1:${VISUAL}} \right\rangle$0
 endsnippet
 
-context "math()"
-snippet normm "\| \|" i
-\\| ${1:${VISUAL}} \\|
-endsnippet
-
-context "math()"
-snippet abss "| |" i
-| ${1:${VISUAL}} | $0
-endsnippet
-
 # other names for brackets (non-visual)
 context "math()"
 snippet big( "\left( \right)" iA
@@ -340,7 +330,18 @@ snippet union "bigcup" i
 \bigcup_{$1}^{$2} $0
 endsnippet
 
+context "math()"
+snippet UUU "bigcup" i
+\bigcup_{$1}^{$2} $0
+endsnippet
+
+context "math()"
 snippet inter "bigcap" i
+\bigcap_{$1}^{$2} $0
+endsnippet
+
+context "math()"
+snippet III "bigcap" i
 \bigcap_{$1}^{$2} $0
 endsnippet
 
@@ -396,6 +397,17 @@ context "math()"
 snippet Specc "Spec ( )" iA
 \mathrm{Spec} \left( $1 \right) $0
 endsnippet
+
+context "math()"
+snippet Spc "Spec ( )" iA
+\mathrm{Spec} \left( $1 \right) $0
+endsnippet
+
+context "math()"
+snippet restr "rho_^( )" iA
+\rho_{$2}^{$1} $0
+endsnippet
+
 
 #matrices etc.
 context "math()"
@@ -520,12 +532,11 @@ snippet C** "\mathbb{C}^*" iA
 \mathbb{C}^{*}$0
 endsnippet
 
-#needs a different snipper as it overlaps with the snippet for absolute value
 #bold in math mode
-#context "math()"
-#snippet bs "boldsymbol" iA
-#\boldsymbol{$1} $0
-#endsnippet
+context "math()"
+snippet bfm "boldsymbol" iA
+\boldsymbol{$1} $0
+endsnippet
 
 
 context "math()"
@@ -548,8 +559,18 @@ endsnippet
 
 #special fonts
 context "math()"
-snippet BB "\mathcal{B}" iA
+snippet CB "\mathcal{B}" iA
 \mathcal{B}
+endsnippet
+
+context "math()"
+snippet CF "\mathcal{F}" iA
+\mathcal{F}
+endsnippet
+
+context "math()"
+snippet CG "\mathcal{G}" iA
+\mathcal{G}
 endsnippet
 
 context "math()"
@@ -665,6 +686,16 @@ endsnippet
 context "math()"
 snippet nrm "norm" iA
 \\| $1 \\| $0
+endsnippet
+
+context "math()"
+snippet normm "\| \|" i
+\\| ${1:${VISUAL}} \\| $0
+endsnippet
+
+context "math()"
+snippet abss "| |" i
+| ${1:${VISUAL}} | $0
 endsnippet
 
 # numbering
