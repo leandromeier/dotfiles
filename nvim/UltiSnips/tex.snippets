@@ -248,6 +248,11 @@ snippet sqrt "sqrt" iA
 \sqrt{$1}$0
 endsnippet
 
+context "math()"
+snippet dual "dual / ^v" iA
+^{\vee} $0
+endsnippet
+
 # visual brackets
 snippet lr "left( right)" i
 \left( ${1:${VISUAL}} \right)$0
@@ -498,6 +503,11 @@ snippet CC "\mathbb{C}" iA
 endsnippet
 
 context "math()"
+snippet C[ "\mathbb{C}" iA
+\mathbb{C} \left[ ${1:${VISUAL}} \right]$0
+endsnippet
+
+context "math()"
 snippet HH "\mathbb{H}" iA
 \mathbb{H}$0
 endsnippet
@@ -611,6 +621,16 @@ snippet bbb "beta" iA
 endsnippet
 
 context "math()"
+snippet Ddel "Delta" iA
+\Delta
+endsnippet
+
+context "math()"
+snippet ddel "delta" iA
+\delta
+endsnippet
+
+context "math()"
 snippet vareps "varepsilon" iA
 \varepsilon
 endsnippet
@@ -643,6 +663,11 @@ endsnippet
 context "math()"
 snippet ttau "tau" iA
 \tau
+endsnippet
+
+context "math()"
+snippet cchi "chi" iA
+\chi
 endsnippet
 
 context "math()"
@@ -681,6 +706,11 @@ endsnippet
 context "math()"
 snippet perp "perp" iA
 \perp $0
+endsnippet
+
+context "math()"
+snippet tns "tensor" iA
+\otimes $0
 endsnippet
 
 context "math()"
