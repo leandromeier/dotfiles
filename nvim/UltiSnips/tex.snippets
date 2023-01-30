@@ -570,6 +570,11 @@ snippet CB "\mathcal{B}" iA
 endsnippet
 
 context "math()"
+snippet CD "\mathcal{D}" iA
+\mathcal{D}
+endsnippet
+
+context "math()"
 snippet CF "\mathcal{F}" iA
 \mathcal{F}
 endsnippet
@@ -577,6 +582,16 @@ endsnippet
 context "math()"
 snippet CG "\mathcal{G}" iA
 \mathcal{G}
+endsnippet
+
+context "math()"
+snippet CM "\mathcal{M}" iA
+\mathcal{M}
+endsnippet
+
+context "math()"
+snippet CE "\mathcal{E}" iA
+\mathcal{E}
 endsnippet
 
 context "math()"
@@ -925,6 +940,14 @@ context "not math()"
 snippet noth "noetherian" i
 Noetherian
 endsnippet
+
+# Declare Operators etc
+context "not math()" 
+snippet DMO "Declare Math Operator" i
+\DeclareMathOperator{\\$1}{$2}
+endsnippet
+
+
 
 post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br

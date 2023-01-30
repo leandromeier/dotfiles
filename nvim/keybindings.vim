@@ -50,3 +50,9 @@ inoremap <C-@> <C-x><C-o>
 
 " remap :noh to ESC
 nnoremap <ESC> :nohlsearch<CR>
+
+" remap reloading the source file
+nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
+
+" remap reloading the tex snippets file 
+nnoremap <leader>tt :source ~/.config/nvim/UltiSnips/tex.snippets<CR>

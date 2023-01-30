@@ -28,7 +28,8 @@ Start bluez (bluetoothctl)
 
 
 ## How to spellcheck in vim
-start: setlocal spell
+start: set spell
+start and specify language: setlocal spell spelllang=de_20 (or another language)
 end: set nospell
 add good word: zg
 add bad word: zw
