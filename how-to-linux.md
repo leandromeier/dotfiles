@@ -35,6 +35,9 @@ add good word: zg
 add bad word: zw
 get word suggestions: z=
 
+## Packages
+Don't forget to update packages installed via snap, or if neither pacman nor yay can find a local package, try snap as well.
+
 ## How to compare two lines in vim (e.g. sha checksums)
 Select both lines, type the command ":sort u", if only one line remains, they were identical, otherwise not
 
