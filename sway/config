@@ -41,8 +41,8 @@ set $thund 'thunderbird'
 set $zoom 'zoom'
 # spotify
 set $spot 'spotify'
-# antoher filemanager 
-set $guifileman 'nautilus'
+# preferred bluethooth manager
+set $blth 'blueman-manager'
 
 # Logo key. Use Mod1 for Alt.
 # Logo key. Use Mod4 for super/windows key.
@@ -68,18 +68,15 @@ for_window [class="^(steam_app_*|steam)$"] fullscreen
 
 
 # screen before suspend. Use loginctl lock-session to lock your screen.
-set $locktime 660
+set $locktime 600
 set $bltime 300
 
-exec swayidle -w \
-	timeout $locktime 'swaylock -f -e' \
-	timeout $bltime 'swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"' \
-	before-sleep 'swaylock -f -e' \
+exec swayidle -w timeout $locktime 'swaylock -f -e' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -e' 
+
 exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -e' unlock 'kill -s 1 $(pgrep swaylock)'
 
 #old commands
-#exec swayidle -w timeout 10 'swaylock -C$HOME/.config/swaylock/config.idle' timeout 100 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
+#exec swayidle -w timeout $locktime 'swaylock -C$HOME/.config/swaylock/config.idle' timeout bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
 	#timeout 660 'swaylock -f -c 001b60 -e' \
 #exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 -e --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
 
@@ -125,7 +122,7 @@ input type:tablet_tool {
     bindsym $mod+Return exec $term            # Terminal
     bindsym $mod+t exec $term                 # Terminal
     bindsym $mod+space exec $launcher         # Launcher
-    bindsym $mod+d exec $menu                 # menu
+    bindsym $mod+d exec $menu                 # D-menu
 
     bindsym $mod+b exec $browser              # Browser
     bindsym $mod+Shift+f exec $filemanager    # File manager
@@ -133,9 +130,9 @@ input type:tablet_tool {
     bindsym $mod+x exec $xournal              # xournalpp
 
     bindsym $mod+shift+t exec $thund          # thunderbird 
-    bindsym $mod+z exec $zoom                 # zoom
-    bindsym $mod+v exec $spot                 # spotify
-    bindsym $mod+shift+v exec $mixer          # pavucontrol
+    bindsym $mod+shift+v exec $spot           # spotify
+    bindsym $mod+v exec $mixer                # pavucontrol
+    bindsym $mod+shift+b exec $blth           # blueman
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -156,12 +153,12 @@ input type:tablet_tool {
 
     # Screenshots 
     # full screen
-    bindsym $mod+S exec grim -t jpeg ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+    bindsym $mod+c exec grim -t jpeg ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
     # region select
-    bindsym $mod+shift+P exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+    bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
-    bindsym $mod+o exec swaylock -C$HOME/.config/swaylock/config # lock screen
+    bindsym $mod+o exec swaylock -C $HOME/.config/swaylock/config # lock screen
 #
 # Moving around:
 #
