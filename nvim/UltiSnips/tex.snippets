@@ -282,6 +282,15 @@ snippet scp "scalar product / left\langle right\rangle" i
 \left\langle ${1:${VISUAL}} \right\rangle$0
 endsnippet
 
+snippet leftr "left( right]" i
+\left( ${1:${VISUAL}} \right]$0
+endsnippet
+
+snippet rightr "left[ right)" i
+\left[ ${1:${VISUAL}} \right)$0
+endsnippet
+
+
 # other names for brackets (non-visual)
 context "math()"
 snippet big( "\left( \right)" iA
@@ -559,7 +568,7 @@ snippet frac "visual frac" i
 \\frac{${VISUAL}}{$1} $0
 endsnippet
 
-snippet frac "visual frac" i
+snippet \\ "visual frac" i
 \\frac{${VISUAL}}{$1} $0
 endsnippet
 
