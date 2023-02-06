@@ -6,6 +6,7 @@ let maplocalleader = "\<Space>"
 
 " files
 nnoremap <leader>fs :write<CR>
+nnoremap <leader>jj :write<CR>
 inoremap <C-l> <esc>:write<CR>a
 
 " opening things
