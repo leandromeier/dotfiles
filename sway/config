@@ -14,8 +14,8 @@ output DP-3  resolution 2560x1440 position 1920,0
 
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # images can be done as follows:
-# output * bg /path/to/image fill
-output * bg #1A0C18 solid_color
+output * bg ~/Desktop/background/image3.jpeg fill
+# output * bg #1A0C18 solid_color
 
 
 # Your preferred terminal emulator
@@ -65,6 +65,8 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 #::::::::::fullscreen apps:::::::::
 for_window [app_id="mpv"] fullscreen
 for_window [class="^(steam_app_*|steam)$"] fullscreen
+for_window [app_id="spotify"] fullscreen
+
 
 
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -153,9 +155,9 @@ input type:tablet_tool {
 
     # Screenshots 
     # full screen
-    bindsym $mod+c exec grim -t jpeg ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+    bindsym $mod+c exec grim -t jpeg ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
     # region select
-    bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+    bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
     bindsym $mod+o exec swaylock -C $HOME/.config/swaylock/config # lock screen
