@@ -14,8 +14,12 @@ output DP-3  resolution 2560x1440 position 1920,0
 
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # images can be done as follows:
-output * bg ~/Desktop/background/image3.jpeg fill
+# output * bg ~/Desktop/background/image3.jpeg fill
 # output * bg #1A0C18 solid_color
+#dynamic background, changing automatically after a fixed time interval
+# exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-dynamic.sh"
+# choose a random background at startup
+exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-st-random.sh"
 
 
 # Your preferred terminal emulator
