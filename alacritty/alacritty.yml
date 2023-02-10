@@ -1,5 +1,5 @@
 key_bindings:
-  - { key: Escape,  mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
     # Plus and Equals cannot be pressed without Shift on swiss keyboards
   - { key: Plus,  mods: Control|Shift, action: IncreaseFontSize }
   - { key: Equals,  mods: Control|Shift, action: ResetFontSize }
@@ -10,3 +10,7 @@ key_bindings:
   - { key: D, mods: Alt, action: ScrollPageDown }
 font:
   size: 14.0
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+window:
+  opacity: 0.9
