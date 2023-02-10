@@ -47,6 +47,8 @@ set $zoom 'zoom'
 set $spot 'spotify'
 # preferred bluethooth manager
 set $blth 'blueman-manager'
+# preferred network manager
+set $nm alacritty -e nmtui
 
 # Logo key. Use Mod1 for Alt.
 # Logo key. Use Mod4 for super/windows key.
@@ -139,6 +141,7 @@ input type:tablet_tool {
     bindsym $mod+shift+v exec $spot           # spotify
     bindsym $mod+v exec $mixer                # pavucontrol
     bindsym $mod+shift+b exec $blth           # blueman
+    bindsym $mod+n exec $nm                   # nmtui 
 
     # Kill focused window
     bindsym $mod+Shift+q kill
