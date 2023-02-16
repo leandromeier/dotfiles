@@ -3,6 +3,8 @@ set synctex true
 set synctex-editor-command "nvim +%{line} %{input}"
 
 unmap d
+map d scroll half-down
+map u scroll half-up
 
 map t toggle_index
 map s toggle_statusbar
