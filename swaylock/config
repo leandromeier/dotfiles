@@ -2,9 +2,12 @@ daemonize
 screenshots
 fade-in=4
 ignore-empty-password
-effect-greyscale
 effect-blur=10x2
 indicator
 clock
 text-color=blue
+grace 8
+grace-no-mouse
+grace-no-touch
+fade-in 0.2
 

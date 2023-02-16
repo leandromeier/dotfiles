@@ -1,10 +1,11 @@
 daemonize
+screenshots
+fade-in=4
 ignore-empty-password
 effect-blur=10x2
 indicator
 clock
 text-color=blue
+grace 2
+fade-in 0.2
 
-indicator
-clock
-color=29087c
