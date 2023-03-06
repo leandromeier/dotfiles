@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-swaybg -i $(find ~/Desktop/background/. -type f | shuf -n1) -m fill &
+swaybg -i $(find ~/Documents/background/. -type f | shuf -n1) -m fill &
 OLD_PID=$!
 while true; do
     sleep 10
