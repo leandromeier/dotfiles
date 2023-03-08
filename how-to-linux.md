@@ -44,3 +44,10 @@ Select both lines, type the command ":sort u", if only one line remains, they we
 ## How to burn an iso file to a USB stick
 run 'lsblk' before and after inserting the USB stick to learn its location
 sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
+
+
+## Change file permissions
+'chmod 755 -R /path/to/folder' (recursively) or just
+'chmod 755 /path/to/file'
+this grants read, write and execute permissions to the user, and only read and write to 'the group' and 'others', respectively.
+Of course, replacing the 7 and 5's by other digits yields other results, cf. https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/
