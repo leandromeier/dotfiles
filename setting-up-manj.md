@@ -22,7 +22,7 @@ Install the package 'lsd' to get the lsd command to work.
 - dmenu: dmenu
 
 # latex
-Install texlive ('sudo pacman -S texlive-core' and 'sudo pacman -S texlive-science' should to it). If there are initially erros abt comment.sty not being found when compiling, comment that line, then re-compile, this should permanently stop that error.
+Install texlive ('sudo pacman -S texlive-core texlive-science texlive-latexextra texlive-bibtexextra texlive-bin' should to it). 
 
 # pacman
 customize mirror pool: 
