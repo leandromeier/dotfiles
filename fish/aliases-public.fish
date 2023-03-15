@@ -37,7 +37,7 @@ alias z='zathura'
 # lock and suspend 
 #alias sn='loginctl lock-session && systemctl suspend'
 # for lenovo: atm the following is the only thing which seems to lock and suspend
-alias sn='swaylock && systemctl suspend'
+alias sn='systemctl suspend'
 
 # only lock
 alias lock='loginctl lock-session'

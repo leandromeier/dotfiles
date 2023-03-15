@@ -10,7 +10,7 @@ line-color=00000000
 inside-color=00000088
 separator-color=00000000
 grace=2
-grace-no-mouse
+indicator-idle-visible
 fade-in=0.2
 inside-clear-color=abfcb8
 ring-clear-color=abfcb8
