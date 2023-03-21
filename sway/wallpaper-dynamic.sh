@@ -3,7 +3,7 @@ swaybg -i $(find ~/Documents/background/. -type f | shuf -n1) -m fill &
 OLD_PID=$!
 while true; do
     sleep 10
-    swaybg -i $(find ~/Desktop/background/. -type f | shuf -n1) -m fill &
+    swaybg -i $(find ~/Documents/background/. -type f | shuf -n1) -m fill &
     NEXT_PID=$!
     sleep 5
     kill $OLD_PID

@@ -77,11 +77,19 @@ for_window [app_id="spotify"] fullscreen
 
 # screen before suspend. Use loginctl lock-session to lock your screen.
 set $locktime 600
-set $bltime 300
+set $bltime 660
 
-exec swayidle -w timeout $locktime 'swaylock -C $HOME/.config/swaylock/config.idle' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
+# lcoks your screen after $locktime minutes, and turns it black after $bltime minutes 
+exec swayidle -w \
+          timeout $locktime 'swaylock -f' \
+          timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          before-sleep 'swaylock -f'
+#exec swayidle -w timeout $locktime 'swaylock -C $HOME/.config/swaylock/config' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
 
-exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -C $HOME/.config/swaylock/config.idle' unlock 'kill -s 1 $(pgrep swaylock)'
+#does not work apparently:
+#exec swayidle -w timeout $locktime 'swaylock && swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep 'swaylock'
+
+#exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -C $HOME/.config/swaylock/config.idle' unlock 'kill -s 1 $(pgrep swaylock)'
 
 #old commands
 #exec swayidle -w timeout $locktime 'swaylock -f -e' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -e' 
