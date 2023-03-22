@@ -21,11 +21,8 @@ set cursorline
 set showmatch " show matching brackets
 set autoindent " indent a new line the same amount as the line just typed
 
-
 filetype plugin indent on " make vim recognize filetypes
 syntax on " syntax highlighting
-
-let g:vimtex_view_method = 'zathura'
 
 ""allow + and * to copy to clipboard
 let g:clipboard = {

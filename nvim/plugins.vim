@@ -33,7 +33,7 @@ Plug 'tpope/vim-surround'
 " latex compilation with <localleader>ll etc
 Plug 'lervag/vimtex'
 " git support with :G
-"Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " linting and IDE-like behaviour
 Plug 'dense-analysis/ale'
 " status bar
