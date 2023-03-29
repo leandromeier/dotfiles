@@ -14,7 +14,7 @@ and so on...
 waybar configs are at ~/.config/waybar
 
 #simlinks
-ln -s /absolute/path/to/original /abs/path/to/link
+ln -s /absolute/path/to/original (/abs)/path/to/link
 e.g. ln -s ~/Documents/dotfiles/gitconfig ~/.gitconfig 
 The original has to be in the repo folder, otherwise git won't see the changes made to it
 
