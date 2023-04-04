@@ -9,3 +9,5 @@ map u scroll half-up
 map t toggle_index
 map s toggle_statusbar
 
+set selection-clipboard clipboard
+
