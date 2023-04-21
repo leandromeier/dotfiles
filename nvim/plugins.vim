@@ -7,6 +7,7 @@
 
 " Plugins
 " reload vimrc and run :PlugInstall to install
+" to remove, reload vimrc and run :PlugClean 
 """""""""
 " vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
