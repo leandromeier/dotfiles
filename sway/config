@@ -81,9 +81,9 @@ set $bltime 660
 
 # lcoks your screen after $locktime minutes, and turns it black after $bltime minutes 
 exec swayidle -w \
-          timeout $locktime 'swaylock -f' \
+          timeout $locktime 'swaylock -f -e' \
           timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f'
+          before-sleep 'swaylock -f -e'
 #exec swayidle -w timeout $locktime 'swaylock -C $HOME/.config/swaylock/config' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
 
 #does not work apparently:
@@ -123,7 +123,7 @@ input type:keyboard {
 #change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
 #change to 'map_to_outputeDP-3' to get the graphics tablet to map to secondary monitor
 input type:tablet_tool {
-  map_to_output DP-4
+  map_to_output DP-3
 }
 
 #enable floating for selected applications
