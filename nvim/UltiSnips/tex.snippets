@@ -180,6 +180,11 @@ snippet aset "{ ... }" iA
 endsnippet
 
 context "math()"
+snippet 0set "{=}" iA
+\left\\{ 0 \\right\\}$0
+endsnippet
+
+context "math()"
 snippet \\\ "\setminus" iA
 \\setminus
 endsnippet
@@ -718,6 +723,11 @@ endsnippet
 
 #special lettering (cursive, ...)
 context "not math()"
+snippet emph
+\emph{$1} $0
+endsnippet
+
+context "not math()"
 snippet emphh
 \emph{$1} $0
 endsnippet
@@ -814,6 +824,10 @@ endsnippet
 # templates
 snippet tempmain "template for a main document" b
 \documentclass[a4paper]{$1}
+\usepackage[backend=bibtex,
+style=alphabetic,
+sorting=ynt]{biblatex}
+\addbibresource{$5}
 
 \title{$2}
 \author{$3}
@@ -829,22 +843,26 @@ snippet tempmain "template for a main document" b
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
 
-\usepackage{comment}
-
 \setlength\parindent{0pt}
 
+% no thmstyle set -> default is plain
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
 
-\theoremstyle{definition}
+\theoremstyle{definition} %definitions and examples should not be cursive
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
 
 \begin{document}
 \maketitle
 \tableofcontents
 
 $0
+
+\printbibliography
 \end{document}
 endsnippet
 
@@ -948,6 +966,16 @@ endsnippet
 context "not math()" 
 snippet noth "noetherian" i
 Noetherian
+endsnippet
+
+context "not math()" 
+snippet DVR "discrete valuation ring" i
+discrete valuation ring
+endsnippet
+
+context "not math()" 
+snippet TFAE "the following are equivalent" i
+The following are equivalent:
 endsnippet
 
 # Declare Operators etc
