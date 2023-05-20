@@ -11,6 +11,8 @@
 """""""""
 " vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
+" vim command line interpreter
+Plug 'jalvesaq/vimcmdline'
 " macaulay2 in vim
 Plug '8d1h/vim-macaulay2'
 " a colorscheme
