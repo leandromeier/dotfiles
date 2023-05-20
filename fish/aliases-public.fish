@@ -42,3 +42,6 @@ alias lock='loginctl lock-session'
 
 # bluetoothctl
 alias bl='bluetoothctl'
+
+#sage notebook jupyter
+alias snj='sage --notebook jupyter'
