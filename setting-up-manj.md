@@ -26,7 +26,7 @@ Install texlive ('sudo pacman -S texlive-core texlive-science texlive-latexextra
 
 # pacman
 customize mirror pool: 
-'sudo pacman-mirrors --country Germany,France,Austria,Switzerland && sudo pacman -Syu'
+'sudo pacman-mirrors --country Germany,Denmark,Netherlands,France,Austria,Switzerland && sudo pacman -Syyu'
 
 # ssh
 see https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys
