@@ -1,9 +1,12 @@
 set recolor true
+set default-bg \#222230
+
 set synctex true
 set synctex-editor-command "nvim +%{line} %{input}"
 
 unmap d
 map d scroll half-down
+map m scroll half-down
 map u scroll half-up
 map e scroll half-up
 
