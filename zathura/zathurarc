@@ -1,5 +1,6 @@
 set recolor true
 set default-bg \#222230
+set recolor-lightcolor \#222222
 
 set synctex true
 set synctex-editor-command "nvim +%{line} %{input}"

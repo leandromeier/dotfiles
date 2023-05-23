@@ -123,7 +123,7 @@ input type:keyboard {
 #change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
 #change to 'map_to_outputeDP-3' to get the graphics tablet to map to secondary monitor
 input type:tablet_tool {
-  map_to_output DP-3
+  map_to_output eDP-1
 }
 
 #enable floating for selected applications
