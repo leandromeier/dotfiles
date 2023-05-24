@@ -45,12 +45,6 @@ def create_fig_minipages(snip):
 
 endglobal
 
-
-
-snippet // "backslash" iA
-\\
-endsnippet
-
 snippet ö "backslash" iA
 \\
 endsnippet
@@ -969,13 +963,28 @@ Noetherian
 endsnippet
 
 context "not math()" 
-snippet DVR "discrete valuation ring" i
-discrete valuation ring
+snippet TFAE "The following are equivalent" i
+The following are equivalent
 endsnippet
 
 context "not math()" 
-snippet TFAE "the following are equivalent" i
-The following are equivalent:
+snippet Tfae "The following are equivalent" i
+The following are equivalent
+endsnippet
+
+context "not math()" 
+snippet tfae "the following are equivalent" i
+the following are equivalent
+endsnippet
+
+context "not math()" 
+snippet gcq "good categorical quotient" i
+good categorical quotient
+endsnippet
+
+context "not math()" 
+snippet DVR "discrete valuation ring" i
+discrete valuation ring
 endsnippet
 
 # Declare Operators etc
@@ -983,7 +992,6 @@ context "not math()"
 snippet DMO "Declare Math Operator" i
 \DeclareMathOperator{\\$1}{$2}
 endsnippet
-
 
 
 post_jump "create_row_placeholders(snip)"
