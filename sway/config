@@ -25,7 +25,8 @@ exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-st-random.sh"
 # Your preferred terminal emulator
 set $term alacritty -e fish
 # Your preferred browser
-set $browser firefox
+set $browser MOZ_ENABLE_WAYLAND=1 firefox 
+#set $browser firefox
 # Your preferred file manager
 set $filemanager alacritty -e ranger
 # Your preferred application launchers
@@ -299,8 +300,13 @@ exec_always synology-drive
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
 
-#hide the mouse pointer if idle for >5 seconds
-exec_always unclutter & 
+#hide cursor when idle (after approx. 5-6 seconds)
+seat * hide_cursor 8000
+
+#hide cursor when typing
+seat * hide_cursor when-typing enable
+
+
 
 #
 # Media keys
@@ -328,3 +334,4 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 
 include /etc/sway/config.d/*
+
