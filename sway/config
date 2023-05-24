@@ -41,7 +41,7 @@ set $signal 'signal-desktop'
 # your preferred note-taking application
 set $xournal 'xournalpp'
 # your preferred email program
-set $thund 'thunderbird'
+set $thund MOZ_ENABLE_WAYLAND=1 thunderbird 
 # zoom
 set $zoom 'zoom'
 # spotify
