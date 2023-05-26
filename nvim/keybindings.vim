@@ -61,3 +61,9 @@ nnoremap <leader>tt :source ~/.config/nvim/UltiSnips/tex.snippets<CR>
 
 nnoremap <silent><leader>x :put =trim(execute(input(':', '', 'command')))<CR>
 
+"vimcmdline mappings
+let cmdline_map_start = '<Enter>'
+let cmdline_map_send = '<Enter>'
+let cmdline_map_send_and_stay  = '<LocalLeader><Enter>'
+
+ 
