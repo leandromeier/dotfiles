@@ -11,6 +11,8 @@ map m scroll half-down
 map u scroll half-up
 map e scroll half-up
 
+map <C-d> toggle_page_mode
+map b toggle_page_mode
 map t toggle_index
 map s toggle_statusbar
 
