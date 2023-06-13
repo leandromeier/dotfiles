@@ -42,8 +42,6 @@ set $signal 'signal-desktop'
 set $xournal 'xournalpp'
 # your preferred email program
 set $thund MOZ_ENABLE_WAYLAND=1 thunderbird 
-# zoom
-set $zoom 'zoom'
 # spotify
 set $spot 'spotify'
 # preferred bluethooth manager
@@ -122,13 +120,16 @@ input type:keyboard {
 }
 
 #change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
-#change to 'map_to_outputeDP-3' to get the graphics tablet to map to secondary monitor
+#change to 'map_to_output DP-3' to get the graphics tablet to map to secondary monitor
+# use 'swaymsg -t get_outputs' to get output list
+  #map_to_output eDP-1
+  #map_to_output DP-3
 input type:tablet_tool {
-  map_to_output eDP-1
+  map_to_output DP-3
 }
 
 #enable floating for selected applications
-#for_window [app_id="org.gnome.Settings"] floating enable
+for_window [app_id="org.gnome.Settings"] floating enable
 # while this enables the settings to float, it does not solve the access unlock problem
 
 
