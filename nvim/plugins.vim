@@ -40,7 +40,7 @@ Plug 'lervag/vimtex'
 " git support with :G
 Plug 'tpope/vim-fugitive'
 " linting and IDE-like behaviour
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 " status bar
 Plug 'itchyny/lightline.vim'
 " repeat surround commands
