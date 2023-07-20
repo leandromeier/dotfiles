@@ -35,7 +35,10 @@ alias xoup='xournalpp'
 alias z='zathura'
 
 # lock and suspend 
-alias sn='loginctl lock-session && systemctl suspend'
+#this appears to make waybar disappear upon resume
+#alias sn='loginctl lock-session && systemctl suspend'
+# wait and see if this is better 
+alias sn='systemctl suspend'
 
 # only lock
 alias lock='loginctl lock-session'
