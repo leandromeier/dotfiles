@@ -35,9 +35,10 @@ nnoremap <leader>gp :G push<CR>
 nnoremap <leader>gf :G pull<CR>
 
 " searching
-nnoremap <leader>s /
-" (turn off highlighting till next search)
-nnoremap <leader>h :noh<CR>
+nnoremap <leader>s  /
+" turn off highlighting till next search
+nnoremap <leader>h  :noh<CR>
+nnoremap <ESC>      :nohlsearch<CR>
 
 " clipboard
 xnoremap <leader>cy "+y
@@ -46,11 +47,8 @@ nnoremap <leader>cp "+p
 inoremap <C-v> <C-r>+
 
 " autocomplete
-"inoremap <C-Space> <C-x><C-o>
+inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-x><C-o>
-
-" remap :noh to ESC
-nnoremap <ESC> :nohlsearch<CR>
 
 " remap reloading the source file
 nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
