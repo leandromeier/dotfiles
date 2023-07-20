@@ -38,7 +38,7 @@ Plug 'tpope/vim-surround'
 " latex compilation with <localleader>ll etc
 Plug 'lervag/vimtex'
 " git support with :G
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 " linting and IDE-like behaviour
 "Plug 'dense-analysis/ale'
 " status bar
@@ -71,7 +71,6 @@ let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 " let g:vimtex_delim_stopline=2500
 let g:vimtex_compiler_progname = 'nvr'
-
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'

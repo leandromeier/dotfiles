@@ -37,3 +37,9 @@ let g:clipboard = {
   \   },
   \   'cache_enabled': 1,
   \ }
+
+
+" hide the double insert mode 
+" this mostly fixes the fickering text issue with vimtex, now it's only the
+" cursor flickering
+set noshowmode
