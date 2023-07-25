@@ -1,56 +1,28 @@
 global !p
-texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA', 'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG', 'AmsAS', 'AmsBS', 'AmsCS', 'AmsDS', 'AmsES', 'AmsFS', 'AmsGS' ]]
-texIgnoreMathZones = ['texMathText']
-texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
-texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
-ignore = texIgnoreMathZoneIds[0]
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
-def create_row_placeholders(snip):
-    # count
-    placeholders_amount = int(snip.buffer[snip.line].strip())
 
-    # erase current line
-    snip.buffer[snip.line] = ''
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
 
-    # create anonymous snippet with expected content and number of tabstops
-    anon_snippet_body = ' & '.join(['$' + str(i+1)
-                                    for i in range(placeholders_amount)])
-
-    # expand anonymous snippet
-    snip.expand_anon(anon_snippet_body)
-
-def create_fig_minipages(snip):
-
-    # count
-    placeholders_amount = int(snip.buffer[snip.line].strip())
-
-    formatted_parts = "{:.2f}".format(1/placeholders_amount)
-
-    # erase current line
-    snip.buffer[snip.line] = ''
-
-    # create anonymous snippet with expected content and number of tabstops
-    anon_snippet_body = '\\begin{figure}[htb] \n  \centering\n'
-
-    for i in range(placeholders_amount):
-        anon_snippet_body += '  \\begin{minipage}{' + formatted_parts + '\\textwidth}\n    \centering\n'
-        anon_snippet_body += '\n    $' + str(i+3) + '\n  \end{minipage}%\n' 
-    
-
-    anon_snippet_body += '  \caption{$1}%\n  \label{fig:$2}\n\end{figure}'
-
-    # expand anonymous snippet
-    snip.expand_anon(anon_snippet_body)
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
 
 endglobal
+
+# some basic syntax:
+# b - this snippet will only be expanded at the beginning of a line
+# A - this snippet will be automatically expanded
+# w - this snippet will only expand at word boundaries, i.e. not as a suffix to another word
+
 
 snippet ö "backslash" iA
 \\
 endsnippet
 
-#now umlaut 'ö' is annoying, so a snippet for this:
-snippet ooe "ö" iA
+#now need a snippet for 'ö'
+snippet oe "ö" i
 ö
 endsnippet
 
@@ -100,7 +72,6 @@ snippet ssse* "subsubsection*" bA
 \subsubsection*{$1}
 $0
 endsnippet
-
  
 # math
 context "not math()"
@@ -114,7 +85,7 @@ else:
 endsnippet
 
 context "not math()"
-snippet ä "inline math" A
+snippet mk "inline math" wA
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
 	snip.rv = ' '
@@ -124,6 +95,13 @@ else:
 endsnippet
 
 snippet \[ "display math" bA
+\[
+  $1
+\]
+$0
+endsnippet
+
+snippet dm "display math" bA
 \[
   $1
 \]
@@ -174,11 +152,6 @@ snippet aset "{ ... }" iA
 endsnippet
 
 context "math()"
-snippet 0set "{=}" iA
-\left\\{ 0 \\right\\}$0
-endsnippet
-
-context "math()"
 snippet \\\ "\setminus" iA
 \\setminus
 endsnippet
@@ -192,7 +165,6 @@ context "math()"
 snippet nnn "\cap" iA
 \\cap
 endsnippet
-
 
 context "math()"
 snippet ccc "\subset" iA
@@ -214,7 +186,6 @@ snippet rcr "\geq" iA
 \\geq
 endsnippet
 
-
 context "math()"
 snippet __ "subscript block" iA
 _{$1}$0
@@ -222,10 +193,9 @@ endsnippet
 
 
 context "math()"
-snippet xxx "\times" iA
+snippet xx "\times" wA
 \\times
 endsnippet
-
 
 context "math()"
 snippet ^^ "superscript block" iA
@@ -257,6 +227,12 @@ snippet sqrt "sqrt" iA
 \sqrt{$1}$0
 endsnippet
 
+priority 100
+snippet "([a-zA-Z])dual" "vee" riA
+{`!p snip.rv=match.group(1)`}^{\vee} $0
+endsnippet
+
+priority 10
 context "math()"
 snippet dual "dual / ^v" iA
 ^{\vee} $0
@@ -440,7 +416,7 @@ endsnippet
 
 #matrices etc.
 context "math()"
-snippet mat "pmatrix" bA
+snippet mat "pmatrix" wA
 \begin{pmatrix}
   $1
 \end{pmatrix}
@@ -485,7 +461,7 @@ snippet rarrow "rightarrow" iA
 endsnippet
 
 context "math()"
-snippet mapsto "mapsto" iA
+snippet to "mapsto" wA
 \mapsto
 endsnippet
 
@@ -506,16 +482,14 @@ snippet corrow "<--->" iA
 endsnippet
 
 context "math()"
-snippet larrol "<---" iA
+snippet larrow "<---" iA
 \longleftarrow 
 endsnippet
 
 context "math()"
-snippet rarrol "--->" iA
+snippet rarrow "--->" iA
 \longrightarrow 
 endsnippet
-
-
 
 # blackboard bold symbols
 context "math()"
@@ -583,13 +557,13 @@ snippet C** "\mathbb{C}^*" iA
 \mathbb{C}^{*}$0
 endsnippet
 
-#bold in math mode
+#bold text in math mode
 context "math()"
 snippet bfm "boldsymbol" iA
 \boldsymbol{$1} $0
 endsnippet
 
-
+#more math symbols
 context "math()"
 snippet ooo "infinity" iA
 \infty
@@ -600,57 +574,39 @@ snippet vtrop "V trop" iA
 \mathcal{V}_{trop}\left( $1 \right) $0
 endsnippet
 
-snippet frac "visual frac" i
-\\frac{${VISUAL}}{$1} $0
+#special symbols
+context "math()"
+snippet perp "perp" iA
+\perp $0
 endsnippet
 
-snippet \\ "visual frac" i
-\\frac{${VISUAL}}{$1} $0
+context "math()"
+snippet tns "tensor" iA
+\otimes $0
 endsnippet
 
 #special fonts
+priority 100
 context "math()"
-snippet CB "\mathcal{B}" iA
-\mathcal{B}
+snippet "([a-zA-Z])cal" "caligraphic" riA
+\mathcal{`!p snip.rv=match.group(1)`}
 endsnippet
 
+priority 10
 context "math()"
-snippet CD "\mathcal{D}" iA
-\mathcal{D}
-endsnippet
-
-context "math()"
-snippet CF "\mathcal{F}" iA
-\mathcal{F}
-endsnippet
-
-context "math()"
-snippet CG "\mathcal{G}" iA
-\mathcal{G}
-endsnippet
-
-context "math()"
-snippet CM "\mathcal{M}" iA
-\mathcal{M}
-endsnippet
-
-context "math()"
-snippet CE "\mathcal{E}" iA
-\mathcal{E}
-endsnippet
-
-context "math()"
-snippet CO "\mathcal{O}" iA
-\mathcal{O}
-endsnippet
-
-context "math()"
-snippet mcc "\mathcal{}" iA
+snippet cal "\mathcal{}" wA
 \mathcal{$1} $0
 endsnippet
 
+priority 100
 context "math()"
-snippet mff "\mathfrak{}" iA
+snippet "([a-zA-Z])frak" "fraktal" riA
+\mathfrak{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet frak "\mathfrak{}" wA
 \mathfrak{$1}$0
 endsnippet
 
@@ -660,17 +616,21 @@ snippet mrr "\mathrm{}" iA
 endsnippet
 
 context "math()"
-snippet text "\text{}" iA
+snippet text "\text{}" wA
 \text{$1} $0
 endsnippet
 
-#symbols over letters
+#greek letters
 context "math()"
-snippet ~ "\tilde{}" iA
-\tilde{$1} $0
+snippet alp "alpha" wA
+\alpha
 endsnippet
 
-#greek letters
+context "math()"
+snippet bet "beta" wA
+\beta
+endsnippet
+
 context "math()"
 snippet aaa "alpha" iA
 \alpha
@@ -682,12 +642,12 @@ snippet bbb "beta" iA
 endsnippet
 
 context "math()"
-snippet Del "Delta" iA
+snippet Del "Delta" wA
 \Delta
 endsnippet
 
 context "math()"
-snippet ddel "delta" iA
+snippet del "delta" wA
 \delta
 endsnippet
 
@@ -697,37 +657,37 @@ snippet vareps "varepsilon" iA
 endsnippet
 
 context "math()"
-snippet lll "lambda" iA
+snippet lam "lambda" wA
 \lambda
 endsnippet
 
 context "math()"
-snippet mmu "mu" iA
+snippet mu "mu" wA
 \mu
 endsnippet
 
 context "math()"
-snippet rrh "rho" iA
+snippet rho "rho" wA
 \rho
 endsnippet
 
 context "math()"
-snippet ssig "sigma" iA
+snippet sig "sigma" wA
 \sigma
 endsnippet
 
 context "math()"
-snippet Sig "Sigma" iA
+snippet Sig "Sigma" wA
 \Sigma
 endsnippet
 
 context "math()"
-snippet ttau "tau" iA
+snippet tau "tau" wA
 \tau
 endsnippet
 
 context "math()"
-snippet cchi "chi" iA
+snippet chi "chi" wA
 \chi
 endsnippet
 
@@ -737,12 +697,12 @@ snippet vph "varphi" iA
 endsnippet
 
 context "math()"
-snippet pssi "psi" iA
+snippet psi "psi" wA
 \psi
 endsnippet
 
 context "math()"
-snippet pppi "pi" iA
+snippet pi "pi" wA
 \pi
 endsnippet
 
@@ -768,17 +728,7 @@ snippet emph
 \emph{$1} $0
 endsnippet
 
-#special symbols
-context "math()"
-snippet perp "perp" iA
-\perp $0
-endsnippet
-
-context "math()"
-snippet tns "tensor" iA
-\otimes $0
-endsnippet
-
+#norms etc
 context "math()"
 snippet nrm "norm" iA
 \\| $1 \\| $0
@@ -794,7 +744,44 @@ snippet abss "| |" i
 | ${1:${VISUAL}} | $0
 endsnippet
 
-# numbering
+# overlines, hat, tilde, ...
+# credit to Gilles Castel 
+priority 10
+snippet "bar" "bar" riA
+\overline{$1}$0
+endsnippet
+
+priority 100
+snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+snippet "hat" "hat" riA
+\hat{$1}$0
+endsnippet
+
+priority 100
+snippet "([a-zA-Z])hat" "hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+snippet "tilde" "tilde" riA
+\tilde{$1}$0
+endsnippet
+
+priority 100
+snippet "([a-zA-Z])tilde" "tilde" riA
+\tilde{`!p snip.rv=match.group(1)`}
+endsnippet
+
+context "math()"
+snippet ~ "\tilde{}" iA
+\tilde{$1} $0
+endsnippet
+
+# numbering / lists
 snippet enum "enumerate" b
 \begin{enumerate}[${1:first-item}]
   \item $2
@@ -968,7 +955,7 @@ $11
 \end{document}
 endsnippet
 
-#new word abbreviations
+#word abbreviations
 context "not math()" 
 snippet thm "theorem" i
 theorem
@@ -992,6 +979,11 @@ endsnippet
 context "not math()" 
 snippet def "definition" i
 definition
+endsnippet
+
+context "not math()" 
+snippet exa "example" i
+example
 endsnippet
 
 context "not math()" 
@@ -1045,10 +1037,7 @@ snippet Dmo "Declare Math Operator" i
 \DeclareMathOperator{\\$1}{$2}
 endsnippet
 
-
 post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br
 `!p snip.rv = match.group(1)`
 endsnippet
-
-
