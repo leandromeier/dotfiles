@@ -54,7 +54,8 @@ inoremap <C-@> <C-x><C-o>
 nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
 
 " remap reloading the tex snippets file 
-nnoremap <leader>tt :source ~/.config/nvim/UltiSnips/tex.snippets<CR>
+nnoremap <leader>tt :call UltiSnips#RefreshSnippets()<CR>
+"nnoremap <leader>tt :source ~/.config/nvim/UltiSnips/tex.snippets<CR>
 
 
 nnoremap <silent><leader>x :put =trim(execute(input(':', '', 'command')))<CR>
