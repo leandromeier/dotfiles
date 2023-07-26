@@ -1,8 +1,6 @@
-#  
 #  sway config
-#  leandromeier, 2021
+#  leandromeier, 2023
 #  ~/.config/sway/config
-#
 
 ### Output configuration
 #
@@ -53,6 +51,9 @@ set $nm alacritty -e nmtui
 # Logo key. Use Mod4 for super/windows key.
 # Logo key. Use Mod5 for Alt Gr.
 set $mod Mod4
+set $mod1 Mod1
+
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -62,7 +63,6 @@ set $right l
 
 ### Idle configuration
 # 
-
 #::::Inhibit Idle if a window is fullscreen:::;
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
@@ -72,13 +72,11 @@ for_window [app_id="mpv"] fullscreen
 for_window [class="^(steam_app_*|steam)$"] fullscreen
 for_window [app_id="spotify"] fullscreen
 
-
-
-# screen before suspend. Use loginctl lock-session to lock your screen.
+# timeout before suspend. Use loginctl lock-session to lock your screen.
 set $locktime 600
 set $bltime 660
 
-# lcoks your screen after $locktime minutes, and turns it black after $bltime minutes 
+# locks your screen after $locktime minutes, and turns it black after $bltime minutes 
 exec swayidle -w \
           timeout $locktime 'swaylock -f -e' \
           timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -95,9 +93,15 @@ exec swayidle -w \
 	#timeout 660 'swaylock -f -c 001b60 -e' \
 #exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 -e --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
 
-#######################
 
-
+# using mod1 + certain keys looks up the commands in a script
+bindsym $mod1+f exec "./math/scripts/shortcut.sh f"
+bindsym $mod1+n exec "./math/scripts/shortcut.sh n"
+bindsym $mod1+o exec "./math/scripts/shortcut.sh o"
+bindsym $mod1+p exec "./math/scripts/shortcut.sh p"
+bindsym $mod1+r exec "./math/scripts/shortcut.sh r"
+bindsym $mod1+t exec "./math/scripts/shortcut.sh t"
+bindsym $mod1+x exec "./math/scripts/shortcut.sh x"
 
 ### Input configuration
 # Mouse
@@ -123,9 +127,9 @@ input type:keyboard {
 #change to 'map_to_output DP-3' to get the graphics tablet to map to secondary monitor
 # use 'swaymsg -t get_outputs' to get output list
   #map_to_output eDP-1
-  #map_to_output DP-3
+  #map_to_output DP-4
 input type:tablet_tool {
-  map_to_output DP-3
+  map_to_output eDP-1
 }
 
 #enable floating for selected applications
