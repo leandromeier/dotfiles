@@ -1,6 +1,5 @@
 Things learnt
 
-
 # yay
 Before you attempt to install yay, or do something like 'sudo pacman -S --needed base-devel git', do a system update and check whether the above command wants to install anything called sudo or pacman or so. This will likely result in disaster so don't do it.
 
