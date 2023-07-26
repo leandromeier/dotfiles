@@ -25,7 +25,7 @@ case $key in
        [ -f "$pdf_file" ] && zathura "$(realpath "$pdf_file")" || sensible-browser "https://google.com/search?q=$pdf_file" ;;
    r ) $terminal "ranger ~/math/notes/daily-notes/$(date +"%F")" ;;
    n ) $terminal "cd ~/math/notes/daily-notes/$(date +"%F"); $vim ~/math/notes/daily-notes/$(date +"%F")/note.tex" ;;
-   t ) $terminal "cd ~/math/notes/daily-notes; $vim ~/math/notes/main.tex" ;;
+   t ) $terminal "cd ~/math/notes/daily-notes; $vim ~/math/notes/daily-notes/main.tex" ;;
    o ) zathura ~/math/notes/daily-notes/main.pdf;;
    x ) open_xournalpp ;;
    f ) $node $root/copy-pdf-reference.js ;;
