@@ -381,6 +381,11 @@ snippet asandps "product of affine spaces with projective" iA
 \mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
 endsnippet
 
+context "math()"
+snippet pair "(X;x)" iA
+\left( $1; $2 \right)$0
+endsnippet
+
 #specific alg-geo things
 context "math()"
 snippet Grs "Grassmannian Gr(k,n)" iA
@@ -747,31 +752,37 @@ endsnippet
 # overlines, hat, tilde, ...
 # credit to Gilles Castel 
 priority 10
+context "math()"
 snippet "bar" "bar" riA
 \overline{$1}$0
 endsnippet
 
 priority 100
+context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
+context "math()"
 snippet "hat" "hat" riA
 \hat{$1}$0
 endsnippet
 
 priority 100
+context "math()"
 snippet "([a-zA-Z])hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
+context "math()"
 snippet "tilde" "tilde" riA
 \tilde{$1}$0
 endsnippet
 
 priority 100
+context "math()"
 snippet "([a-zA-Z])tilde" "tilde" riA
 \tilde{`!p snip.rv=match.group(1)`}
 endsnippet
