@@ -11,10 +11,12 @@ def env(name):
 
 endglobal
 
-# some basic syntax:
+# the options:
 # b - this snippet will only be expanded at the beginning of a line
 # A - this snippet will be automatically expanded
-# w - this snippet will only expand at word boundaries, i.e. not as a suffix to another word
+# w - this snippet will only expand at word boundaries, i.e. not as a suffix or prefix to another word. Overrdies 'i'
+# i - this snippet will only expand if the trigger is the first word on a line or preceded by whitespace.
+# r - the trigger is expected to be a regular expression. Frame it by quotations because ultisnips expects it to be surrounded by a character.
 
 
 snippet ö "backslash" iA
@@ -228,7 +230,7 @@ snippet sqrt "sqrt" iA
 endsnippet
 
 priority 100
-snippet "([a-zA-Z])dual" "vee" riA
+snippet "(w+)dual" "vee" riA
 {`!p snip.rv=match.group(1)`}^{\vee} $0
 endsnippet
 
@@ -382,8 +384,8 @@ snippet asandps "product of affine spaces with projective" iA
 endsnippet
 
 context "math()"
-snippet pair "(X;x)" iA
-\left( $1; $2 \right)$0
+snippet pair "(X,x)" iA
+\left( $1, $2 \right)$0
 endsnippet
 
 #specific alg-geo things
@@ -417,11 +419,16 @@ snippet XFan "X_Fan" iA
 X_{$1} $0
 endsnippet
 
+context "math()"
+snippet nvol "normalized volume" iA
+\widehat{\vol}_{$1}\left( $2\right)$0
+endsnippet
+
 
 
 #matrices etc.
 context "math()"
-snippet mat "pmatrix" wA
+snippet mat "pmatrix" bA
 \begin{pmatrix}
   $1
 \end{pmatrix}
@@ -520,6 +527,12 @@ endsnippet
 context "math()"
 snippet CC "\mathbb{C}" iA
 \mathbb{C}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "mbb([a-zA-Z])" "\mathbb{-}" riA
+\mathbb{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
 context "math()"
@@ -625,6 +638,11 @@ snippet text "\text{}" wA
 \text{$1} $0
 endsnippet
 
+context "math()"
+snippet txt "\text{}" wA
+\text{$1} $0
+endsnippet
+
 #greek letters
 context "math()"
 snippet alp "alpha" wA
@@ -687,12 +705,12 @@ snippet Sig "Sigma" wA
 endsnippet
 
 context "math()"
-snippet tau "tau" wA
+snippet ttau "tau" wA
 \tau
 endsnippet
 
 context "math()"
-snippet chi "chi" wA
+snippet chii "chi" wA
 \chi
 endsnippet
 
@@ -702,14 +720,25 @@ snippet vph "varphi" iA
 endsnippet
 
 context "math()"
-snippet psi "psi" wA
+snippet pssi "psi" wA
 \psi
 endsnippet
 
 context "math()"
-snippet pi "pi" wA
+snippet pii "pi" wA
 \pi
 endsnippet
+
+context "math()"
+snippet xii "xi" wA
+\xi
+endsnippet
+
+context "math()" 
+snippet "gr (\w+)" "greek letter" r
+`!p snip.rv = ("\\" + match.group(1))`
+endsnippet
+
 
 #arrows
 context "math()"
@@ -805,6 +834,10 @@ snippet item "itemize" b
   \item $1
 \end{itemize}
 $0
+endsnippet
+
+snippet nit "new item" b
+`!p snip << 2`\item $1
 endsnippet
 
 snippet tab "table" b
@@ -1037,7 +1070,12 @@ snippet DVR "discrete valuation ring" i
 discrete valuation ring 
 endsnippet
 
-# Declare Operators etc
+# preamble
+context "not math()" 
+snippet package "use package" i
+\usepackage[$2]{$1}
+endsnippet
+
 context "not math()" 
 snippet DMO "Declare Math Operator" i
 \DeclareMathOperator{\\$1}{$1}
@@ -1046,6 +1084,19 @@ endsnippet
 context "not math()" 
 snippet Dmo "Declare Math Operator" i
 \DeclareMathOperator{\\$1}{$2}
+endsnippet
+
+# python snippets
+# you can put python code between '`!p' and '`' 
+# snip.rv is the value that is returned by the snippet
+
+# this needs to become better to be useful
+# maybe using a global snippet and some option for an item snippet
+snippet "item(\d+)" "Itemize <number>" r
+\begin{itemize}
+	`!p snip.rv= int(match.group(1))*("\item" + '\n')`
+\end{itemize}
+$0
 endsnippet
 
 post_jump "create_row_placeholders(snip)"

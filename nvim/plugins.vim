@@ -51,6 +51,10 @@ Plug 'tpope/vim-repeat'
 Plug 'rust-lang/rust.vim'
 " fish support
 Plug 'dag/vim-fish'
+" easycomplete
+"idk wth this does but it seems to break ultisnips
+"figure it out later
+"Plug 'jayli/vim-easycomplete'
 "
 call plug#end()
 " plugin configuration
