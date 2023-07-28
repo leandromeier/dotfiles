@@ -607,13 +607,13 @@ endsnippet
 priority 100
 context "math()"
 snippet "([a-zA-Z])cal" "caligraphic" riA
-\mathcal{`!p snip.rv=match.group(1)`}
+\mathcal{`!p snip.rv=match.group(1)`}$0
 endsnippet
 
 priority 10
 context "math()"
 snippet cal "\mathcal{}" wA
-\mathcal{$1} $0
+\mathcal{$1}$0
 endsnippet
 
 priority 100
@@ -758,7 +758,12 @@ endsnippet
 
 #special lettering (cursive, ...)
 context "not math()"
-snippet emph
+snippet emp "emph{}" w
+\emph{$1} $0
+endsnippet
+
+context "not math()"
+snippet emph "emph{}" w
 \emph{$1} $0
 endsnippet
 
