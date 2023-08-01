@@ -32,3 +32,6 @@ see https://docs.github.com/en/authentication/connecting-to-github-with-ssh/chec
 
 # zathura
 Zathura needs a plugin to read pdfs and co. 'sudo pacman -S zathura-pdf-mupdf' for instance
+
+# neovim
+wl-clipboard for copying to and pasting from system clipboard
