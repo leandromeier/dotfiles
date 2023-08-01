@@ -24,19 +24,33 @@ set autoindent " indent a new line the same amount as the line just typed
 filetype plugin indent on " make vim recognize filetypes
 syntax on " syntax highlighting
 
-""allow + and * to copy to clipboard
+" allow + and * to copy to clipboard
+" replace xclip by wl-clipboard
 let g:clipboard = {
-  \   'name': 'xclip-xfce4-clipman',
+  \   'name': 'wl-clipboard',
   \   'copy': {
-  \      '+': 'xclip -selection clipboard',
-  \      '*': 'xclip -selection clipboard',
+  \      '+': 'wl-copy',
+  \      '*': 'wl-copy',
   \    },
   \   'paste': {
-  \      '+': 'xclip -selection clipboard -o',
-  \      '*': 'xclip -selection clipboard -o',
+  \      '+': 'wl-paste',
+  \      '*': 'wl-paste',
   \   },
-  \   'cache_enabled': 1,
   \ }
+"
+" old
+"let g:clipboard = {
+  "\   'name': 'xclip-xfce4-clipman',
+  "\   'copy': {
+  "\      '+': 'xclip -selection clipboard',
+  "\      '*': 'xclip -selection clipboard',
+  "\    },
+  "\   'paste': {
+  "\      '+': 'xclip -selection clipboard -o',
+  "\      '*': 'xclip -selection clipboard -o',
+  "\   },
+  "\   'cache_enabled': 1,
+  "\ }
 
 
 " hide the double insert mode 
