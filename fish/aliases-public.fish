@@ -48,3 +48,6 @@ alias bl='bluetoothctl'
 
 #sage notebook jupyter
 alias snj='sage --notebook jupyter'
+
+#jupyter notebook 
+alias jn='jupyter notebook'

@@ -16,14 +16,17 @@ open_xournalpp () {
     fi
 }
 
-mkdir -p ~/math/notes/$(date +"%F"); 
+mkdir -p ~/math/notes/daily-notes/$(date +"%F"); 
 
 case $key in
-   p ) cd ~/math/articles;
+   a ) cd ~/math/articles;
+       pdf_file="$(ls . | rofi -i -dmenu)";
+       [ -z "$pdf_file" ] && exit 0;;
+       #[ -f "$pdf_file" ] && zathura "$(realpath "$pdf_file")" || sensible-browser "https://google.com/search?q=$pdf_file" ;;
+   b ) cd ~/math/books;
        pdf_file="$(ls . | rofi -i -dmenu)";
        [ -z "$pdf_file" ] && exit 0;
-       [ -f "$pdf_file" ] && zathura "$(realpath "$pdf_file")" || sensible-browser "https://google.com/search?q=$pdf_file" ;;
-   r ) $terminal "ranger ~/math/notes/daily-notes/$(date +"%F")" ;;
+       #[ -f "$pdf_file" ] && zathura "$(realpath "$pdf_file")" || sensible-browser "https://google.com/search?q=$pdf_file" ;;
    n ) $terminal "cd ~/math/notes/daily-notes/$(date +"%F"); $vim ~/math/notes/daily-notes/$(date +"%F")/note.tex" ;;
    t ) $terminal "cd ~/math/notes/daily-notes; $vim ~/math/notes/daily-notes/main.tex" ;;
    o ) zathura ~/math/notes/daily-notes/main.pdf;;
@@ -31,4 +34,4 @@ case $key in
    f ) $node $root/copy-pdf-reference.js ;;
 esac
 
-
+   #r ) $terminal "ranger ~/math/notes/daily-notes/$(date +"%F")" ;;
