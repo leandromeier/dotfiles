@@ -51,3 +51,8 @@ alias snj='sage --notebook jupyter'
 
 #jupyter notebook 
 alias jn='jupyter notebook'
+
+# arxiv-downloader
+alias axu='arxiv-downloader --url'
+alias axi='arxiv-downloader --id'
+
