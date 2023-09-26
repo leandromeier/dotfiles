@@ -50,11 +50,10 @@ def authorsToString(s):
 
 def download(article_id, directory: str, source:bool):
 
+    #TODO: deal with math mode characters, replace them by sth sensible
     # TODO: add checks for valid urls
 
-    #TODO: deal with math mode characters, replace them by sth sensible
     check_out_dir(directory)
-
 
     # Download
     result = arxiv.Search(id_list=[article_id])
@@ -64,7 +63,8 @@ def download(article_id, directory: str, source:bool):
 
 
     print(f'Starting download of article: "{result.title}" ({article_id})')
-    path = result.download_pdf(dirpath=directory, filename=( result.title + " by "+ authors + ".pdf"))
+    #path = result.download_pdf(dirpath=directory, filename=( result.title + " by "+ authors + ".pdf"))
+    path = result.download_pdf(dirpath=directory, filename=( result.title + " ("+ authors + ").pdf"))
 
     print(f"Download finished! Result saved at:\n{path}")
 
