@@ -40,7 +40,7 @@ Plug 'lervag/vimtex'
 " git support with :G
 "Plug 'tpope/vim-fugitive'
 " linting and IDE-like behaviour
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 " status bar
 Plug 'itchyny/lightline.vim'
 " repeat surround commands
@@ -51,10 +51,8 @@ Plug 'tpope/vim-repeat'
 Plug 'rust-lang/rust.vim'
 " fish support
 Plug 'dag/vim-fish'
-" easycomplete
-"idk wth this does but it seems to break ultisnips
-"figure it out later
-"Plug 'jayli/vim-easycomplete'
+" supertab (to avoid ycm and ultisnips clashing)
+Plug 'ervandew/supertab'
 "
 call plug#end()
 " plugin configuration
@@ -106,3 +104,21 @@ let g:lightline = {
   \   'gitbranch': 'FugitiveHead'
   \ },
 \}
+
+packadd YouCompleteMe
+let g:ycm_filetype_blacklist = {
+      \ 'markdown': 1,
+      \ 'text': 1,
+      \}
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+
+" ALE
+" only displays messages on current line. Change to 'disabled' to turn off entirely
+let g:ale_virtualtext_cursor = 'current' 
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
