@@ -322,7 +322,7 @@ snippet prod "product" i
 endsnippet
 
 context "math()"
-snippet int "integral" i
+snippet int "integral" w
 \int_{$1}^{$2} $3 \, d$0
 endsnippet
 
@@ -337,7 +337,7 @@ snippet UUU "bigcup" i
 endsnippet
 
 context "math()"
-snippet inter "bigcap" i
+snippet inter "bigcap" w
 \bigcap_{$1}^{$2} $0
 endsnippet
 
@@ -1117,3 +1117,17 @@ post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br
 `!p snip.rv = match.group(1)`
 endsnippet
+
+
+#intervals (using the package interval)
+context "math()"
+snippet rinter "[-,-)" w
+\\rinterval{$1}{$2} $0
+endsnippet
+
+context "math()"
+snippet linter "(-,-]" w
+\\linterval{$1}{$2} $0
+endsnippet
+
+
