@@ -312,7 +312,7 @@ endsnippet
 
 # big n-ary operators
 context "math()"
-snippet sum "sum" i
+snippet sum "sum" w
 \sum_{$1}^{$2} $0
 endsnippet
 
@@ -320,6 +320,12 @@ context "math()"
 snippet prod "product" i
 \prod_{$1}^{$2} $0
 endsnippet
+
+context "math()"
+snippet dirsum "direct sum" w
+\bigoplus_{$1}^{$2} $0
+endsnippet
+
 
 context "math()"
 snippet int "integral" w
@@ -915,7 +921,6 @@ sorting=ynt]{biblatex}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
-
 \usepackage{enumerate}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -928,19 +933,24 @@ sorting=ynt]{biblatex}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
 
-\theoremstyle{definition} %definitions and examples should not be cursive
+%definitions and examples should not be cursive
+\theoremstyle{definition} 
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 
-\DeclareMathOperator{\TV}{TV}
-\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\Div}{Div} 
-\DeclareMathOperator{\dv}{div}
+\let\div\relax
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\Loc}{Loc}
+\DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\Spec}{Spec}
-\DeclareMathOperator{\codim}{codim}
-\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\TV}{TV}
 
 
 \begin{document}
