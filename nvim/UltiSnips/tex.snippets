@@ -79,7 +79,7 @@ endsnippet
 context "not math()"
 snippet < "inline math" A
 $${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')', ':']:
 	snip.rv = ' '
 else:
 	snip.rv = ''
@@ -527,6 +527,12 @@ endsnippet
 context "math()"
 snippet CC "\mathbb{C}" iA
 \mathbb{C}$0
+endsnippet
+
+# the torus
+context "math()"
+snippet trs "\mathbb{C}^{*}" iA
+\mathbb{C}^{*}$0
 endsnippet
 
 priority 100
