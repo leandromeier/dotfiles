@@ -17,7 +17,6 @@ set laststatus=2 " make lightline appear
 set showcmd " show what command you're typing
 set smartindent
 set cursorline
-" new additions
 set showmatch " show matching brackets
 set autoindent " indent a new line the same amount as the line just typed
 
@@ -37,23 +36,7 @@ let g:clipboard = {
   \      '*': 'wl-paste',
   \   },
   \ }
-"
-" old
-"let g:clipboard = {
-  "\   'name': 'xclip-xfce4-clipman',
-  "\   'copy': {
-  "\      '+': 'xclip -selection clipboard',
-  "\      '*': 'xclip -selection clipboard',
-  "\    },
-  "\   'paste': {
-  "\      '+': 'xclip -selection clipboard -o',
-  "\      '*': 'xclip -selection clipboard -o',
-  "\   },
-  "\   'cache_enabled': 1,
-  "\ }
 
 
-" hide the double insert mode 
-" this mostly fixes the fickering text issue with vimtex, now it's only the
-" cursor flickering
+" hide the double insert mode. This mostly fixes the flickering text issue with vimtex, now it's only the cursor flickering
 set noshowmode

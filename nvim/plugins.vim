@@ -105,10 +105,18 @@ let g:lightline = {
   \ },
 \}
 
+" auto-completion with YouCompleteMe
 packadd YouCompleteMe
 let g:ycm_filetype_blacklist = {
       \ 'markdown': 1,
       \ 'text': 1,
+      \ 'tex': 1,
+      \}
+
+" stop semantic completion (in .tex files, because it clashes with the trigger
+" expanding and jumping around snippets)
+let g:ycm_filetype_specific_completion_to_disable = {
+      \ 'tex': 1
       \}
 
 " make YCM compatible with UltiSnips (using supertab)
