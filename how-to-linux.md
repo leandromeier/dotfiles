@@ -57,3 +57,7 @@ Write a script: create a file 'filename.sh'. Its first line must consist only of
 To make it executable, go into bash and run 'chmod +x filename.sh'.
 To execute, run '/.filename.sh'.
 
+
+## curl
+to copy text content under a url to a file
+'curl -fLo path/to/file <url>
