@@ -56,3 +56,5 @@ alias jn='jupyter notebook'
 alias axu='arxiv-downloader --url'
 alias axi='arxiv-downloader --id'
 
+# toggle main display (Sway)
+alias tog='swaymsg output eDP-1 toggle'

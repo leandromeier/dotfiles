@@ -103,6 +103,12 @@ bindsym $mod1+r exec "./math/scripts/shortcut.sh r"
 bindsym $mod1+t exec "./math/scripts/shortcut.sh t"
 bindsym $mod1+x exec "./math/scripts/shortcut.sh x"
 
+# Calls a script checking whether an external monitor is connected
+# if yes, toggles primary screen
+bindsym $mod1+s exec  "./Documents/dotfiles/sway/monitor-off.sh"
+# calls a script turning primary screen back on
+bindsym $mod1+m exec  "./Documents/dotfiles/sway/monitor-on.sh"
+
 ### Input configuration
 # Mouse
 input type:touchpad {
