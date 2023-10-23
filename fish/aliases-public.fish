@@ -51,6 +51,7 @@ alias snj='sage --notebook jupyter'
 
 #jupyter notebook 
 alias jn='jupyter notebook'
+alias nj='jupyter notebook'
 
 # arxiv-downloader
 alias axu='arxiv-downloader --url'
@@ -58,3 +59,7 @@ alias axi='arxiv-downloader --id'
 
 # toggle main display (Sway)
 alias tog='swaymsg output eDP-1 toggle'
+
+# rclone
+alias rlsd='rclone lsd dropbox:'
+alias rc='rclone'
