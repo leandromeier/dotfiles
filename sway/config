@@ -107,8 +107,8 @@ bindsym $mod1+t exec "./math/scripts/shortcut.sh t"
 # Calls a script checking whether an external monitor is connected
 # if yes, toggles primary screen
 bindsym $mod1+s exec  "./Documents/dotfiles/sway/monitor-off.sh"
-# calls a script turning primary screen back on
-bindsym $mod1+m exec  "./Documents/dotfiles/sway/monitor-on.sh"
+# calls a script turning only the primary on 
+bindsym $mod1+m exec  "./Documents/dotfiles/sway/monitor-external-off.sh"
 
 ### Input configuration
 # Mouse
