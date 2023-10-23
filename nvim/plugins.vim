@@ -48,6 +48,9 @@ Plug 'ervandew/supertab'
 "Plug 'jupyter-vim/jupyter-vim'
 " jupytext.vim to edit .ipynb files in vim
 Plug 'goerz/jupytext.vim'
+" YouCompleteMe for autocompletion
+Plug 'ycm-core/YouCompleteMe'
+"
 " git
 " git support with :G
 " Plug 'tpope/vim-fugitive'
@@ -110,7 +113,7 @@ let g:lightline = {
 \}
 
 " auto-completion with YouCompleteMe
-packadd YouCompleteMe
+" packadd YouCompleteMe
 let g:ycm_filetype_blacklist = {
       \ 'markdown': 1,
       \ 'text': 1,
