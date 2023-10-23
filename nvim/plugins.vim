@@ -20,39 +20,43 @@ Plug '8d1h/vim-macaulay2'
 " a colorscheme
 Plug 'morhetz/gruvbox'
 " tree view
-Plug 'preservim/nerdtree'
-" show git status in nerdtree
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'preservim/nerdtree'
 " snippets
 Plug 'SirVer/ultisnips'
 " comment with gcc
 Plug 'tpope/vim-commentary'
-"fat-finger: auto-correct common spelling mistakes
+" fat-finger: auto-correct common spelling mistakes
 Plug 'chip/vim-fat-finger'
 " change cwd to configured directory
 Plug 'airblade/vim-rooter'
-" show lines that change since last commit
-Plug 'mhinz/vim-signify'
 " surround words with ysiw) or visualmode selection with S)
 Plug 'tpope/vim-surround'
-" latex compilation with <localleader>ll etc
-Plug 'lervag/vimtex'
-" git support with :G
-"Plug 'tpope/vim-fugitive'
-" linting and IDE-like behaviour
-"Plug 'dense-analysis/ale'
-" status bar
-Plug 'itchyny/lightline.vim'
 " repeat surround commands
 Plug 'tpope/vim-repeat'
-" GitHub integration
-" Plug 'tpope/vim-rhubarb'
+" latex compilation with <localleader>ll etc
+Plug 'lervag/vimtex'
+" status bar
+Plug 'itchyny/lightline.vim'
 " Rust support
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
 " fish support
 Plug 'dag/vim-fish'
 " supertab (to avoid ycm and ultisnips clashing)
 Plug 'ervandew/supertab'
+" jupyter-vim to edit jupyter notebooks in vim
+" does not work so far
+"Plug 'jupyter-vim/jupyter-vim'
+" jupytext.vim to edit .ipynb files in vim
+Plug 'goerz/jupytext.vim'
+" git
+" git support with :G
+" Plug 'tpope/vim-fugitive'
+" show git status in nerdtree
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" GitHub integration
+" Plug 'tpope/vim-rhubarb'
+" show lines that change since last commit
+" Plug 'mhinz/vim-signify'
 "
 call plug#end()
 " plugin configuration
