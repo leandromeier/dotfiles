@@ -63,3 +63,7 @@ alias tog='swaymsg output eDP-1 toggle'
 # rclone
 alias rlsd='rclone lsd dropbox:'
 alias rc='rclone'
+
+
+# load script for external brightness. needs to be passed a number between 1 and 100
+alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
