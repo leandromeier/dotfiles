@@ -384,6 +384,11 @@ snippet homo "homogeneous coordinates" iA
 endsnippet
 
 context "math()"
+snippet homco "homogeneous coordinates" iA
+[$1_{$2} : \dots : $1_{$3}]
+endsnippet
+
+context "math()"
 snippet asandps "product of affine spaces with projective" iA
 \mathbb{A}^{n_1} \times \cdots \times \mathbb{A}^{n_\ell} \times
 \mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
@@ -1114,6 +1119,16 @@ endsnippet
 context "not math()" 
 snippet Dmo "Declare Math Operator" i
 \DeclareMathOperator{\\$1}{$2}
+endsnippet
+
+context "not math()" 
+snippet iso "isomorphism" w
+isomorphism
+endsnippet
+
+context "not math()" 
+snippet homo "homomorphism" w
+homomorphism
 endsnippet
 
 # python snippets
