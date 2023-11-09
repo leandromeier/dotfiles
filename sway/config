@@ -17,7 +17,7 @@ output DP-3  resolution 2560x1440 position 1920,0
 #dynamic background, changing automatically after a fixed time interval
 # exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-dynamic.sh"
 # choose a random background at startup
-exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-st-random.sh"
+exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-dynamic.sh"
 
 
 # Your preferred terminal emulator
