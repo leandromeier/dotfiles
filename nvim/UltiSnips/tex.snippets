@@ -193,6 +193,20 @@ snippet __ "subscript block" iA
 _{$1}$0
 endsnippet
 
+context "math()"
+snippet cons "(X_a, x_a)" w
+\left( X_{$1}, x_{$1} \right)$0
+endsnippet
+
+context "math()"
+snippet polp "(X_a, xi_a)" w
+\left( X_{$1}, \xi_{$1} \right)$0
+endsnippet
+
+context "math()"
+snippet prd "X_1 x X_2" wA
+$1 = $1_{1} \times $1_{2} $0
+endsnippet
 
 context "math()"
 snippet xx "\times" wA
@@ -746,13 +760,14 @@ snippet pii "pi" iA
 \pi
 endsnippet
 
-context "math()"
-snippet xii "xi" iA
-\xi
-endsnippet
-
 context "math()" 
 snippet "gr (\w+)" "greek letter" r
+`!p snip.rv = ("\\" + match.group(1))`
+endsnippet
+
+#easier to hit ' than `
+context "math()" 
+snippet "'(\w+)" "greek letter" r
 `!p snip.rv = ("\\" + match.group(1))`
 endsnippet
 
