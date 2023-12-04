@@ -61,8 +61,10 @@ alias axi='arxiv-downloader --id'
 alias tog='swaymsg output eDP-1 toggle'
 
 # rclone
-alias rlsd='rclone lsd dropbox:'
+alias rlsd='rclone lsd nextcloud:'
 alias rc='rclone'
+alias rcla='rclone sync ~/Documents/math-books/articles/ nextcloud:articles/'
+alias rclb='rclone sync ~/Documents/math-books/books/ nextcloud:books/'
 
 
 # load script for external brightness. needs to be passed a number between 1 and 100
