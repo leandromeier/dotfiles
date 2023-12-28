@@ -70,6 +70,10 @@ alias rclb='rclone sync ~/Documents/math-books/books/ nextcloud:books/'
 # load script for external brightness. needs to be passed a number between 1 and 100
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
 
-#7zip 
+# 7zip 
 alias zip='7z a -tzip'
 alias unzip='7z x'
+
+
+# gphoto2  
+alias getphotos='gphoto2 --new --get-all-files'

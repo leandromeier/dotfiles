@@ -6,7 +6,7 @@ key=$1
 case $key in
     h ) ddcutil getvcp 10 ;;
     ''|*[!0-9]*) echo invalid value ;;
-    *)  if [ 0 -lt $key ] && [ $key -lt 100 ]; then 
+    *)  if [ 10 -lt $key ] && [ $key -lt 100 ]; then 
           ddcutil setvcp 10 $key
         else
           echo invalid value
