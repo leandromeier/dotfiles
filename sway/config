@@ -10,15 +10,6 @@
 output eDP-1 resolution 1920x1080 position 0,0
 output DP-3  resolution 2560x1440 position 1920,0
 
-# Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# images can be done as follows:
-# output * bg ~/Desktop/background/image3.jpeg fill
-# output * bg #1A0C18 solid_color
-#dynamic background, changing automatically after a fixed time interval
-# exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-dynamic.sh"
-# choose a random background at startup
-exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-dynamic.sh"
-
 
 # Your preferred terminal emulator
 set $term alacritty -e fish
@@ -92,6 +83,15 @@ exec swayidle -w \
 #exec swayidle -w timeout $locktime 'swaylock -f -e' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -e' 
 	#timeout 660 'swaylock -f -c 001b60 -e' \
 #exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 -e --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
+
+# Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# images can be done as follows:
+# output * bg ~/Desktop/background/image3.jpeg fill
+# output * bg #1A0C18 solid_color
+#dynamic background, changing automatically after a fixed time interval
+# exec_always "cd ~/Documents/dotfiles/sway && ./wallpaper-dynamic.sh"
+# choose a random background at startup
+exec_always "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 
 
 # using mod1 + certain keys looks up the commands in a script
