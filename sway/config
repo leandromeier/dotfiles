@@ -64,7 +64,7 @@ for_window [class="^(steam_app_*|steam)$"] fullscreen
 for_window [app_id="spotify"] fullscreen
 
 # timeout before suspend. Use loginctl lock-session to lock your screen.
-set $locktime 600
+set $locktime 1200
 set $bltime 660
 
 # locks your screen after $locktime minutes, and turns it black after $bltime minutes 
