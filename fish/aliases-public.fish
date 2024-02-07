@@ -34,26 +34,19 @@ alias xoup='xournalpp'
 # zathura
 alias z='zathura'
 
-# lock and suspend 
-#this appears to make waybar disappear upon resume
-#alias sn='loginctl lock-session && systemctl suspend'
-# wait and see if this is better 
+### other actions
+#
+# suspend 
 alias sn='systemctl suspend'
 
-# only lock
-alias lock='loginctl lock-session'
-
-# bluetoothctl
-alias bl='bluetoothctl'
-
-#sage notebook jupyter
+# sage notebook jupyter
 alias snj='sage --notebook jupyter'
 
-#jupyter notebook 
+# jupyter notebook 
 alias jn='jupyter notebook'
 alias nj='jupyter notebook'
 
-# arxiv-downloader
+# call arxiv-downloader script with parameters
 alias axu='arxiv-downloader --url'
 alias axi='arxiv-downloader --id'
 
@@ -63,17 +56,16 @@ alias tog='swaymsg output eDP-1 toggle'
 # rclone
 alias rlsd='rclone lsd nextcloud:'
 alias rc='rclone'
-alias rcla='rclone sync ~/Documents/math-books/articles/ nextcloud:articles/'
-alias rclb='rclone sync ~/Documents/math-books/books/ nextcloud:books/'
+# 'copy' is better than 'sync' as it does not erase the destination
+alias rcla='rclone copy ~/Documents/math-books/articles/ nextcloud:articles/'
+alias rclb='rclone copy ~/Documents/math-books/books/ nextcloud:books/'
 
-
-# load script for external brightness. needs to be passed a number between 1 and 100
+# load script for external brightness. needs to be passed a number between 1 and 100 
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
 
 # 7zip 
 alias zip='7z a -tzip'
 alias unzip='7z x'
-
 
 # gphoto2  
 alias getphotos='gphoto2 --new --get-all-files'
