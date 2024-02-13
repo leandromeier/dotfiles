@@ -70,20 +70,9 @@ set $bltime 600
 
 # locks your screen after $locktime minutes, and turns it black after $bltime minutes 
 exec swayidle -w \
-          timeout $locktime 'swaylock -f --grace 5' \
+          timeout $locktime 'swaylock -f --grace 0' \
           timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f --grace 5'
-#exec swayidle -w timeout $locktime 'swaylock -C $HOME/.config/swaylock/config' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock'
-
-#does not work apparently:
-#exec swayidle -w timeout $locktime 'swaylock && swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep 'swaylock'
-
-#exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -C $HOME/.config/swaylock/config.idle' unlock 'kill -s 1 $(pgrep swaylock)'
-
-#old commands
-#exec swayidle -w timeout $locktime 'swaylock -f -e' timeout $bltime 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f -e' 
-	#timeout 660 'swaylock -f -c 001b60 -e' \
-#exec swayidle lock 'swaymsg "output * dpms on"&& swaylock -f -c 001b60 -e --inside-color 111111' unlock 'kill -s 1 $(pgrep swaylock)'
+          before-sleep 'swaylock -f --grace 0'
 
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # images can be done as follows:
@@ -319,7 +308,6 @@ seat * hide_cursor 8000
 
 #hide cursor when typing
 seat * hide_cursor when-typing enable
-
 
 
 #
