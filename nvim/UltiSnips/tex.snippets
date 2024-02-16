@@ -587,6 +587,12 @@ snippet "mbb([a-zA-Z])" "\mathbb{-}" riA
 \mathbb{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
+priority 10
+context "math()"
+snippet "mbb" "\mathbb{}" riA
+\mathbb{$1}$0
+endsnippet
+
 context "math()"
 snippet HH "\mathbb{H}" iA
 \mathbb{H}$0
@@ -1110,6 +1116,10 @@ example
 endsnippet
 
 context "not math()" 
+snippet mld "minimal log discrepancy" i
+minimal log discrepancy
+endsnippet
+
 snippet noth "noetherian" i
 Noetherian
 endsnippet
