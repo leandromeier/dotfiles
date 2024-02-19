@@ -12,7 +12,7 @@
 " vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
 " github copilot
-"Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 " vim command line interpreter
 Plug 'jalvesaq/vimcmdline'
 " macaulay2 in vim
