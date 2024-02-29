@@ -137,3 +137,9 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ale_virtualtext_cursor = 'current' 
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+
+
+" copilot settings
+" use <c-n> to accept suggestion 
+imap <silent><script><expr> <C-N> copilot#Accept("\<CR>")
+        let g:copilot_no_tab_map = v:true
