@@ -71,9 +71,9 @@ set $bltime 600
 
 # locks your screen after $locktime minutes, and turns it black after $bltime minutes 
 exec swayidle -w \
-          timeout $locktime 'swaylock -f --grace 0' \
+          timeout $locktime 'swaylock -f' \
           timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f --grace 0'
+          before-sleep 'swaylock -f'
 
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # images can be done as follows:
