@@ -143,3 +143,9 @@ let g:ale_sign_warning = '--'
 " use <c-n> to accept suggestion 
 imap <silent><script><expr> <C-N> copilot#Accept("\<CR>")
         let g:copilot_no_tab_map = v:true
+
+" disable copilot in .md files
+let g:copilot_filetypes = {
+                              \ 'md': v:false,
+                              \ }
+<
