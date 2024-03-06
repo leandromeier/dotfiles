@@ -12,6 +12,7 @@
 " vim-plug
 call plug#begin('~/.local/share/nvim/site/plugged')
 " github copilot
+" run ':Copilot enable' in neovim to enable 
 Plug 'github/copilot.vim'
 " vim command line interpreter
 Plug 'jalvesaq/vimcmdline'
@@ -49,7 +50,7 @@ Plug 'ervandew/supertab'
 " jupytext.vim to edit .ipynb files in vim
 Plug 'goerz/jupytext.vim'
 " YouCompleteMe for autocompletion
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
 "
 " git
 " git support with :G
@@ -139,13 +140,13 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
 
-" copilot settings
-" use <c-n> to accept suggestion 
+" " copilot settings
+" " use <c-n> to accept suggestion 
 imap <silent><script><expr> <C-N> copilot#Accept("\<CR>")
         let g:copilot_no_tab_map = v:true
 
 " disable copilot in .md files
 let g:copilot_filetypes = {
+                              \ 'xml': v:false,
                               \ 'md': v:false,
                               \ }
-<
