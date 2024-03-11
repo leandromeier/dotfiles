@@ -35,3 +35,9 @@ Zathura needs a plugin to read pdfs and co. 'sudo pacman -S zathura-pdf-mupdf' f
 
 # neovim
 wl-clipboard for copying to and pasting from system clipboard
+
+## How to burn an iso file to a USB stick
+run 'lsblk' before and after inserting the USB stick to learn its location
+sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
+
+
