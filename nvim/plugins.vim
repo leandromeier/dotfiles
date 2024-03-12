@@ -148,5 +148,5 @@ imap <silent><script><expr> <C-N> copilot#Accept("\<CR>")
 " disable copilot in .md files
 let g:copilot_filetypes = {
                               \ 'xml': v:false,
-                              \ 'md': v:false,
+                              \ 'markdown': v:false,
                               \ }
