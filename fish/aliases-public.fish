@@ -56,9 +56,13 @@ alias tog='swaymsg output eDP-1 toggle'
 # rclone
 alias rlsd='rclone lsd nextcloud:'
 alias rc='rclone'
+#
 # 'copy' is better than 'sync' as it does not erase the destination
-alias rcla='rclone copy ~/Documents/math-books/articles/ nextcloud:articles/'
-alias rclb='rclone copy ~/Documents/math-books/books/ nextcloud:books/'
+alias copya='rclone copy ~/Documents/math-books/articles/ nextcloud:articles/'
+alias copyb='rclone copy ~/Documents/math-books/books/ nextcloud:books/'
+alias fetcha='rclone copy nextcloud:articles/ ~/Documents/math-books/articles/'
+alias fetchb='rclone copy nextcloud:books/ ~/Documents/math-books/books/'
+alias fetchBB='rclone copy nextcloud:Blackboards/ ~/Documents/notes/blackboard/'
 
 # load script for external brightness. needs to be passed a number between 1 and 100 
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
