@@ -73,3 +73,9 @@ alias unzip='7z x'
 
 # gphoto2  
 alias getphotos='gphoto2 --new --get-all-files'
+
+# new terminal with fish
+alias alacritty='alacritty -e fish'
+alias term='alacritty -e fish'
+alias t='alacritty -e fish'
+
