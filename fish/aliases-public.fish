@@ -38,7 +38,13 @@ alias z='zathura'
 #
 # suspend 
 alias sn='systemctl suspend'
-# sage notebook jupyter alias snj='sage --notebook jupyter' jupyter notebook alias jn='jupyter notebook' alias nj='jupyter notebook'
+
+# sage notebook jupyter 
+# alias snj='sage --notebook jupyter' 
+# jupyter notebook 
+alias jn='jupyter notebook' 
+alias nj='jupyter notebook'
+
 # call arxiv-downloader script with parameters
 alias axu='arxiv-downloader --url'
 alias axi='arxiv-downloader --id'
@@ -67,6 +73,4 @@ alias unzip='7z x'
 # gphoto2  
 alias getphotos='gphoto2 --new --get-all-files'
 
-# new terminal with fish
-alias alacritty='alacritty -e fish'
 

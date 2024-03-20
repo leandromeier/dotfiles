@@ -60,9 +60,9 @@ for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen
 
 #::::::::::fullscreen apps:::::::::
-for_window [app_id="mpv"] fullscreen
+for_window [app_id="mpv"] open
 for_window [app_id="vlc"] fullscreen
-for_window [class="^(steam_app_*|steam)$"] fullscreen
+#for_window [class="^(steam_app_*|steam)$"] fullscreen
 for_window [app_id="spotify"] fullscreen
 
 # timeout before suspend. Use loginctl lock-session to lock your screen.
@@ -236,6 +236,8 @@ for_window [app_id="org.gnome.Settings"] floating enable
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
+    # Popup behaviour during fullscreen
+    popup_during_fullscreen smart
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
