@@ -14,10 +14,6 @@ call plug#begin('~/.local/share/nvim/site/plugged')
 " github copilot
 " run ':Copilot enable' in neovim to enable 
 Plug 'github/copilot.vim'
-" vim command line interpreter
-Plug 'jalvesaq/vimcmdline'
-" macaulay2 in vim
-Plug '8d1h/vim-macaulay2'
 " a colorscheme
 Plug 'morhetz/gruvbox'
 " tree view
@@ -38,17 +34,21 @@ Plug 'tpope/vim-repeat'
 Plug 'lervag/vimtex'
 " status bar
 Plug 'itchyny/lightline.vim'
+" vim command line interpreter
+"Plug 'jalvesaq/vimcmdline'
+" macaulay2 in vim
+"Plug '8d1h/vim-macaulay2'
 " Rust support
 "Plug 'rust-lang/rust.vim'
 " fish support
-Plug 'dag/vim-fish'
+"Plug 'dag/vim-fish'
 " supertab (to avoid ycm and ultisnips clashing)
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 " jupyter-vim to edit jupyter notebooks in vim
 " does not work so far
 "Plug 'jupyter-vim/jupyter-vim'
 " jupytext.vim to edit .ipynb files in vim
-Plug 'goerz/jupytext.vim'
+"Plug 'goerz/jupytext.vim'
 " YouCompleteMe for autocompletion
 "Plug 'ycm-core/YouCompleteMe'
 "
@@ -90,16 +90,16 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips']
 
 " nerdtree
-" hide Press ? for help and u for up a dir
-let g:NERDTreeMinimalUI=1
+" " hide Press ? for help and u for up a dir
+" let g:NERDTreeMinimalUI=1
 
-" ale
-let g:ale_linters = {
-  \    'tex': ['chktex', 'lacheck'],
-  \    'bib': ['bibclean'],
-  \    'rust': ['analyzer']
-\}
-let g:ale_completion_enabled = 1
+" " ale
+" let g:ale_linters = {
+"   \    'tex': ['chktex', 'lacheck'],
+"   \    'bib': ['bibclean'],
+"   \    'rust': ['analyzer']
+" \}
+" let g:ale_completion_enabled = 1
 
 " statusline
 let g:lightline = {
@@ -114,30 +114,29 @@ let g:lightline = {
 \}
 
 " auto-completion with YouCompleteMe
-" packadd YouCompleteMe
-let g:ycm_filetype_blacklist = {
-      \ 'markdown': 1,
-      \ 'text': 1,
-      \ 'tex': 1,
-      \}
+" let g:ycm_filetype_blacklist = {
+"       \ 'markdown': 1,
+"       \ 'text': 1,
+"       \ 'tex': 1,
+"       \}
 
-" stop semantic completion (in .tex files, because it clashes with the trigger
-" expanding and jumping around snippets)
-let g:ycm_filetype_specific_completion_to_disable = {
-      \ 'tex': 1
-      \}
+" " stop semantic completion (in .tex files, because it clashes with the trigger
+" " expanding and jumping around snippets)
+" let g:ycm_filetype_specific_completion_to_disable = {
+"       \ 'tex': 1
+"       \}
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" " make YCM compatible with UltiSnips (using supertab)
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
 
 
 " ALE
 " only displays messages on current line. Change to 'disabled' to turn off entirely
-let g:ale_virtualtext_cursor = 'current' 
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+" let g:ale_virtualtext_cursor = 'current' 
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
 
 
 " " copilot settings
