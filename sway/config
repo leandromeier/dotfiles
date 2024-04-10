@@ -34,7 +34,7 @@ set $xournal 'xournalpp'
 set $thund MOZ_ENABLE_WAYLAND=1 thunderbird 
 # spotify
 set $spot 'spotify'
-# preferred bluethooth manager
+# preferred bluetooth manager
 set $blth 'blueman-manager'
 # preferred network manager
 set $nm alacritty -e nmtui
@@ -305,6 +305,9 @@ exec_always synology-drive
 
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
+
+#start bluetooth service
+exec_always systemctl enable bluetooth.service
 
 #hide cursor when idle (after approx. 5-6 seconds)
 seat * hide_cursor 8000
