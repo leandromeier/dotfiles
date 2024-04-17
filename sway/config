@@ -80,7 +80,10 @@ exec swayidle -w \
 # output * bg ~/Desktop/background/image3.jpeg fill
 # output * bg #1A0C18 solid_color
 #dynamic background, changing automatically after a fixed time interval
-exec --no-startup-id "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
+exec "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
+# this one not sure what the point of '--no-startup-id' is
+#exec --no-startup-id "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
+# this one always executes, i.e. even after reloading the config file
 #exec_always "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 
 
@@ -301,13 +304,13 @@ client.unfocused          $bg     $bg     $fg   $bg       $bg
 exec --no-startup-id waybar
 
 #start synoloy drive client
-exec_always synology-drive
+exec synology-drive
 
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
 
 #start bluetooth service
-exec_always systemctl enable bluetooth.service
+exec systemctl enable bluetooth.service
 
 #hide cursor when idle (after approx. 5-6 seconds)
 seat * hide_cursor 8000
@@ -339,7 +342,6 @@ bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #b
 
 # screen sharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
 
 include /etc/sway/config.d/*
 
