@@ -2,10 +2,7 @@
 
 ## How to compress and optionally encrypt (using 7zip)
 To compress to a zip file:
-'7z a -tzip zipname.zip <files to compress>'
-
-To compress and password protect
-'7z a -tzip -p{password} zipname.zip <files to compress>'
+'7z a -tzip zipname.zip <files to compress>' To compress and password protect '7z a -tzip -p{password} zipname.zip <files to compress>'
 
 To set a password on a compressed file
 '7za a -p{password} compressed-file.tar.7z'
@@ -45,7 +42,6 @@ Select both lines, type the command ":sort u", if only one line remains, they we
 run 'lsblk' before and after inserting the USB stick to learn its location
 sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
 
-
 ## Change file permissions
 'chmod 755 -R /path/to/folder' (recursively) or just
 'chmod 755 /path/to/file'
@@ -56,7 +52,6 @@ Of course, replacing the 7 and 5's by other digits yields other results, cf. htt
 Write a script: create a file 'filename.sh'. Its first line must consist only of '#!/bin/bash'.
 To make it executable, go into bash and run 'chmod +x filename.sh'.
 To execute, run '/.filename.sh'.
-
 
 ## curl
 to copy text content under a url to a file
