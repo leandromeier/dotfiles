@@ -58,9 +58,9 @@ alias rc='rclone'
 #
 # 'copy' is better than 'sync' as it does not erase the destination
 alias copya='rclone copy ~/Documents/math-books/articles/ nextcloud:articles/'
-#alias fetcha='rclone copy nextcloud:articles/ ~/Documents/math-books/articles/'
+alias fetcha='rclone copy nextcloud:articles/ ~/Documents/math-books/articles/'
 alias copyb='rclone copy ~/Documents/math-books/books/ nextcloud:books/'
-#alias fetchb='rclone copy nextcloud:books/ ~/Documents/math-books/books/'
+alias fetchb='rclone copy nextcloud:books/ ~/Documents/math-books/books/'
 alias fetchBB='rclone copy nextcloud:Blackboards/ ~/Documents/notes/blackboard/'
 alias fetchAZT='rclone copy nextcloud:AZT/ ~/Downloads/AZT/'
 alias copyAZT='rclone copy ~/Downloads/AZT/ nextcloud:AZT/'
