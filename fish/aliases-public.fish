@@ -57,13 +57,16 @@ alias rlsd='rclone lsd nextcloud:'
 alias rc='rclone'
 #
 # 'copy' is better than 'sync' as it does not erase the destination
-alias copya='rclone copy ~/Documents/math-books/articles/ nextcloud:articles/'
-alias fetcha='rclone copy nextcloud:articles/ ~/Documents/math-books/articles/'
-alias copyb='rclone copy ~/Documents/math-books/books/ nextcloud:books/'
-alias fetchb='rclone copy nextcloud:books/ ~/Documents/math-books/books/'
-alias fetchBB='rclone copy nextcloud:Blackboards/ ~/Documents/notes/blackboard/'
-alias fetchAZT='rclone copy nextcloud:AZT/ ~/Downloads/AZT/'
+alias copya='rclone copy ~/math/articles/ nextcloud:articles/'
+alias fetcha='rclone copy nextcloud:articles/ ~/math/articles/'
+alias copyb='rclone copy ~/math/books/ nextcloud:books/'
+alias fetchb='rclone copy nextcloud:books/ ~/math/books/'
+alias copyBB='rclone copy ~/math/notes/blackboard/ nextcloud:Blackboards/'
+alias fetchBB='rclone copy nextcloud:Blackboards/ ~/math/notes/blackboard/'
+alias copyn='rclone copy ~/math/notes/handwritten_notes/ nextcloud:notes/handwritten_notes/'
+alias fetchn='rclone copy nextcloud:notes/handwritten_notes/ ~/math/notes/handwritten_notes/'
 alias copyAZT='rclone copy ~/Downloads/AZT/ nextcloud:AZT/'
+alias fetchAZT='rclone copy nextcloud:AZT/ ~/Downloads/AZT/'
 
 # load script for external brightness. needs to be passed a number between 1 and 100 
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
