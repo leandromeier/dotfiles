@@ -46,8 +46,8 @@ alias jn='jupyter notebook'
 alias nj='jupyter notebook'
 
 # call arxiv-downloader script with parameters
-alias axu='arxiv-downloader --url'
-alias axi='arxiv-downloader --id'
+alias axu='arxiv-downloader'
+alias axi='arxiv-downloader'
 
 # toggle main display (Sway)
 alias tog='swaymsg output eDP-1 toggle'
