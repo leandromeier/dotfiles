@@ -88,14 +88,13 @@ exec "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 
 
 # using mod1 + certain keys looks up the commands in a script
-bindsym $mod1+a exec "./math/scripts/shortcut.sh a"
-bindsym $mod1+b exec "./math/scripts/shortcut.sh b"
-bindsym $mod1+x exec "./math/scripts/shortcut.sh x"
-bindsym $mod1+n exec "./math/scripts/shortcut.sh n"
-bindsym $mod1+o exec "./math/scripts/shortcut.sh o"
-bindsym $mod1+p exec "./math/scripts/shortcut.sh p"
-bindsym $mod1+r exec "./math/scripts/shortcut.sh r"
-bindsym $mod1+t exec "./math/scripts/shortcut.sh t"
+bindsym $mod1+a exec "./Documents/dotfiles/scripts/shortcut.sh a"
+bindsym $mod1+b exec "./Documents/dotfiles/scripts/shortcut.sh b"
+# bindsym $mod1+a exec  cd ~/math/articles \
+#        pdf_file="$(ls . | rofi -i -dmenu)" \
+#        [ -z "$pdf_file" ] && exit 0 \
+#        [ -f "$pdf_file" ] && zathura "$(realpath "$pdf_file")" || firefox "https://duckduckgo.com/?hps=1&q=$pdf_file" 
+
 
 # Calls a script checking whether an external monitor is connected
 # if yes, toggles primary screen
