@@ -36,3 +36,18 @@ sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress o
 ## rclone with nextcloud
 'rclone config'
 then option 'webdav', there you can choose nextcloud
+
+## printing via cups
+run
+'sudo systemctl start cups'
+and
+=sudo systemctl enable cups'
+Then make sure client.conf is linked to the /etc/cups/ folder and run
+'systemctl restart cups.service'
+Then go to
+'http://localhost:631/'
+Click on "Administration" and "add printer"
+To log in to Admin, use your local laptop's admin credentials
+follow instructions
+
+for uni jena office printing, choose mps02, then generic driver and PCL6, and the connection address socket://mps02.mats.uni-jena.de
