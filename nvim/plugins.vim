@@ -13,7 +13,7 @@
 call plug#begin('~/.local/share/nvim/site/plugged')
 " github copilot
 " run ':Copilot enable' in neovim to enable 
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 " a colorscheme
 Plug 'morhetz/gruvbox'
 " snippets
