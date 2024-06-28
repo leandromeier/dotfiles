@@ -1,4 +1,4 @@
 #!/bin/bash
 sudo pacman -Syu
 yay -Syu
-sudo snap refresh
+#sudo snap refresh
