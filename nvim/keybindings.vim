@@ -55,7 +55,13 @@ nnoremap <leader>rr :source ~/.config/nvim/init.vim<CR>
 
 " remap reloading the tex snippets file 
 nnoremap <leader>tt :call UltiSnips#RefreshSnippets()<CR>
-"nnoremap <leader>tt :source ~/.config/nvim/UltiSnips/tex.snippets<CR>
+
+
+" remap compiling with xelatex 
+nnoremap <leader>lx :!xelatex %<CR>
+
+" remap compiling with lualatex 
+nnoremap <leader>lu :!lualatex %<CR>
 
 
 nnoremap <silent><leader>x :put =trim(execute(input(':', '', 'command')))<CR>
