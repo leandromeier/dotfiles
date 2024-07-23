@@ -55,6 +55,17 @@ let g:vimtex_quickfix_mode=0
 let g:vimtex_compiler_progname = 'nvr'
 "set conceallevel=1
 "let g:tex_conecal='abdmg'
+"
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+
 
 " ultisnips
 let g:UltiSnipsExpandTrigger = '<tab>'
