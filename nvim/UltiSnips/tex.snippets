@@ -22,14 +22,15 @@ snippet * "multiplication" wA
 \cdot
 endsnippet
 
+context "math()"
 snippet ö "backslash" iA
 \\
 endsnippet
 
-#now need a snippet for 'ö'
-snippet oe "ö" i
-ö
-endsnippet
+##now need a snippet for 'ö'
+#snippet oe "ö" i
+#ö
+#endsnippet
 
 snippet " "latex quote" iA
 \`\`$1''$0
@@ -1234,4 +1235,9 @@ snippet col "color{}" b
 endsnippet
 
 
+#auto correct 'i' to 'I' outside math mode
+context "not math()"
+snippet i "i" bA
+I
+endsnippet
 
