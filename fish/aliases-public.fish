@@ -78,4 +78,6 @@ alias unzip='7z x'
 # gphoto2  
 alias getphotos='gphoto2 --new --get-all-files'
 
-
+# alias for shutdown
+alias killallkillall='shutdown'
+alias killallkillallnow='shutdown now'
