@@ -38,6 +38,8 @@ set $spot 'spotify'
 set $blth 'blueman-manager'
 # preferred network manager
 set $nm alacritty -e nmtui
+# open ranger in a terminal in the books folder
+set $books alacritty -e ranger
 
 # Logo key. Use Mod1 for Alt.
 # Logo key. Use Mod4 for super/windows key.
@@ -90,10 +92,7 @@ exec "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 # using mod1 + certain keys looks up the commands in a script
 bindsym $mod1+a exec "./Documents/dotfiles/scripts/shortcut.sh a"
 bindsym $mod1+b exec "./Documents/dotfiles/scripts/shortcut.sh b"
-# bindsym $mod1+a exec  cd ~/math/articles \
-#        pdf_file="$(ls . | rofi -i -dmenu)" \
-#        [ -z "$pdf_file" ] && exit 0 \
-#        [ -f "$pdf_file" ] && zathura "$(realpath "$pdf_file")" || firefox "https://duckduckgo.com/?hps=1&q=$pdf_file" 
+#bindsym $mod1+b exec cd ~/math/books && alacritty -e ranger
 
 
 # Calls a script checking whether an external monitor is connected
@@ -148,7 +147,6 @@ for_window [app_id="org.gnome.Settings"] floating enable
 
     bindsym $mod+b exec $browser              # Browser
     bindsym $mod+Shift+f exec $filemanager    # File manager
-    bindsym $mod1+f exec $filemanager         # File manager
     bindsym $mod+Shift+s exec $signal         # signal
     bindsym $mod+Shift+x exec $xournal              # xournalpp
 
