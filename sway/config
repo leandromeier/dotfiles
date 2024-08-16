@@ -282,12 +282,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Hide Title bar
-default_border pixel 2 
+default_border pixel 3
 hide_edge_borders smart
 
 set $bg #000000
 set $fg #ffffff
-set $br #940BAD
+set $br #40e0d0
+#set $br #940BAD
 
 #class                    border  backgr. text  indicator child_border
 client.focused            $br     $br     $fg   $br       $br
