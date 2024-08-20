@@ -80,9 +80,10 @@ exec swayidle -w \
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # images can be done as follows:
 # output * bg ~/Desktop/background/image3.jpeg fill
+output * bg ~/Documents/background/IMG_1746.jpg fit
 # output * bg #1A0C18 solid_color
 #dynamic background, changing automatically after a fixed time interval
-exec "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
+#exec "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 # this one not sure what the point of '--no-startup-id' is
 #exec --no-startup-id "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 # this one always executes, i.e. even after reloading the config file

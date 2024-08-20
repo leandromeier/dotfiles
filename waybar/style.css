@@ -35,12 +35,16 @@ window#waybar.hidden {
 }
 
 #workspaces button.focused {
-    background-color: #940BAD;
-    box-shadow: inset 0 -3px #FF96FE;
+    background-color: #33b3a6;
+    /* background-color: #40e0d0; */
+    /* background-color: #940BAD; */
+    box-shadow: inset 0 -3px #8cece2;
+    /* box-shadow: inset 0 -3px #FF96FE; */
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: #ef706f;
+    /* background-color: #eb4d4b; */
 }
 
 #mode {
@@ -115,8 +119,12 @@ label:focus {
 #clock,
 #pulseaudio,
 #clock  {
-    background-color: #940BAD;
-    color: #cccccc;
+    background-color: #33b3a6;
+    /* background-color: #40e0d0; */
+    /* background-color: #940BAD; */
+    /* color: #cccccc; */
+    /* change the text color to black (for better contrast with the light color surrounding) */
+    color: #000000;
 }
 
 #cpu,
