@@ -56,3 +56,7 @@ To execute, run '/.filename.sh'.
 ## curl
 to copy text content under a url to a file
 'curl -fLo path/to/file <url>
+
+
+## connect to FSU (FMI) net via openconnect
+'sudo openconnect -b --useragent 'AnyConnect' --user=to75teh@uni-jena.de --pid-file=/var/run/vpn.pid --timestamp --syslog vpn.sci.uni-jena.de'
