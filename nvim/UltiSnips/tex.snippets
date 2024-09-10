@@ -23,14 +23,9 @@ snippet * "multiplication" wA
 endsnippet
 
 context "math()"
-snippet ö "backslash" iA
+snippet ö "backslash" i
 \\
 endsnippet
-
-##now need a snippet for 'ö'
-#snippet oe "ö" i
-#ö
-#endsnippet
 
 snippet " "latex quote" iA
 \`\`$1''$0
@@ -44,7 +39,7 @@ $0
 endsnippet
 
 # sections etc
-snippet chp "chapter" bA
+snippet chp "chapter" b
 \chapter{$1}
 $0
 endsnippet
@@ -79,7 +74,7 @@ snippet ssse* "subsubsection*" bA
 $0
 endsnippet
  
-# math
+# math modes
 context "not math()"
 snippet < "inline math" A
 $${1}$`!p
@@ -100,14 +95,13 @@ else:
 `$2
 endsnippet
 
-snippet \[ "display math" bA
-\[
-  $1
-\]
-$0
+# from https://ejmastnak.com/tutorials/vim-latex/ultisnips/#examples
+context "not math()"
+snippet "(^|[^a-zA-Z])mm" "Inline LaTeX math" rA
+`!p snip.rv = match.group(1)`\$ ${1:${VISUAL:}} \$$0
 endsnippet
 
-snippet dm "display math" bA
+snippet \[ "display math" bA
 \[
   $1
 \]
@@ -129,6 +123,7 @@ snippet eqn "equation" b
 $0
 endsnippet
 
+# function signatures and arrows
 context "math()"
 snippet :: "colon" iA
 \colon
@@ -139,7 +134,8 @@ snippet fun "signature of function" iA
 $1 \colon $2 \to $3
 endsnippet
 
-snippet alifun "full definition of function" iA
+context "math()"
+snippet ffun "full definition of function" iA
 \begin{align*}
   $1 \colon $2 & \to $3 \\\\
   $4 & \mapsto $5
@@ -147,6 +143,131 @@ snippet alifun "full definition of function" iA
 $0
 endsnippet
 
+context "math()"
+snippet -> "rightarrow" iA
+\to
+endsnippet
+
+context "math()"
+snippet mto "mapsto" wA
+\mapsto
+endsnippet
+
+context "math()"
+snippet krn "ker( )" i
+\ker \left( $1 \right)$0
+endsnippet
+
+context "math()"
+snippet img "im( )" i
+\img \left( $1 \right)$0
+endsnippet
+
+context "math()"
+snippet corrow "<--->" i
+\longleftrightarrow 
+endsnippet
+
+context "math()"
+snippet larrow "<---" iA
+\longleftarrow 
+endsnippet
+
+context "math()"
+snippet rarrow "--->" iA
+\longrightarrow 
+endsnippet
+
+# implication arrows
+context "math()"
+snippet Rarrow "Rightarrow" iA
+\Rightarrow 
+endsnippet
+
+context "math()"
+snippet Larrow "Leftarrow" iA
+\Leftarrow 
+endsnippet
+
+context "math()"
+snippet iff "if and only if" i
+\Leftrightarrow
+endsnippet
+
+# lists
+context "math()"
+snippet two "two" iA
+$1_{1}, $1_{2}$0
+endsnippet
+
+context "math()"
+snippet three "three" iA
+$1_{1}, $1_{2}, $1_{3}$0
+endsnippet
+
+context "math()"
+snippet some "finitely many" iA
+$1_{$2}, \dots, $1_{$3}$0
+endsnippet
+
+context "math()"
+snippet sompow "finitely many powers" iA
+$1_{$2}^{$3_{$2}}, \dots, $1_{$4}^{$3_{$4}}$0
+endsnippet
+
+context "math()"
+snippet zeroes "(0, ... , 0)" iA
+\left( 0, \dots , 0 \right) $0
+endsnippet
+
+context "math()"
+snippet many "infinitely many" iA
+$1_{$2}, $1_{$3}, \dots$0
+endsnippet
+
+context "math()"
+snippet seq "sequence" wA
+{($1_{$2})}_{$3 \in \mathbb{N}}$0
+endsnippet
+
+context "math()"
+snippet chaiin "chain of ideal (increasing)" i
+$1_{$2} \subseteq $1_{$3} \subseteq \dots$0
+endsnippet
+
+context "math()"
+snippet chain "chain of subspaces (decreasing)" i
+$1_{$2} \supseteq $1_{$3} \supseteq \dots$0
+endsnippet
+
+context "math()"
+snippet homo "homogeneous coordinates" iA
+[$1_{$2} : \dots : $1_{$3}]
+endsnippet
+
+context "math()"
+snippet asandps "product of affine spaces with projective" iA
+\mathbb{A}^{n_1} \times \cdots \times \mathbb{A}^{n_\ell} \times
+\mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
+endsnippet
+
+context "math()"
+snippet pair "(X,x)" i
+\left( $1, $2 \right)$0
+endsnippet
+
+context "math()"
+snippet pairdiv "K_X + Delta_X" i
+K_{$1} + $2_{$1} $0
+endsnippet
+
+context "math()"
+snippet prd "X_1 x X_2" wA
+$1_{1} \times $1_{2} $0
+endsnippet
+
+
+# sets and groups etc
 context "math()"
 snippet theset "{x \in X | p(X)}" iA
 \left\\{$1 \mid $2\right\\}
@@ -157,6 +278,13 @@ snippet aset "{ ... }" iA
 \left\\{$1\\right\\}$0
 endsnippet
 
+context "math()"
+snippet ems "\emptyset" iA
+\emptyset $0
+endsnippet
+
+
+# operations and relations 
 context "math()"
 snippet \\\ "\setminus" iA
 \\setminus
@@ -178,6 +306,11 @@ snippet ccc "\subset" iA
 endsnippet
 
 context "math()"
+snippet ccn "\subsetneq" iA
+\\subsetneq
+endsnippet
+
+context "math()"
 snippet ccr "\supset" iA
 \\supseteq
 endsnippet
@@ -193,37 +326,19 @@ snippet rcr "\geq" iA
 endsnippet
 
 context "math()"
+snippet xx "\times" wA
+\\times
+endsnippet
+
+
+# subscript, superscript
+context "math()"
 snippet __ "subscript block" iA
 _{$1}$0
 endsnippet
 
 context "math()"
-snippet cons "(X_a, x_a)" w
-\left( X_{$1}, x_{$1} \right)$0
-endsnippet
-
-context "math()"
-snippet polp "(X_a, xi_a)" w
-\left( X_{$1}, \xi_{$1} \right)$0
-endsnippet
-
-context "math()"
-snippet prd "X_1 x X_2" wA
-$1_{1} \times $1_{2} $0
-endsnippet
-
-context "math()"
-snippet xx "\times" wA
-\\times
-endsnippet
-
-context "math()"
 snippet ^^ "superscript block" iA
-^{$1}$0
-endsnippet
-
-context "math()"
-snippet üü "superscript block" iA
 ^{$1}$0
 endsnippet
 
@@ -247,12 +362,7 @@ snippet sqrt "sqrt" iA
 \sqrt{$1}$0
 endsnippet
 
-priority 100
-snippet "(w+)dual" "vee" riA
-{`!p snip.rv=match.group(1)`}^{\vee} $0
-endsnippet
 
-priority 10
 context "math()"
 snippet dual "dual / ^v" iA
 ^{\vee} $0
@@ -295,38 +405,10 @@ snippet rightr "left[ right)" i
 \left[ ${1:${VISUAL}} \right)$0
 endsnippet
 
-
-# other names for brackets (non-visual)
-context "math()"
-snippet big( "\left( \right)" iA
-\left( $1 \right)$0
-endsnippet
-
-context "math()"
-snippet big{ "\left\{ \right\}" iA
-\left\\{ $1 \right\\}$0
-endsnippet
-
-context "math()"
-snippet bigv "\left\vert \right\vert" iA
-\left\vert $1 \right\vert$0
-endsnippet
-
-context "math()"
-snippet bigV "\left\Vert \right\Vert" iA
-\left\Vert $1 \right\Vert$0
-endsnippet
-
-context "math()"
-snippet big< "\left\langle \right\langle" iA
-\left\langle $1 \right\rangle
-endsnippet
-
 context "math()"
 snippet << "\langle \rangle" iA
 \langle $1 \rangle$0
 endsnippet
-
 
 # big n-ary operators
 context "math()"
@@ -343,7 +425,6 @@ context "math()"
 snippet dirsum "direct sum" w
 \bigoplus_{$1}^{$2} $0
 endsnippet
-
 
 context "math()"
 snippet int "integral" w
@@ -365,124 +446,80 @@ snippet inter "bigcap" w
 \bigcap_{$1}^{$2} $0
 endsnippet
 
-context "math()"
-snippet III "bigcap" i
-\bigcap_{$1}^{$2} $0
-endsnippet
 
-# lists
+# algebro-geometric structures
 context "math()"
-snippet two "two" iA
-$1_{1}, $1_{2}$0
+snippet trs "\mathbb{C}^{*}" i
+\mathbb{C}^{*}$0
 endsnippet
 
 context "math()"
-snippet three "three" iA
-$1_{1}, $1_{2}, $1_{3}$0
+snippet C[ "\mathbb{C}" i
+\mathbb{C} \left[ ${1:${VISUAL}} \right]$0
 endsnippet
 
 context "math()"
-snippet some "finitely many" iA
-$1_{$2}, \dots, $1_{$3}$0
+snippet C** "\mathbb{C}^*" iA
+\mathbb{C}^{*}$0
 endsnippet
 
 context "math()"
-snippet sompow "finitely many powers" iA
-$1_{$2}^{$3_{$2}}, \dots, $1_{$4}^{$3_{$4}}$0
-endsnippet
-
-context "math()"
-snippet zeroes "(0, ... , 0)" iA
-\left( 0, \dots , 0 \right) $0
-endsnippet
-
-context "math()"
-snippet many "infinitely many" iA
-$1_{$2}, $1_{$3}, \dots$0
-endsnippet
-
-context "math()"
-snippet seq "sequence" wA
-{($1_{$2})}_{$3 \in \mathbb{N}}$0
-endsnippet
-
-context "math()"
-snippet chaiin "chain of ideal (increasing)" iA
-$1_{$2} \subseteq $1_{$3} \subseteq \dots$0
-endsnippet
-
-context "math()"
-snippet chain "chain of subspaces (decreasing)" iA
-$1_{$2} \supseteq $1_{$3} \supseteq \dots$0
-endsnippet
-
-context "math()"
-snippet homo "homogeneous coordinates" iA
-[$1_{$2} : \dots : $1_{$3}]
-endsnippet
-
-context "math()"
-snippet homco "homogeneous coordinates" iA
-[$1_{$2} : \dots : $1_{$3}]
-endsnippet
-
-context "math()"
-snippet asandps "product of affine spaces with projective" iA
-\mathbb{A}^{n_1} \times \cdots \times \mathbb{A}^{n_\ell} \times
-\mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
-endsnippet
-
-context "math()"
-snippet pair "(X,x)" i
-\left( $1, $2 \right)$0
-endsnippet
-
-context "math()"
-snippet pairdiv "K_X + Delta_X" iA
-K_{$1} + $2_{$1} $0
-endsnippet
-
-#specific alg-geo things
-context "math()"
-snippet Grs "Grassmannian Gr(k,n)" iA
+snippet Grs "Grassmannian Gr(k,n)" i
 \Grs_{$1, $2}$0
 endsnippet
 
 context "math()"
-snippet Spc "Spec ( )" iA
+snippet Spc "Spec ( )" i
 \Specc \left( $1 \right) $0
 endsnippet
 
 context "math()"
-snippet restr "rho_^( )" iA
-\rho_{$2}^{$1} $0
+snippet TV "\TV" i
+\TV $0
+endsnippet
+
+#must have priority higher than the tilde regex snippet
+priority 80
+context "math()"
+snippet TVtilde "\widetilde{\TV}" iA
+\widetilde{\TV} $0
 endsnippet
 
 context "math()"
-snippet Pol "Pol( )" iA
+snippet Pol "Pol( )" i
 \Pol_{$1}^{+}\left( $2, $3\right) $0
 endsnippet
 
 context "math()"
-snippet XSig "X_Sigma" iA
+snippet cadiv "CaDiv( )" i
+\cadiv_{$1}\left( $2\right) $0
+endsnippet
+
+context "math()"
+snippet XSig "X_Sigma" i
 X_{\Sigma} $0
 endsnippet
 
 context "math()"
-snippet XFan "X_Fan" iA
+snippet XFan "X_Fan" i
 X_{$1} $0
 endsnippet
 
 context "math()"
-snippet nvol "normalized volume" iA
-\widehat{\vol}_{$1}\left( $2\right)$0
+snippet stab "Stab_()" w
+\Stab_{$1}\left($2 \right) $0
 endsnippet
 
 
+# special algebro-geometric invariants
+context "math()"
+snippet nvol "normalized volume" i
+\widehat{\vol}_{$1}\left( $2\right)$0
+endsnippet
 
 #matrices etc.
 context "math()"
-snippet mat "pmatrix" bA
+snippet mat "pmatrix" b
 \begin{pmatrix}
   $1
 \end{pmatrix}
@@ -491,74 +528,36 @@ endsnippet
 
 #specific useful stuff for the master's thesis
 context "math()"
-snippet symN "Sym(N)" iA
+snippet symN "Sym(N)" i
 \Sym \left( \mathbb{N} \right)$0
 endsnippet
 
 context "math()"
-snippet symI "Sym(Inf)" iA
+snippet symI "Sym(Inf)" i
 \Sym \left( \infty \right)$0
 endsnippet
 
 context "math()"
-snippet incN "Inc(N)" iA
+snippet incN "Inc(N)" i
 \Inc \left( \mathbb{N} \right)$0
 endsnippet
 
 context "math()"
-snippet mnr "minor" iA
+snippet mnr "minor" i
 $1 \times $1 $0
 endsnippet
 
 context "math()"
-snippet Vker "V (ker ( ))" iA
+snippet Vker "V (ker ( ))" i
 \mathcal{V} \left( \ker \left( $1 \right) \right) $0
 endsnippet
 
 context "math()"
-snippet Kpowers "products of powers of K" iA
+snippet Kpowers "products of powers of K" i
 K^{$1} \times K^{$2 \times \mathbb{N}} \times K^{$3 \times \mathbb{N} \times \mathbb{N} } $0
 endsnippet
 
-#stuff for maps
-context "math()"
-snippet -> "rightarrow" iA
-\to
-endsnippet
-
-context "math()"
-snippet mto "mapsto" wA
-\mapsto
-endsnippet
-
-context "math()"
-snippet kernel "ker( )" iA
-\ker \left( $1 \right)$0
-endsnippet
-
-context "math()"
-snippet img "im( )" iA
-\img \left( $1 \right)$0
-endsnippet
-
-# arrows
-context "math()"
-snippet corrow "<--->" iA
-\longleftrightarrow 
-endsnippet
-
-context "math()"
-snippet larrow "<---" iA
-\longleftarrow 
-endsnippet
-
-context "math()"
-snippet rarrow "--->" iA
-\longrightarrow 
-endsnippet
-
 # blackboard bold symbols
-
 context "math()"
 snippet AA "\mathbb{A}" iA
 \mathbb{A}
@@ -614,65 +613,105 @@ snippet ZZ "\mathbb{Z}" iA
 \mathbb{Z}$0
 endsnippet
 
-#mathbb via regex
-priority 100
-context "math()"
-snippet "mbb([a-zA-Z])" "\mathbb{-}" riA
-\mathbb{`!p snip.rv = match.group(1)`}$0
-endsnippet
-
-priority 10
 context "math()"
 snippet "mbb" "\mathbb{}" riA
 \mathbb{$1}$0
 endsnippet
 
-
-# the torus
+# other special fonts
 context "math()"
-snippet trs "\mathbb{C}^{*}" iA
-\mathbb{C}^{*}$0
+snippet cal "\mathcal{}" wA
+\mathcal{$1}$0
 endsnippet
 
 context "math()"
-snippet C[ "\mathbb{C}" iA
-\mathbb{C} \left[ ${1:${VISUAL}} \right]$0
-endsnippet
-
-
-context "math()"
-snippet C*n "\mathbb{C}^*^n " iA
-\left( \mathbb{C}^{*} \right) ^{n}$0
+snippet frak "\mathfrak{}" wA
+\mathfrak{${VISUAL}}$0
 endsnippet
 
 context "math()"
-snippet C** "\mathbb{C}^*" iA
-\mathbb{C}^{*}$0
+snippet mr "\mathrm{}" i
+\mathrm{$1}$0
 endsnippet
 
-#bold text in math mode
+
+# overhead symbols
+context "math()"
+snippet "bar" "bar" ri
+\overline{$1}$0
+endsnippet
+
+priority 10
+context "math()"
+snippet "hat" "hat" ri
+\hat{$1}$0
+endsnippet
+
+priority 10
+context "math()"
+snippet "tilde" "tilde" ri
+\tilde{$1}$0
+endsnippet
+
+# regex fonts and overhead symbols
+# snippet "(w+)dual" "vee" riA
+# {`!p snip.rv=match.group(1)`}^{\vee} $0
+# endsnippet
+
+# context "math()"
+# snippet "mbb([a-zA-Z])" "\mathbb{-}" riA
+# \mathbb{`!p snip.rv = match.group(1)`}$0
+# endsnippet
+
+priority 70
+context "math()"
+snippet "([a-zA-Z])cal" "caligraphic" riA
+\mathcal{`!p snip.rv=match.group(1)`}$0
+endsnippet
+
+priority 70
+context "math()"
+snippet "([a-zA-Z])tilde" "tilde" riA
+\tilde{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 70
+context "math()"
+snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 70
+context "math()"
+snippet "([a-zA-Z])hat" "hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 70
+context "math()"
+snippet "([a-zA-Z])frak" "fraktal" riA
+\mathfrak{`!p snip.rv=match.group(1)`}
+endsnippet
+
+
+# special text in math mode
 context "math()"
 snippet bfm "boldsymbol" iA
 \boldsymbol{$1} $0
 endsnippet
 
-#more math symbols
+context "math()"
+snippet text "\text{}" wA
+\text{${VISUAL}} $0
+endsnippet
+
+
+# more math symbols
 context "math()"
 snippet ooo "infinity" iA
 \infty
 endsnippet
 
-context "math()"
-snippet ein "in" iA
-\in
-endsnippet
-
-context "math()"
-snippet vtrop "V trop" iA
-\mathcal{V}_{trop}\left( $1 \right) $0
-endsnippet
-
-#special symbols
 context "math()"
 snippet perp "perp" iA
 \perp $0
@@ -683,115 +722,11 @@ snippet tns "tensor" iA
 \otimes $0
 endsnippet
 
-#special fonts
-priority 100
-context "math()"
-snippet "([a-zA-Z])cal" "caligraphic" riA
-\mathcal{`!p snip.rv=match.group(1)`}$0
-endsnippet
 
-priority 10
+# certain greek letters
 context "math()"
-snippet cal "\mathcal{}" wA
-\mathcal{$1}$0
-endsnippet
-
-priority 100
-context "math()"
-snippet "([a-zA-Z])frak" "fraktal" riA
-\mathfrak{`!p snip.rv=match.group(1)`}
-endsnippet
-
-priority 10
-context "math()"
-snippet frak "\mathfrak{}" wA
-\mathfrak{$1}$0
-endsnippet
-
-context "math()"
-snippet mrr "\mathrm{}" iA
-\mathrm{$1}$0
-endsnippet
-
-context "math()"
-snippet text "\text{}" wA
-\text{$1} $0
-endsnippet
-
-context "math()"
-snippet txt "\text{}" wA
-\text{$1} $0
-endsnippet
-
-#greek letters
-context "math()"
-snippet alp "alpha" wA
-\alpha
-endsnippet
-
-context "math()"
-snippet bet "beta" wA
-\beta
-endsnippet
-
-context "math()"
-snippet aaa "alpha" iA
-\alpha
-endsnippet
-
-context "math()"
-snippet bbb "beta" iA
-\beta
-endsnippet
-
-context "math()"
-snippet Del "Delta" wA
-\Delta
-endsnippet
-
-context "math()"
-snippet del "delta" wA
-\delta
-endsnippet
-
-context "math()"
-snippet vareps "varepsilon" iA
+snippet veps "varepsilon" iA
 \varepsilon
-endsnippet
-
-context "math()"
-snippet lam "lambda" wA
-\lambda
-endsnippet
-
-context "math()"
-snippet mmu "mu" wA
-\mu
-endsnippet
-
-context "math()"
-snippet rrho "rho" wA
-\rho
-endsnippet
-
-context "math()"
-snippet ssig "sigma" wA
-\sigma
-endsnippet
-
-context "math()"
-snippet Ssig "Sigma" wA
-\Sigma
-endsnippet
-
-context "math()"
-snippet ttau "tau" wA
-\tau
-endsnippet
-
-context "math()"
-snippet chii "chi" wA
-\chi
 endsnippet
 
 context "math()"
@@ -799,64 +734,23 @@ snippet vph "varphi" iA
 \varphi
 endsnippet
 
-context "math()"
-snippet pssi "psi" wA
-\psi
-endsnippet
 
-context "math()"
-snippet pii "pi" iA
-\pi
-endsnippet
-
-context "math()" 
-snippet "gr (\w+)" "greek letter" r
-`!p snip.rv = ("\\" + match.group(1))`
-endsnippet
-
-#easier to hit ' than `
-context "math()" 
-snippet "'(\w+)" "greek letter" r
-`!p snip.rv = ("\\" + match.group(1))`
-endsnippet
-
-
-#arrows
-context "math()"
-snippet Rarrow "Rightarrow" iA
-\Rightarrow 
-endsnippet
-
-context "math()"
-snippet Larrow "Leftarrow" iA
-\Leftarrow 
-endsnippet
-
-context "math()"
-snippet iff "if and only if" i
-\Leftrightarrow
-endsnippet
-
-#special lettering (cursive, ...)
+# emphasize environment
 context "not math()"
 snippet emp "emph{}" w
-\emph{$1}$0
+\emph{${VISUAL}} $0
 endsnippet
 
 context "not math()"
 snippet emph "emph{}" w
-\emph{$1}$0
+\emph{${VISUAL}} $0
 endsnippet
 
-#norms etc
+
+# norms etc
 context "math()"
-snippet nrm "norm" iA
+snippet nrm "norm" i
 \\| $1 \\| $0
-endsnippet
-
-context "math()"
-snippet normm "\| \|" i
-\\| ${1:${VISUAL}} \\| $0
 endsnippet
 
 context "math()"
@@ -864,50 +758,27 @@ snippet abss "| |" i
 | ${1:${VISUAL}} | $0
 endsnippet
 
-# overlines, hat, tilde, ...
-# credit to Gilles Castel 
-priority 10
-context "math()"
-snippet "bar" "bar" riA
-\overline{$1}$0
-endsnippet
 
-priority 100
+#intervals (using the package interval)
 context "math()"
-snippet "([a-zA-Z])bar" "bar" riA
-\overline{`!p snip.rv=match.group(1)`}
-endsnippet
-
-priority 10
-context "math()"
-snippet "hat" "hat" riA
-\hat{$1}$0
-endsnippet
-
-priority 100
-context "math()"
-snippet "([a-zA-Z])hat" "hat" riA
-\hat{`!p snip.rv=match.group(1)`}
-endsnippet
-
-priority 10
-context "math()"
-snippet "tilde" "tilde" riA
-\tilde{$1}$0
-endsnippet
-
-priority 100
-context "math()"
-snippet "([a-zA-Z])tilde" "tilde" riA
-\tilde{`!p snip.rv=match.group(1)`}
+snippet rinter "[-,-)" w
+\\rinterval{$1}{$2} $0
 endsnippet
 
 context "math()"
-snippet ~ "\tilde{}" iA
-\tilde{$1} $0
+snippet linter "(-,-]" w
+\\linterval{$1}{$2} $0
 endsnippet
 
-# numbering / lists
+
+# styling
+context "not math()"
+snippet col "color{}" b
+\color{$1} $0
+endsnippet
+
+
+# enumerations 
 snippet enm "enumerate" b
 \begin{enumerate}[${1:first-item}]
   \item $2
@@ -974,11 +845,8 @@ snippet tikz "tikzpicture" b
 \end{tikzpicture}
 endsnippet
 
+
 # templates
-
-
-
-
 snippet tempmain "template for a main document" b
 \documentclass[a4paper]{$1}
 \usepackage[backend=bibtex,
@@ -1106,6 +974,13 @@ $11
 endsnippet
 
 #word abbreviations
+
+#auto correct 'i' to 'I' outside math mode
+context "not math()"
+snippet i "i" 
+I
+endsnippet
+
 context "not math()" 
 snippet thm "theorem" i
 theorem
@@ -1151,33 +1026,8 @@ Noetherian
 endsnippet
 
 context "not math()" 
-snippet TFAE "The following are equivalent" i
-The following are equivalent:
-endsnippet
-
-context "not math()" 
-snippet Tfae "The following are equivalent" i
-The following are equivalent:
-endsnippet
-
-context "not math()" 
 snippet tfae "the following are equivalent" i
 the following are equivalent:
-endsnippet
-
-context "not math()" 
-snippet gcq "good categorical quotient" i
-good categorical quotient 
-endsnippet
-
-context "not math()" 
-snippet gq "geometric quotient" i
-geometric quotient 
-endsnippet
-
-context "not math()" 
-snippet DVR "discrete valuation ring" i
-discrete valuation ring 
 endsnippet
 
 # preamble
@@ -1192,17 +1042,12 @@ snippet DMO "Declare Math Operator" i
 endsnippet
 
 context "not math()" 
-snippet Dmo "Declare Math Operator" i
-\DeclareMathOperator{\\$1}{$2}
-endsnippet
-
-context "not math()" 
-snippet iso "isomorphism" w
+snippet iso "isomorphism" wA
 isomorphism
 endsnippet
 
 context "not math()" 
-snippet homo "homomorphism" w
+snippet homo "homomorphism" wA
 homomorphism
 endsnippet
 
@@ -1222,35 +1067,5 @@ endsnippet
 post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br
 `!p snip.rv = match.group(1)`
-endsnippet
-
-
-#intervals (using the package interval)
-context "math()"
-snippet rinter "[-,-)" w
-\\rinterval{$1}{$2} $0
-endsnippet
-
-context "math()"
-snippet linter "(-,-]" w
-\\linterval{$1}{$2} $0
-endsnippet
-
-
-context "math()"
-snippet stab "Stab_()" w
-\Stab_{$1}\left($2 \right) $0
-endsnippet
-
-context "not math()"
-snippet col "color{}" b
-\color{$1} $0
-endsnippet
-
-
-#auto correct 'i' to 'I' outside math mode
-context "not math()"
-snippet i "i" 
-I
 endsnippet
 
