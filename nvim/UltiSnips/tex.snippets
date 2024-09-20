@@ -738,12 +738,18 @@ endsnippet
 # emphasize environment
 context "not math()"
 snippet emp "emph{}" w
-\emph{${VISUAL}} $0
+\emph{${VISUAL}}$0
 endsnippet
 
 context "not math()"
 snippet emph "emph{}" w
-\emph{${VISUAL}} $0
+\emph{${VISUAL}}$0
+endsnippet
+
+#bold
+context "not math()"
+snippet bld "\textbf{}" w
+\textbf{${VISUAL}}$0
 endsnippet
 
 
@@ -843,6 +849,42 @@ snippet tikz "tikzpicture" b
 \begin{tikzpicture}
   $0
 \end{tikzpicture}
+endsnippet
+
+# commutative diagram templates
+# % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGJ1bGxldCJdLFsyLDAsIlxcYnVsbGV0Il0sWzAsMiwiXFxidWxsZXQiXSxbMiwyLCJcXGJ1bGxldCJdLFswLDJdLFswLDFdLFsxLDNdLFsyLDNdXQ==
+snippet sqcom "commutative square" bA
+\[\begin{tikzcd}
+	$1 && $2 \\\\
+	\\\\
+	$3 && $4
+	\arrow["$5", from=1-1, to=1-3]
+	\arrow["$6", from=1-1, to=3-1]
+	\arrow["$7", from=1-3, to=3-3]
+	\arrow["$8", from=3-1, to=3-3]
+\end{tikzcd}\] $0
+endsnippet
+
+snippet trcom "commutative triangle" bA
+\[\begin{tikzcd}
+	$1 && $2 \\\\
+	\\\\
+	&	$3 
+	\arrow["$5", from=1-1, to=1-3]
+	\arrow["$6", from=1-1, to=3-2]
+	\arrow["$7", from=1-3, to=3-2]
+\end{tikzcd}\] $0
+endsnippet
+
+snippet trfac "triangle factorization" bA
+\[\begin{tikzcd}
+	$1 && $2 \\\\
+	\\\\
+	$3 
+	\arrow["$5", from=1-1, to=1-3]
+	\arrow["$6", from=1-1, to=3-1]
+	\arrow["$7", from=3-1, to=1-3]
+\end{tikzcd}\] $0
 endsnippet
 
 
@@ -1068,4 +1110,10 @@ post_jump "create_row_placeholders(snip)"
 snippet "tr(\d+)" "latex table row variable" br
 `!p snip.rv = match.group(1)`
 endsnippet
+
+context "math()" 
+snippet Mod	"moduli space" iA
+\overline{{M}}_{$1,$2} \left( $3, $4\right) $0
+endsnippet
+
 
