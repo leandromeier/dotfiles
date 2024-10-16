@@ -84,3 +84,6 @@ alias killallkillallnow='shutdown now'
 
 # FMI via VPN via openconnect
 alias vpnfmi='sudo openconnect -b --useragent 'AnyConnect' --user=to75teh@uni-jena.de --pid-file=/var/run/vpn.pid --timestamp --syslog vpn.sci.uni-jena.de'
+
+#updates
+alias updates='sudo pacman -Syu && yay -Syu'
