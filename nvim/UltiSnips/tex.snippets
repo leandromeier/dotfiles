@@ -646,6 +646,11 @@ snippet "bar" "bar" ri
 \overline{$1}$0
 endsnippet
 
+context "math()"
+snippet "underline" "under" ri
+\underline{$1}$0
+endsnippet
+
 priority 10
 context "math()"
 snippet "hat" "hat" ri
@@ -684,6 +689,12 @@ priority 70
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 70
+context "math()"
+snippet "([a-zA-Z])under" "under" riA
+\underline{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 70
