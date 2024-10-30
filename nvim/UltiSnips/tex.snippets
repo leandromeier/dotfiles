@@ -516,7 +516,7 @@ snippet stab "Stab_()" w
 endsnippet
 
 
-# special algebro-geometric invariants
+# special algebro-geometric terms
 context "math()"
 snippet nvol "normalized volume" i
 \widehat{\vol}_{$1}\left( $2\right)$0
@@ -530,6 +530,18 @@ snippet mat "pmatrix" b
 \end{pmatrix}
 $0
 endsnippet
+
+context "math()"
+snippet birtr "birational transform" i
+$1_{*}^{-1} $0
+endsnippet
+
+context "math()"
+snippet bir( "birational transform (with bracket)" i
+\left( $1_{$2} \right)_{*}^{-1} $0
+endsnippet
+
+#^
 
 #specific useful stuff for the master's thesis
 context "math()"
