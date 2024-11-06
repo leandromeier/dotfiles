@@ -484,14 +484,14 @@ snippet Spc "Spec ( )" i
 endsnippet
 
 context "math()"
-snippet TV "\TV" i
+snippet tv "\TV" i
 \TV $0
 endsnippet
 
 #must have priority higher than the tilde regex snippet
 priority 80
 context "math()"
-snippet TVtilde "\widetilde{\TV}" iA
+snippet tvt "\widetilde{\TV}" iA
 \widetilde{\TV} $0
 endsnippet
 
@@ -535,6 +535,22 @@ snippet mat "pmatrix" b
 \end{pmatrix}
 $0
 endsnippet
+
+
+context "math()"
+snippet sys3 "linear system of 3 equations" b
+\left\\{
+  \begin{alignedat}{3}
+  % R & L   &  R & L   &  R & L 
+    $1 \lambda_{1} & +{} &  $2\lambda_{2} & +{} & $3\lambda_{3} & = $4 \\\\
+	$5 \lambda_{1} & +{} &  $6\lambda_{2} & +{} & $7\lambda_{3} & = $8 \\\\
+	$9 \lambda_{1} & +{} &  $10\lambda_{2} & +{} & $11\lambda_{3} & = $12
+  \end{alignedat}
+\right.
+$0
+endsnippet
+
+
 
 context "math()"
 snippet birtr "birational transform" i
