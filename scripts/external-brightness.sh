@@ -1,4 +1,7 @@
 #!/bin/bash
+# needs ddcutil to run, as well as to load some kernel module. 
+# After installing ddcutil, reboot to see if the kernel module
+# will be loaded automatically
 key=$1
 # h is passed to query current brightness
 # valid options are integers between 0 and 100
