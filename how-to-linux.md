@@ -60,3 +60,6 @@ to copy text content under a url to a file
 
 ## connect to FSU (FMI) net via openconnect
 'sudo openconnect -b --useragent 'AnyConnect' --user=to75teh@uni-jena.de --pid-file=/var/run/vpn.pid --timestamp --syslog vpn.sci.uni-jena.de'
+
+## ghostscript to reduce pdf file size
+'ghostscript -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dQUIET -dDetectDuplicateImage -dCompressFonts=true -r150 -o output.pdf input.pdf'
