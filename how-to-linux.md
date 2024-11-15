@@ -63,3 +63,6 @@ to copy text content under a url to a file
 
 ## ghostscript to reduce pdf file size
 'ghostscript -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dQUIET -dDetectDuplicateImage -dCompressFonts=true -r150 -o output.pdf input.pdf'
+
+## nvim swap files
+are stored under .local/state/nvim/swap

@@ -9,6 +9,9 @@ alias :q='exit'
 # --servername VIM for it to work with reverse synctex
 alias v='nvim'
 alias vim='nvim '
+# readonly alias
+alias vr='vim -mR'
+alias o='vim -mR'
 
 # ls
 alias ls='lsd'
