@@ -939,7 +939,7 @@ snippet grid "insert grid block" b
   \foreach \i in {\yMin,...,\yMax} {
 	\draw [very thin,gray] (\xMin,\i) -- (\xMax,\i) node [left] at (\xMin,\i) {};
   }
- \draw [step=1.0, xshift=-0.5cm, yshift=-0.5cm, gray, very thin] (0.5,0.5) grid (14.5,5.5);
+ \draw [step=1.0, xshift=-0.5cm, yshift=-0.5cm, gray, very thin] (\yMin + 0.5,\xMin + 0.5) grid (\yMax + 0.5,\xMax + 0.5);
 \end{tikzpicture}
 endsnippet
 
