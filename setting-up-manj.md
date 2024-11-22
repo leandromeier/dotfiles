@@ -29,6 +29,12 @@ see https://docs.github.com/en/authentication/connecting-to-github-with-ssh/chec
 Zathura needs a plugin to read pdfs and co. 'sudo pacman -S zathura-pdf-mupdf' for instance
 
 
+# check iso (obtain checksum)
+sha256 file.iso
+
+## compare checksums (in vim)
+
+
 ## How to burn an iso file to a USB stick
 run 'lsblk' before and after inserting the USB stick to learn its location
 sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress oflag=sync
