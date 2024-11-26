@@ -110,7 +110,6 @@ input type:touchpad {
     natural_scroll enabled
     middle_emulation enabled
 }
-#
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 #
@@ -240,14 +239,14 @@ for_window [app_id="org.gnome.Settings"] floating enable
     # Popup behaviour during fullscreen
     popup_during_fullscreen smart
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    # # Toggle the current focus between tiling and floating mode
+    # bindsym $mod+Shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+escape focus mode_toggle
+    # # Swap focus between the tiling area and the floating area
+    # bindsym $mod+escape focus mode_toggle
 
-    # Move focus to the parent container
-    bindsym $mod+a focus parent
+    # # Move focus to the parent container
+    # bindsym $mod+a focus parent
 
 
 
@@ -303,7 +302,7 @@ client.unfocused          $bg     $bg     $fg   $bg       $bg
 exec --no-startup-id waybar
 
 #start synoloy drive client
-exec synology-drive
+# exec synology-drive
 
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
@@ -326,18 +325,14 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
 
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle       #toggle mute audio
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle   #toggle mute mic
 
 
-#bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
-#bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
+# Brightness controls
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-                      #brightness down
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%                        #brightness up
-bindsym Shift+XF86MonBrightnessDown exec brightnessctl set 1%-                #brightness down fine
-bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #brightness up fine
+# bindsym Shift+XF86MonBrightnessDown exec brightnessctl set 1%-                #brightness down fine
+# bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #brightness up fine
 
 # screen sharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
