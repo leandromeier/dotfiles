@@ -1,0 +1,40 @@
+[font]
+size = 14.0
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Equals"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "U"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "D"
+mods = "Alt"
+
+[window]
+opacity = 0.9
