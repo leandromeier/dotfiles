@@ -307,6 +307,9 @@ exec --no-startup-id waybar
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
 
+#start gammastep (adjust color temp automatically for day/night)
+exec_always gammastep
+
 #start bluetooth service
 exec systemctl enable bluetooth.service
 
