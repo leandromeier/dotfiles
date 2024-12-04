@@ -18,16 +18,16 @@ endglobal
 # i - this snippet will only expand if the trigger is the first word on a line or preceded by whitespace.
 # r - the trigger is expected to be a regular expression. Frame it by quotations because ultisnips expects it to be surrounded by a character.
 
-snippet * "multiplication" wA
+snippet * "multiplication" w
 \cdot
 endsnippet
 
-context "math()"
-snippet ö "backslash" i
-\\
-endsnippet
+# context "math()"
+# snippet ö "backslash" i
+# \\
+# endsnippet
 
-snippet " "latex quote" iA
+snippet " "latex quote" i
 \`\`$1''$0
 endsnippet
 
@@ -49,7 +49,7 @@ snippet sec "section" bA
 $0
 endsnippet
 
-snippet se* "section*" bA
+snippet se* "section*" b
 \section*{$1}
 $0
 endsnippet
@@ -59,7 +59,7 @@ snippet ssec "subsection" bA
 $0
 endsnippet
 
-snippet sse* "subsection*" bA
+snippet sse* "subsection*" b
 \subsection*{$1}
 $0
 endsnippet
@@ -69,7 +69,7 @@ snippet sssec "subsubsection" bA
 $0
 endsnippet
 
-snippet ssse* "subsubsection*" bA
+snippet ssse* "subsubsection*" b
 \subsubsection*{$1}
 $0
 endsnippet
@@ -85,15 +85,15 @@ else:
 `$2
 endsnippet
 
-context "not math()"
-snippet mk "inline math" wA
-$${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2
-endsnippet
+# context "not math()"
+# snippet mk "inline math" wA
+# $${1}$`!p
+# if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ')']:
+# 	snip.rv = ' '
+# else:
+# 	snip.rv = ''
+# `$2
+# endsnippet
 
 # from https://ejmastnak.com/tutorials/vim-latex/ultisnips/#examples
 context "not math()"
@@ -125,7 +125,7 @@ endsnippet
 
 # function signatures and arrows
 context "math()"
-snippet :: "colon" iA
+snippet :: "colon" i
 \colon
 endsnippet
 
@@ -171,12 +171,22 @@ endsnippet
 
 # implication arrows
 context "math()"
-snippet Raw "Rightarrow" iA
+snippet => "Rightarrow" i
 \Rightarrow 
 endsnippet
 
 context "math()"
-snippet Law "Leftarrow" iA
+snippet Raw "Rightarrow" i
+\Rightarrow 
+endsnippet
+
+context "math()"
+snippet <= "Leftarrow" i
+\Leftarrow 
+endsnippet
+
+context "math()"
+snippet Law "Leftarrow" i
 \Leftarrow 
 endsnippet
 
@@ -187,17 +197,17 @@ endsnippet
 
 # lists
 context "math()"
-snippet two "two" iA
+snippet two "two" i
 $1_{1}, $1_{2}$0
 endsnippet
 
 context "math()"
-snippet three "three" iA
+snippet three "three" i
 $1_{1}, $1_{2}, $1_{3}$0
 endsnippet
 
 context "math()"
-snippet vect "(x1,y1,z1)" iA
+snippet vect "(x1,y1,z1)" i
 \left( x_{$1}, x_{$1}, x_{$1} \right) $0
 endsnippet
 
@@ -207,12 +217,12 @@ $1_{$2}, \dots, $1_{$3}$0
 endsnippet
 
 context "math()"
-snippet sompow "finitely many powers" iA
+snippet sompow "finitely many powers" i
 $1_{$2}^{$3_{$2}}, \dots, $1_{$4}^{$3_{$4}}$0
 endsnippet
 
 context "math()"
-snippet zeroes "(0, ... , 0)" iA
+snippet zeroes "(0, ... , 0)" i
 \left( 0, \dots , 0 \right) $0
 endsnippet
 
@@ -222,7 +232,7 @@ $1_{$2}, $1_{$3}, \dots$0
 endsnippet
 
 context "math()"
-snippet seq "sequence" wA
+snippet seq "sequence" w
 {($1_{$2})}_{$3 \in \mathbb{N}}$0
 endsnippet
 
@@ -237,15 +247,15 @@ $1_{$2} \supseteq $1_{$3} \supseteq \dots$0
 endsnippet
 
 context "math()"
-snippet homo "homogeneous coordinates" iA
+snippet homco "homogeneous coordinates" i
 [$1_{$2} : \dots : $1_{$3}]
 endsnippet
 
-context "math()"
-snippet asandps "product of affine spaces with projective" iA
-\mathbb{A}^{n_1} \times \cdots \times \mathbb{A}^{n_\ell} \times
-\mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
-endsnippet
+# context "math()"
+# snippet asandps "product of affine spaces with projective" iA
+# \mathbb{A}^{n_1} \times \cdots \times \mathbb{A}^{n_\ell} \times
+# \mathbb{P}^{m_1} \times \cdots \times \mathbb{P}^{n_{\ell'}}
+# endsnippet
 
 context "math()"
 snippet pair "(X,x)" i
@@ -258,7 +268,7 @@ K_{$1} + $2_{$1} $0
 endsnippet
 
 context "math()"
-snippet prd "X_1 x X_2" wA
+snippet prod "X_1 x X_2" wA
 $1_{1} \times $1_{2} $0
 endsnippet
 
@@ -312,7 +322,7 @@ snippet ccn "\subsetneq" iA
 endsnippet
 
 context "math()"
-snippet ccr "\supset" iA
+snippet super "\supset" iA
 \\supseteq
 endsnippet
 
@@ -349,17 +359,17 @@ snippet frac "frac" iA
 endsnippet
 
 context "math()"
-snippet ceil "ceil" iA
+snippet ceil "ceil" i
 \left\lceil ${1:{VISUAL}} \right\rceil $0
 endsnippet
 
 context "math()"
-snippet floor "floor" iA
+snippet floor "floor" i
 \left\lfloor ${1:{VISUAL}} \right\rfloor $0
 endsnippet
 
 context "math()"
-snippet sqrt "sqrt" iA
+snippet sqrt "sqrt" i
 \sqrt{$1}$0
 endsnippet
 
@@ -430,11 +440,6 @@ endsnippet
 context "math()"
 snippet int "integral" w
 \int_{$1}^{$2} $3 \, d$0
-endsnippet
-
-context "math()"
-snippet union "bigcup" i
-\bigcup_{$1}^{$2} $0
 endsnippet
 
 context "math()"
@@ -655,7 +660,7 @@ endsnippet
 
 context "math()"
 snippet frak "\mathfrak{}" wA
-\mathfrak{${VISUAL}}$0
+\mathfrak{ ${1:${VISUAL}} } $0
 endsnippet
 
 context "math()"
@@ -742,7 +747,7 @@ endsnippet
 
 context "math()"
 snippet text "\text{}" wA
-\text{${VISUAL}} $0
+\text{ ${1:${VISUAL}} } $0
 endsnippet
 
 
@@ -778,18 +783,18 @@ endsnippet
 # emphasize environment
 context "not math()"
 snippet emp "emph{}" w
-\emph{${VISUAL}}$0
+\emph{${1:${VISUAL}}}$0
 endsnippet
 
 context "not math()"
 snippet emph "emph{}" w
-\emph{${VISUAL}}$0
+\emph{${1:${VISUAL}}}$0
 endsnippet
 
 #bold
 context "not math()"
 snippet bld "\textbf{}" w
-\textbf{${VISUAL}}$0
+\textbf{${1:${VISUAL}}}$0
 endsnippet
 
 
@@ -1073,11 +1078,15 @@ endsnippet
 
 #word abbreviations
 context "not math()" 
-snippet nbhd "neighborhood" i
-neighborhood
+snippet cts "continuous" i
+continuous
 endsnippet
 
 context "not math()" 
+snippet nbhd "neighborhood" i
+neighborhood $0
+endsnippet
+
 #auto correct 'i' to 'I' outside math mode
 context "not math()"
 snippet i "i" 
@@ -1115,11 +1124,6 @@ example
 endsnippet
 
 context "not math()" 
-snippet exx "example" i
-example
-endsnippet
-
-context "not math()" 
 snippet mld "minimal log discrepancy" i
 minimal log discrepancy
 endsnippet
@@ -1132,6 +1136,27 @@ context "not math()"
 snippet tfae "the following are equivalent" i
 the following are equivalent:
 endsnippet
+
+context "not math()" 
+snippet iso "isomorphism" w
+isomorphism
+endsnippet
+
+context "not math()" 
+snippet homo "homomorphism" w
+homomorphism
+endsnippet
+
+context "not math()" 
+snippet Qg "Q-Gorenstein" i
+\$ \mathbb{Q} \$-Gorenstein
+endsnippet
+
+context "not math()" 
+snippet Qf "Q-factorial" i
+\$ \mathbb{Q} \$-factorial 
+endsnippet
+
 
 # preamble
 context "not math()" 
@@ -1148,17 +1173,6 @@ context "not math()"
 snippet DMO "Declare Math Operator" i
 \DeclareMathOperator{\\$1}{$1}
 endsnippet
-
-context "not math()" 
-snippet iso "isomorphism" w
-isomorphism
-endsnippet
-
-context "not math()" 
-snippet homo "homomorphism" w
-homomorphism
-endsnippet
-
 # python snippets
 # you can put python code between '`!p' and '`' 
 # snip.rv is the value that is returned by the snippet
