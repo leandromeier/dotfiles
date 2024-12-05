@@ -1200,3 +1200,26 @@ context "not math()"
 snippet href "hyperref" i
 \href{$1}{$2} $0
 endsnippet
+
+# citations and references
+context "not math()"
+snippet pcite "parencite" i
+\parencite{$1} $0
+endsnippet
+
+context "not math()"
+snippet ref "ref" i
+\ref{$1} $0
+endsnippet
+
+# context "not math()"
+# snippet prf "pref" i
+# \parref{$1} $0
+# endsnippet
+
+context "not math()"
+snippet lbl "label" i
+\label{$1:$2} $0
+endsnippet
+
+
