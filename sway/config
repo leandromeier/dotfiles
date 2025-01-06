@@ -40,6 +40,15 @@ set $blth 'blueman-manager'
 set $nm alacritty -e nmtui
 # open ranger in a terminal in the books folder
 set $books alacritty -e ranger
+# open ranger at specific location
+set $peace alacritty -e ranger ~/Peaceful_Ambience
+
+
+# open specific programs in specific workspaces
+# the syntax is 
+# assign <match_criteria> <workspace_name>
+assign [app_id="thunderbird"] "9"
+
 
 # Logo key. Use Mod1 for Alt.
 # Logo key. Use Mod4 for super/windows key.
@@ -115,11 +124,18 @@ input type:touchpad {
 #
 
 # Keyboard
+# old:
 input type:keyboard { 
   xkb_layout "ch"
   xkb_variant "de_nodeadkeys"
   xkb_options "caps:swapescape"
 }
+# new:
+# input * { 
+#   xkb_layout ch
+#   xkb_variant de_nodeadkeys
+#   xkb_options caps:swapescape
+# }
 
 #change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
 #change to 'map_to_output DP-3' to get the graphics tablet to map to secondary monitor
@@ -154,6 +170,8 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+shift+v exec $spot           # spotify
     bindsym $mod+v exec $mixer                # pavucontrol
     bindsym $mod+shift+b exec $blth           # blueman
+
+    bindsym $mod+p exec $peace
     bindsym $mod+n exec $nm                   # nmtui 
 
     # Kill focused window
@@ -180,7 +198,7 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
-    bindsym $mod+o exec swaylock -f --grace 5
+    bindsym $mod+o exec swaylock -f --grace 6
     #bindsym $mod+o exec swaylock -C $HOME/.config/swaylock/config 
 #
 # Moving around:
