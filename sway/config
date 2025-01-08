@@ -7,8 +7,10 @@
 # Monitor configuration
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 # coordinates need to be non-negative
-output eDP-1 resolution 1920x1080 position 0,0
-output DP-3  resolution 2560x1440 position -1920,0
+output eDP-1 resolution 1920x1080 position 0 0
+output HDMI-A-2  resolution 2560x1440 position 1920 0 scale 1 
+# output HDMI-A-2  resolution 2560x1440 position 1920,0
+# output DP-3  resolution 2560x1440 position 1920,0
 
 
 # Your preferred terminal emulator
