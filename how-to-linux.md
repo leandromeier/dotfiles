@@ -66,3 +66,10 @@ to copy text content under a url to a file
 
 ## nvim swap files
 are stored under .local/state/nvim/swap
+
+## tlp
+settings may be stored permanently (beyond current OS)
+edit the file under /etc/tlp.conf to set start and stop charge thresholds
+Default: start 75, stop 80
+see also https://linrunner.de/tlp/index.html
+
