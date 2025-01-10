@@ -41,7 +41,7 @@ alias z='zathura'
 ### other actions
 #
 # suspend 
-alias sn='systemctl suspend'
+alias sn='swaymsg output eDP-1 enable && systemctl suspend'
 
 # sage notebook jupyter 
 # alias snj='sage --notebook jupyter' 
@@ -74,6 +74,13 @@ alias fetchAZT='rclone copy nextcloud:AZT/ ~/Downloads/AZT/'
 
 # load script for external brightness. needs to be passed a number between 1 and 100 
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
+# too lazy to type 'eb'...
+alias 20='~/Documents/dotfiles/scripts/external-brightness.sh 20'
+alias 30='~/Documents/dotfiles/scripts/external-brightness.sh 30'
+alias 40='~/Documents/dotfiles/scripts/external-brightness.sh 40'
+alias 50='~/Documents/dotfiles/scripts/external-brightness.sh 50'
+alias 60='~/Documents/dotfiles/scripts/external-brightness.sh 60'
+alias 70='~/Documents/dotfiles/scripts/external-brightness.sh 70'
 
 # 7zip 
 alias zip='7z a -tzip'
@@ -93,3 +100,4 @@ alias endvpn='sudo killall openconnect'
 
 #updates
 alias updates='sudo pacman -Syu && yay -Syu'
+
