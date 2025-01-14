@@ -654,7 +654,7 @@ endsnippet
 
 context "math()"
 snippet TT "\mathbb{T}" iA
-\mathbb{T}
+\mathbb{T}$0
 endsnippet
 
 context "math()"
@@ -666,6 +666,12 @@ context "math()"
 snippet "mbb" "\mathbb{}" riA
 \mathbb{$1}$0
 endsnippet
+
+context "not math()"
+snippet TT "T-" iA
+\$T\$-$0
+endsnippet
+
 
 # other special fonts
 context "math()"
@@ -1093,13 +1099,18 @@ endsnippet
 
 #word abbreviations
 context "not math()" 
+snippet iff "if and only if" i
+if and only if $0
+endsnippet
+
+context "not math()" 
 snippet Tvar "T-variety" i
-\$T\$-variety
+\$T\$-variety $0
 endsnippet
 
 context "not math()" 
 snippet Tvars "T-varieties" i
-\$T\$-varieties
+\$T\$-varieties $0
 endsnippet
 
 context "not math()" 
@@ -1173,13 +1184,18 @@ homomorphism
 endsnippet
 
 context "not math()" 
+snippet QG "Q-Gorenstein" i
+\$ \mathbb{Q} \$-Gorenstein $0
+endsnippet
+
+context "not math()" 
 snippet Qg "Q-Gorenstein" i
-\$ \mathbb{Q} \$-Gorenstein
+\$ \mathbb{Q} \$-Gorenstein $0
 endsnippet
 
 context "not math()" 
 snippet Qf "Q-factorial" i
-\$ \mathbb{Q} \$-factorial 
+\$ \mathbb{Q} \$-factorial $0
 endsnippet
 
 

@@ -41,36 +41,19 @@ alias z='zathura'
 ### other actions
 #
 # suspend 
+# alias sn='systemctl suspend'
+# not sure if this causes the freezing in swaylock
 alias sn='swaymsg output eDP-1 enable && systemctl suspend'
 
-# sage notebook jupyter 
-# alias snj='sage --notebook jupyter' 
 # jupyter notebook 
 alias jn='jupyter notebook' 
 alias nj='jupyter notebook'
 
 # call arxiv-downloader script with parameters
 alias axu='arxiv-downloader'
-alias axi='arxiv-downloader'
 
 # toggle main display (Sway)
 alias tog='swaymsg output eDP-1 toggle'
-
-# rclone
-alias rlsd='rclone lsd nextcloud:'
-alias rc='rclone'
-#
-# 'copy' is better than 'sync' as it does not erase the destination
-alias copya='rclone copy ~/math/articles/ nextcloud:articles/'
-alias fetcha='rclone copy nextcloud:articles/ ~/math/articles/'
-alias copyb='rclone copy ~/math/books/ nextcloud:books/'
-alias fetchb='rclone copy nextcloud:books/ ~/math/books/'
-alias copyBB='rclone copy ~/math/notes/blackboard/ nextcloud:Blackboards/'
-alias fetchBB='rclone copy nextcloud:Blackboards/ ~/math/notes/blackboard/'
-alias copyn='rclone copy ~/math/notes/handwritten_notes/ nextcloud:notes/handwritten_notes/'
-alias fetchn='rclone copy nextcloud:notes/handwritten_notes/ ~/math/notes/handwritten_notes/'
-alias copyAZT='rclone copy ~/Downloads/AZT/ nextcloud:AZT/'
-alias fetchAZT='rclone copy nextcloud:AZT/ ~/Downloads/AZT/'
 
 # load script for external brightness. needs to be passed a number between 1 and 100 
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
