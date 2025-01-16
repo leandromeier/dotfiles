@@ -68,6 +68,9 @@ to copy text content under a url to a file
 are stored under .local/state/nvim/swap
 
 ## tlp
+to start: 'sudo tlp start'
+to get status: tlp-stat -s'
+to get battery info: 'sudo tlp-stat -b'
 settings may be stored permanently (beyond current OS)
 edit the file under /etc/tlp.conf to set start and stop charge thresholds
 Default: start 75, stop 80
