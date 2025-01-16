@@ -49,3 +49,20 @@ To log in to Admin, use your local laptop's admin credentials
 follow instructions
 
 for uni jena office printing, choose mps02, then generic driver and PCL6, and the connection address socket://mps02.mats.uni-jena.de
+
+
+# zoom 
+manual install:    
+1. Download the TAR.XZ installer file from our Download Center.
+2. Open the download location using a file manager.
+3. Right click in the file manager and click Terminal to open the terminal in the current location.
+4. Type in the following command and press Enter to run it.
+  "sudo pacman -U zoom_x86_64.pkg.tar.xz"
+5. Enter your admin password and continue the installation when prompted.
+   Pacman will also download and install the required dependencies
+
+Uninstalling:
+run "sudo pacman -Rs zoom"
+
+
+
