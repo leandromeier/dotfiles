@@ -749,6 +749,12 @@ endsnippet
 
 priority 70
 context "math()"
+snippet "([a-zA-Z])un" "under" ri
+\underline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 70
+context "math()"
 snippet "([a-zA-Z])hat" "hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
@@ -1098,6 +1104,12 @@ $11
 endsnippet
 
 #word abbreviations
+
+context "not math()" 
+snippet onb "Orthonormalbasis" i
+Orthonormalbasis $0
+endsnippet
+
 context "not math()" 
 snippet klt "Kawamata log terminal" i
 Kawamata  log terminal $0

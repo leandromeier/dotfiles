@@ -58,6 +58,7 @@ alias tog='swaymsg output eDP-1 toggle'
 # load script for external brightness. needs to be passed a number between 1 and 100 
 alias eb='~/Documents/dotfiles/scripts/external-brightness.sh'
 # too lazy to type 'eb'...
+alias h='~/Documents/dotfiles/scripts/external-brightness.sh h'
 alias 20='~/Documents/dotfiles/scripts/external-brightness.sh 20'
 alias 30='~/Documents/dotfiles/scripts/external-brightness.sh 30'
 alias 40='~/Documents/dotfiles/scripts/external-brightness.sh 40'
