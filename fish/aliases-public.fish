@@ -77,6 +77,10 @@ alias getphotos='gphoto2 --new --get-all-files'
 alias killallkillall='shutdown'
 alias killallkillallnow='shutdown now'
 
+# other killalls
+alias killz='killall zathura'
+alias killr='killall ranger'
+
 # FMI via VPN via openconnect
 alias vpnfmi='sudo openconnect -b --useragent 'AnyConnect' --user=to75teh@uni-jena.de --pid-file=/var/run/vpn.pid --timestamp --syslog vpn.sci.uni-jena.de'
 alias fmivpn='sudo openconnect -b --useragent 'AnyConnect' --user=to75teh@uni-jena.de --pid-file=/var/run/vpn.pid --timestamp --syslog vpn.sci.uni-jena.de'
