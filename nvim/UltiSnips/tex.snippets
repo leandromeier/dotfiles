@@ -22,11 +22,6 @@ snippet * "multiplication" w
 \cdot
 endsnippet
 
-# context "math()"
-# snippet ö "backslash" i
-# \\
-# endsnippet
-
 snippet " "latex quote" i
 \`\`$1''$0
 endsnippet
@@ -1192,6 +1187,11 @@ example
 endsnippet
 
 context "not math()" 
+snippet rmk "remark" i
+remark
+endsnippet
+
+context "not math()" 
 snippet mld "minimal log discrepancy" i
 minimal log discrepancy
 endsnippet
@@ -1294,5 +1294,17 @@ context "not math()"
 snippet lbl "label" i
 \label{$1:$2} $0
 endsnippet
+
+context "not math()"
+snippet PP "Punkte" i
+\textbf{($1 Punkte)} $0
+endsnippet
+
+#special characters/letters
+context "not math()"
+snippet specch "special character" i
+\\$1{$2} $0
+endsnippet
+
 
 

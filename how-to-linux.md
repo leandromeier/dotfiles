@@ -1,5 +1,10 @@
 # How to Linux
 
+## Getting around python modules that were installed in the wrong version
+(probably really should figure out how to fix but I could not)
+If a module is in /usr/lib/python3.xyz, yet the current version is python3.abc, then by creating a symlink between where the module is, and where it should be, resolves the ModuleNotFoundError
+
+
 ## How to compress and optionally encrypt (using 7zip)
 To compress to a zip file:
 '7z a -tzip zipname.zip <files to compress>' To compress and password protect '7z a -tzip -p{password} zipname.zip <files to compress>'
@@ -89,4 +94,5 @@ to get more info on feature 10
 
 to set a value for feature 10: (here value = 70)
 'ddcutil setvcp 10 70'
+
 
