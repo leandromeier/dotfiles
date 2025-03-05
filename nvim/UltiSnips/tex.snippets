@@ -977,16 +977,29 @@ endsnippet
 
 
 # templates
+snippet temptest "" b
+${1:default text}\\
+mirror $1
+endsnippet 
+
 snippet tempmain "template for a main document" b
 \documentclass[a4paper]{$1}
 \usepackage[backend=bibtex,
+url=false,
+eprint=false,
+isbn=false,
 style=alphabetic,
-sorting=ynt]{biblatex}
-\addbibresource{$5}
+sorting=nty]{biblatex}
+\addbibresource{${2:../sources/sourcefile.bib}}
 
-\title{$2}
-\author{$3}
-\date{$4}
+\title{$3}
+\author{$4}
+\address{${5:Leandro Meier, Mathematisches Institut, Universit\"at Jena, Ernst-Abbe-Platz 1-2, 07743 Jena, Deutschland}}
+\email{\href{mailto:${6:leandro.meier@uni-jena.de}}{$6}}
+\subjclass[2020]{$7}
+\keywords{$8}
+
+\date{${9:Draft version \today}}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -995,6 +1008,7 @@ sorting=ynt]{biblatex}
 \usepackage{enumerate}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{tikz-cd}
 \usepackage[hidelinks]{hyperref}
 
 \setlength\parindent{0pt}
@@ -1014,11 +1028,9 @@ sorting=ynt]{biblatex}
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\Cone}{Cone}
 \DeclareMathOperator{\codim}{codim}
-\DeclareMathOperator{\Div}{Div} 
 \let\div\relax
 \DeclareMathOperator{\div}{div}
 \DeclareMathOperator{\Loc}{Loc}
-\DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\TV}{TV}
@@ -1136,6 +1148,11 @@ snippet Tvar "T-variety" i
 endsnippet
 
 context "not math()" 
+context "not math()" 
+snippet pdiv "p-divisor" i
+\$p\$-divisor $0
+endsnippet
+
 snippet Tvars "T-varieties" i
 \$T\$-varieties $0
 endsnippet
