@@ -267,12 +267,6 @@ snippet pairdiv "K_X + Delta_X" i
 K_{$1} + $2_{$1} $0
 endsnippet
 
-context "math()"
-snippet prod "X_1 x X_2" wA
-$1_{1} \times $1_{2} $0
-endsnippet
-
-
 # sets and groups etc
 context "math()"
 snippet theset "{x \in X | p(X)}" iA
@@ -346,6 +340,11 @@ endsnippet
 context "math()"
 snippet __ "subscript block" iA
 _{$1}$0
+endsnippet
+
+context "math()"
+snippet ([a-zA-Z])zer "subscript zero" iA
+`!p snip.rv=match.group(1)`_{0}$0
 endsnippet
 
 context "math()"
