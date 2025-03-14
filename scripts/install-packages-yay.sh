@@ -1,2 +1,2 @@
 #!/bin/bash
-yay -S youtube-dl-gui linux-steam-integration signal-desktop swaylock-effects joplin-desktop
+yay -Syu youtube-dl-gui linux-steam-integration signal-desktop swaylock-effects joplin-desktop
