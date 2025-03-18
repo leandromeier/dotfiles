@@ -657,20 +657,26 @@ snippet TT "\mathbb{T}" iA
 endsnippet
 
 context "math()"
+snippet VV "\mathbb{V}" iA
+\mathbb{V}$0
+endsnippet
+
+priority 70
+context "math()"
 snippet ZZ "\mathbb{Z}" iA
 \mathbb{Z}$0
 endsnippet
 
 context "math()"
-snippet "mbb" "\mathbb{}" riA
+snippet "mbb" "\mathbb{}" iA
 \mathbb{$1}$0
 endsnippet
 
-context "not math()"
-snippet TT "T-" iA
-\$T\$-$0
+priority 10
+context "math()"
+snippet "([A-Z])\1+" "\mathbb{}" riA
+\mathbb{`!p snip.rv=match.group(1)`}$0
 endsnippet
-
 
 # other special fonts
 context "math()"
