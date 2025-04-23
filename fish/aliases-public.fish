@@ -90,3 +90,6 @@ alias endvpn='sudo killall openconnect'
 #updates
 alias updates='sudo pacman -Syu && yay -Syu'
 
+# compress
+alias compress='python3 compress2.py'
+
