@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
+    Login credentials: <user-id(7 digits, numbers and letters)>@uni-jena.de
  * **************************************************************************
  * Contributions to this work were made on behalf of the GÉANT project,
  * a project that has received funding from the European Union’s Framework
@@ -27,6 +27,8 @@ Authors:
 Contributors:
     Steffen Klemer https://github.com/sklemer1
     ikreb7 https://github.com/ikreb7
+    Dimitri Papadopoulos Orfanos https://github.com/DimitriPapadopoulos
+    sdasda7777 https://github.com/sdasda7777
 Many thanks for multiple code fixes, feature ideas, styling remarks
 much of the code provided by them in the form of pull requests
 has been incorporated into the final form of this script.
@@ -52,7 +54,8 @@ from shutil import copyfile
 from typing import List, Type, Union
 
 NM_AVAILABLE = True
-CRYPTO_AVAILABLE = True
+NEW_CRYPTO_AVAILABLE = True
+OPENSSL_CRYPTO_AVAILABLE = False
 DEBUG_ON = False
 
 parser = argparse.ArgumentParser(description='eduroam linux installer.')
@@ -68,6 +71,8 @@ parser.add_argument('--pfxfile', action='store', dest='pfx_file',
                     help='set path to user certificate file')
 parser.add_argument("--wpa_conf", action='store_true', dest='wpa_conf',
                     help='generate wpa_supplicant config file without configuring the system')
+parser.add_argument("--gui", action='store', dest='gui',
+                    help='one of: tty, tkinter, zenity, kdialog, yad - use this GUI system if present, falling back to standard choice if not')
 ARGS = parser.parse_args()
 if ARGS.debug:
     DEBUG_ON = True
@@ -78,8 +83,7 @@ def debug(msg) -> None:
     """Print debugging messages to stdout"""
     if not DEBUG_ON:
         return
-    else:
-        print("DEBUG:" + str(msg))
+    print("DEBUG:" + str(msg))
 
 
 def byte_to_string(barray: List) -> str:
@@ -92,15 +96,23 @@ debug(sys.version_info.major)
 try:
     import dbus
 except ImportError:
+    print("WARNING: Cannot import the dbus module - please install dbus-python!")
     debug("Cannot import the dbus module")
     NM_AVAILABLE = False
 
 
 try:
-    from OpenSSL import crypto
+    from cryptography.hazmat.primitives.serialization import pkcs12
+    from cryptography.hazmat.backends import default_backend
+    from cryptography.x509.oid import NameOID
 except ImportError:
-    CRYPTO_AVAILABLE = False
-
+    NEW_CRYPTO_AVAILABLE = False
+    try:
+        from OpenSSL import crypto
+        crypto.load_pkcs12  # missing in newer versions
+        OPENSSL_CRYPTO_AVAILABLE = True
+    except (ImportError, AttributeError):  # AttributeError sometimes thrown by old/broken OpenSSL versions
+        OPENSSL_CRYPTO_AVAILABLE = False
 
 
 def detect_desktop_environment() -> str:
@@ -169,6 +181,7 @@ def run_installer() -> None:
     password = ''
     silent = False
     pfx_file = ''
+    gui = ''
     wpa_conf = False
 
     if ARGS.username:
@@ -181,11 +194,13 @@ def run_installer() -> None:
         pfx_file = ARGS.pfx_file
     if ARGS.wpa_conf:
         wpa_conf = ARGS.wpa_conf
+    if ARGS.gui:
+        gui = ARGS.gui
     debug(get_system())
     debug("Calling InstallerData")
     installer_data = InstallerData(silent=silent, username=username,
-                                   password=password, pfx_file=pfx_file)
-    
+                                   password=password, pfx_file=pfx_file, gui=gui)
+
     if wpa_conf:
         NM_AVAILABLE = False
 
@@ -208,12 +223,13 @@ def run_installer() -> None:
     installer_data.show_info(Messages.installation_finished)
 
 
-class Messages(object):
+class Messages:
     """
     These are initial definitions of messages, but they will be
     overridden with translated strings.
     """
     quit = "Really quit?"
+    credentials_prompt = "Please, enter your credentials:"
     username_prompt = "enter your userid"
     enter_password = "enter password"
     enter_import_password = "enter your import password"
@@ -228,13 +244,15 @@ class Messages(object):
     cert_error = "Certificate file not found, looks like a CAT error"
     unknown_version = "Unknown version"
     dbus_error = "DBus connection problem, a sudo might help"
+    ok = "OK"
     yes = "Y"
     nay = "N"
     p12_filter = "personal certificate file (p12 or pfx)"
     all_filter = "All files"
     p12_title = "personal certificate file (p12 or pfx)"
-    save_wpa_conf = "NetworkManager configuration failed, " \
-                    "but we may generate a wpa_supplicant configuration file " \
+    save_wpa_conf = "NetworkManager configuration failed. " \
+                    "Ensure you have the dbus-python package for your distro installed on your system. " \
+                    "We may generate a wpa_supplicant configuration file " \
                     "if you wish. Be warned that your connection password will be saved " \
                     "in this file as clear text."
     save_wpa_confirm = "Write the file"
@@ -250,7 +268,7 @@ class Messages(object):
     # "Output written to %s"
 
 
-class Config(object):
+class Config:
     """
     This is used to prepare settings during installer generation.
     """
@@ -277,19 +295,23 @@ class Config(object):
     hint_user_input = False
 
 
-class InstallerData(object):
+class InstallerData:
     """
     General user interaction handling, supports zenity, KDialog, yad and
     standard command-line interface
     """
 
     def __init__(self, silent: bool = False, username: str = '',
-                 password: str = '', pfx_file: str = '') -> None:
+                 password: str = '', pfx_file: str = '', gui: str = '') -> None:
         self.graphics = ''
         self.username = username
         self.password = password
         self.silent = silent
         self.pfx_file = pfx_file
+        if gui in ('tty', 'tkinter', 'yad', 'zenity', 'kdialog'):
+            self.gui = gui
+        else:
+            self.gui = ''
         debug("starting constructor")
         if silent:
             self.graphics = 'tty'
@@ -350,23 +372,27 @@ class InstallerData(object):
                     return 0
                 if i == nay:
                     return 1
-        command = []
-        if self.graphics == "zenity":
-            command = ['zenity', '--title=' + Config.title, '--width=500',
-                       '--question', '--text=' + question + "\n\n" + prompt]
-        elif self.graphics == 'kdialog':
-            command = ['kdialog', '--yesno', question + "\n\n" + prompt,
-                       '--title=', Config.title]
-        elif self.graphics == 'yad':
-            command = ['yad', '--image="dialog-question"',
-                       '--button=gtk-yes:0',
-                       '--button=gtk-no:1',
-                       '--width=500',
-                       '--wrap',
-                       '--text=' + question + "\n\n" + prompt,
-                       '--title=' + Config.title]
-        returncode = subprocess.call(command, stderr=subprocess.DEVNULL)
-        return returncode
+        elif self.graphics == 'tkinter':
+            from tkinter import messagebox
+            return 0 if messagebox.askyesno(Config.title, question + "\n\n" + prompt) else 1
+        else:
+            command = []
+            if self.graphics == "zenity":
+                command = ['zenity', '--title=' + Config.title, '--width=500',
+                           '--question', '--text=' + question + "\n\n" + prompt]
+            elif self.graphics == 'kdialog':
+                command = ['kdialog', '--yesno', question + "\n\n" + prompt,
+                           '--title=' + Config.title]
+            elif self.graphics == 'yad':
+                command = ['yad', '--image="dialog-question"',
+                           '--button=gtk-yes:0',
+                           '--button=gtk-no:1',
+                           '--width=500',
+                           '--wrap',
+                           '--text=' + question + "\n\n" + prompt,
+                           '--title=' + Config.title]
+            returncode = subprocess.call(command, stderr=subprocess.DEVNULL)
+            return returncode
 
     def show_info(self, data: str) -> None:
         """
@@ -376,16 +402,19 @@ class InstallerData(object):
             return
         if self.graphics == 'tty':
             print(data)
-            return
-        if self.graphics == "zenity":
-            command = ['zenity', '--info', '--width=500', '--text=' + data]
-        elif self.graphics == "kdialog":
-            command = ['kdialog', '--msgbox', data]
-        elif self.graphics == "yad":
-            command = ['yad', '--button=OK', '--width=500', '--text=' + data]
+        elif self.graphics == 'tkinter':
+            from tkinter import messagebox
+            messagebox.showinfo(Config.title, data)
         else:
-            sys.exit(1)
-        subprocess.call(command, stderr=subprocess.DEVNULL)
+            if self.graphics == "zenity":
+                command = ['zenity', '--info', '--width=500', '--text=' + data]
+            elif self.graphics == "kdialog":
+                command = ['kdialog', '--msgbox', data, '--title=' + Config.title]
+            elif self.graphics == "yad":
+                command = ['yad', '--button=OK', '--width=500', '--text=' + data]
+            else:
+                sys.exit(1)
+            subprocess.call(command, stderr=subprocess.DEVNULL)
 
     def confirm_exit(self) -> None:
         """
@@ -401,16 +430,19 @@ class InstallerData(object):
             return
         if self.graphics == 'tty':
             print(text)
-            return
-        if self.graphics == 'zenity':
-            command = ['zenity', '--warning', '--text=' + text]
-        elif self.graphics == "kdialog":
-            command = ['kdialog', '--sorry', text]
-        elif self.graphics == "yad":
-            command = ['yad', '--text=' + text]
+        elif self.graphics == 'tkinter':
+            from tkinter import messagebox
+            messagebox.showwarning(Config.title, text)
         else:
-            sys.exit(1)
-        subprocess.call(command, stderr=subprocess.DEVNULL)
+            if self.graphics == 'zenity':
+                command = ['zenity', '--warning', '--text=' + text]
+            elif self.graphics == "kdialog":
+                command = ['kdialog', '--sorry', text, '--title=' + Config.title]
+            elif self.graphics == "yad":
+                command = ['yad', '--text=' + text]
+            else:
+                sys.exit(1)
+            subprocess.call(command, stderr=subprocess.DEVNULL)
 
     def prompt_nonempty_string(self, show: int, prompt: str, val: str = '') -> str:
         """
@@ -428,53 +460,150 @@ class InstallerData(object):
                 output = inp.strip()
                 if output != '':
                     return output
-        command = []
-        if self.graphics == 'zenity':
-            if val == '':
-                default_val = ''
-            else:
-                default_val = '--entry-text=' + val
-            if show == 0:
-                hide_text = '--hide-text'
-            else:
-                hide_text = ''
-            command = ['zenity', '--entry', hide_text, default_val,
-                       '--width=500', '--text=' + prompt]
-        elif self.graphics == 'kdialog':
-            if show == 0:
-                hide_text = '--password'
-            else:
-                hide_text = '--inputbox'
-            command = ['kdialog', hide_text, prompt]
-        elif self.graphics == 'yad':
-            if show == 0:
-                hide_text = ':H'
-            else:
-                hide_text = ''
-            command = ['yad', '--form', '--field=' + hide_text,
-                       '--text=' + prompt, val]
+        elif self.graphics == 'tkinter':
+            from tkinter import simpledialog
+            while True:
+                output = simpledialog.askstring(Config.title, prompt,
+                                                initialvalue=val,
+                                                show="*" if show == 0 else "")
+                if output:
+                    return output
 
-        output = ''
-        while not output:
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
-            out, _ = shell_command.communicate()
-            output = out.decode('utf-8')
-            if self.graphics == 'yad':
-                output = output[:-2]
-            output = output.strip()
-            if shell_command.returncode == 1:
-                self.confirm_exit()
-        return output
+        else:
+            command = []
+            if self.graphics == 'zenity':
+                if val == '':
+                    default_val = ''
+                else:
+                    default_val = '--entry-text=' + val
+                if show == 0:
+                    hide_text = '--hide-text'
+                else:
+                    hide_text = ''
+                command = ['zenity', '--entry', hide_text, default_val,
+                           '--width=500', '--text=' + prompt]
+            elif self.graphics == 'kdialog':
+                if show == 0:
+                    hide_text = '--password'
+                else:
+                    hide_text = '--inputbox'
+                command = ['kdialog', hide_text, prompt, '--title=' + Config.title]
+            elif self.graphics == 'yad':
+                if show == 0:
+                    hide_text = ':H'
+                else:
+                    hide_text = ''
+                command = ['yad', '--form', '--field=' + hide_text,
+                           '--text=' + prompt, val]
+
+            output = ''
+            while not output:
+                shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                                 stderr=subprocess.PIPE)
+                out, _ = shell_command.communicate()
+                output = out.decode('utf-8')
+                if self.graphics == 'yad':
+                    output = output[:-2]
+                output = output.strip()
+                if shell_command.returncode == 1:
+                    self.confirm_exit()
+            return output
+
+    def __get_username_password_atomic(self) -> None:
+        """
+        use single form to get username, password and password confirmation
+        """
+        output_fields_separator = "\n\n\n\n\n"
+        while True:
+            password = "a"
+            password1 = "b"
+            if self.graphics == 'tkinter':
+                import tkinter as tk
+
+                root = tk.Tk()
+                root.title(Config.title)
+
+                desc_label = tk.Label(root, text=Messages.credentials_prompt)
+                desc_label.grid(row=0, column=0, columnspan=2, sticky=tk.W)
+
+                username_label = tk.Label(root, text=Messages.username_prompt)
+                username_label.grid(row=1, column=0, sticky=tk.W)
+
+                username_entry = tk.Entry(root, textvariable=tk.StringVar(root, value=self.username))
+                username_entry.grid(row=1, column=1)
+
+                password_label = tk.Label(root, text=Messages.enter_password)
+                password_label.grid(row=2, column=0, sticky=tk.W)
+
+                password_entry = tk.Entry(root, show="*")
+                password_entry.grid(row=2, column=1)
+
+                password1_label = tk.Label(root, text=Messages.repeat_password)
+                password1_label.grid(row=3, column=0, sticky=tk.W)
+
+                password1_entry = tk.Entry(root, show="*")
+                password1_entry.grid(row=3, column=1)
+
+                def submit(installer):
+                    def inner():
+                        nonlocal password, password1
+                        (installer.username, password, password1) = (username_entry.get(), password_entry.get(), password1_entry.get())
+                        root.destroy()
+                    return inner
+
+                login_button = tk.Button(root, text=Messages.ok, command=submit(self))
+                login_button.grid(row=4, column=0, columnspan=2)
+
+                root.mainloop()
+            else:
+                if self.graphics == 'zenity':
+                    command = ['zenity', '--forms', '--width=500',
+                               f"--title={Config.title}",
+                               f"--text={Messages.credentials_prompt}",
+                               f"--add-entry={Messages.username_prompt}",
+                               f"--add-password={Messages.enter_password}",
+                               f"--add-password={Messages.repeat_password}",
+                               "--separator", output_fields_separator]
+                elif self.graphics == 'yad':
+                    command = ['yad', '--form',
+                               f"--title={Config.title}",
+                               f"--text={Messages.credentials_prompt}",
+                               f"--field={Messages.username_prompt}", self.username,
+                               f"--field={Messages.enter_password}:H",
+                               f"--field={Messages.repeat_password}:H",
+                               "--separator", output_fields_separator]
+
+                output = ''
+                while not output:
+                    shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                                     stderr=subprocess.PIPE)
+                    out, _ = shell_command.communicate()
+                    output = out.decode('utf-8')
+                    if self.graphics == 'yad':
+                        output = output[:-(len(output_fields_separator)+1)]
+                    output = output.strip()
+                    if shell_command.returncode == 1:
+                        self.confirm_exit()
+
+                if self.graphics in ('zenity', 'yad'):
+                    self.username, password, password1 = output.split(output_fields_separator)
+
+            if not self.__validate_user_name():
+                continue
+            if password != password1:
+                self.alert(Messages.passwords_differ)
+                continue
+            self.password = password
+            break
 
     def get_user_cred(self) -> None:
         """
         Get user credentials both username/password and personal certificate
         based
         """
-        if Config.eap_outer == 'PEAP' or Config.eap_outer == 'TTLS':
+        if Config.eap_outer in ('PEAP', 'TTLS'):
             self.__get_username_password()
-        if Config.eap_outer == 'TLS':
+        elif Config.eap_outer == 'TLS':
             self.__get_p12_cred()
 
     def __get_username_password(self) -> None:
@@ -482,29 +611,32 @@ class InstallerData(object):
         read user password and set the password property
         do nothing if silent mode is set
         """
-        password = "a"
-        password1 = "b"
         if self.silent:
             return
-        if self.username:
-            user_prompt = self.username
-        elif Config.hint_user_input:
-            user_prompt = '@' + Config.user_realm
+        if self.graphics in ('tkinter', 'zenity', 'yad'):
+            self.__get_username_password_atomic()
         else:
-            user_prompt = ''
-        while True:
-            self.username = self.prompt_nonempty_string(
-                1, Messages.username_prompt, user_prompt)
-            if self.__validate_user_name():
-                break
-        while password != password1:
-            password = self.prompt_nonempty_string(
-                0, Messages.enter_password)
-            password1 = self.prompt_nonempty_string(
-                0, Messages.repeat_password)
-            if password != password1:
-                self.alert(Messages.passwords_differ)
-        self.password = password
+            password = "a"
+            password1 = "b"
+            if self.username:
+                user_prompt = self.username
+            elif Config.hint_user_input:
+                user_prompt = '@' + Config.user_realm
+            else:
+                user_prompt = ''
+            while True:
+                self.username = self.prompt_nonempty_string(
+                    1, Messages.username_prompt, user_prompt)
+                if self.__validate_user_name():
+                    break
+            while password != password1:
+                password = self.prompt_nonempty_string(
+                    0, Messages.enter_password)
+                password1 = self.prompt_nonempty_string(
+                    0, Messages.repeat_password)
+                if password != password1:
+                    self.alert(Messages.passwords_differ)
+            self.password = password
 
     def __check_graphics(self, command) -> bool:
         shell_command = subprocess.Popen(['which', command],
@@ -513,22 +645,53 @@ class InstallerData(object):
         shell_command.wait()
         if shell_command.returncode == 0:
             self.graphics = command
+            debug("Using "+command)
             return True
-        else:
-            return False
+        return False
 
     def __get_graphics_support(self) -> None:
-        if os.environ.get('DISPLAY') is not None:
-            for cmd in ['zenity', 'kdialog', 'yad']:
-                if self.__check_graphics(cmd) == True:
-                    return
         self.graphics = 'tty'
+        if self.gui == 'tty':
+            return
+        if os.environ.get('DISPLAY') is None:
+            return
+        if self.gui != 'tkinter':
+            if self.__check_graphics(self.gui):
+                return
+            try:
+                import tkinter
+                self.graphics = 'tkinter'
+                return
+            except Exception:
+                pass
+            for cmd in ('yad', 'zenity', 'kdialog'):
+                if self.__check_graphics(cmd):
+                    return
 
     def __process_p12(self) -> bool:
         debug('process_p12')
         pfx_file = get_config_path() + '/cat_installer/user.p12'
-        if CRYPTO_AVAILABLE:
-            debug("using crypto")
+        if NEW_CRYPTO_AVAILABLE:
+            debug("using new crypto")
+            try:
+                p12 = pkcs12.load_key_and_certificates(
+                                        open(pfx_file,'rb').read(),
+                                        self.password, backend=default_backend())
+            except Exception as error:
+                debug("Incorrect password ({}).".format(error))
+                return False
+            else:
+                if Config.use_other_tls_id:
+                    return True
+                try:
+                    self.username = p12[1].subject.\
+                        get_attributes_for_oid(NameOID.COMMON_NAME)[0].value
+                except crypto.Error:
+                    self.username = p12[1].subject.\
+                        get_attributes_for_oid(NameOID.EMAIL_ADDRESS)[0].value
+                return True
+        if OPENSSL_CRYPTO_AVAILABLE:
+            debug("using openssl crypto")
             try:
                 p12 = crypto.load_pkcs12(open(pfx_file, 'rb').read(),
                                          self.password)
@@ -545,46 +708,45 @@ class InstallerData(object):
                     self.username = p12.get_certificate().\
                         get_subject().emailAddress
                 return True
-        else:
-            debug("using openssl")
-            command = ['openssl', 'pkcs12', '-in', pfx_file, '-passin',
-                       'pass:' + self.password, '-nokeys', '-clcerts']
-            shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
-            out, _ = shell_command.communicate()
-            if shell_command.returncode != 0:
-                debug("first password run failed")
-                command1 = ['openssl', 'pkcs12', '-legacy', '-in', pfx_file, '-passin',
-                       'pass:' + self.password, '-nokeys', '-clcerts']
-                shell_command1 = subprocess.Popen(command1, stdout=subprocess.PIPE,
-                                             stderr=subprocess.PIPE)
-                out, err = shell_command1.communicate()
-                if shell_command1.returncode != 0:
-                    return False
-            if Config.use_other_tls_id:
-                return True
-            out_str = out.decode('utf-8').strip()
-            # split only on commas that are not inside double quotes
-            subject = re.split(r'\s*[/,]\s*(?=([^"]*"[^"]*")*[^"]*$)',
-                               re.findall(r'subject=/?(.*)$',
-                                          out_str, re.MULTILINE)[0])
-            cert_prop = {}
-            for field in subject:
-                if field:
-                    cert_field = re.split(r'\s*=\s*', field)
-                    cert_prop[cert_field[0].lower()] = cert_field[1]
-            if cert_prop['cn'] and re.search(r'@', cert_prop['cn']):
-                debug('Using cn: ' + cert_prop['cn'])
-                self.username = cert_prop['cn']
-            elif cert_prop['emailaddress'] and \
-                    re.search(r'@', cert_prop['emailaddress']):
-                debug('Using email: ' + cert_prop['emailaddress'])
-                self.username = cert_prop['emailaddress']
-            else:
-                self.username = ''
-                self.alert("Unable to extract username "
-                           "from the certificate")
+        debug("using openssl")
+        command = ['openssl', 'pkcs12', '-in', pfx_file, '-passin',
+                   'pass:' + self.password, '-nokeys', '-clcerts']
+        shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE)
+        out, _ = shell_command.communicate()
+        if shell_command.returncode != 0:
+            debug("first password run failed")
+            command1 = ['openssl', 'pkcs12', '-legacy', '-in', pfx_file, '-passin',
+                        'pass:' + self.password, '-nokeys', '-clcerts']
+            shell_command1 = subprocess.Popen(command1, stdout=subprocess.PIPE,
+                                              stderr=subprocess.PIPE)
+            out, err = shell_command1.communicate()
+            if shell_command1.returncode != 0:
+                return False
+        if Config.use_other_tls_id:
             return True
+        out_str = out.decode('utf-8').strip()
+        # split only on commas that are not inside double quotes
+        subject = re.split(r'\s*[/,]\s*(?=([^"]*"[^"]*")*[^"]*$)',
+                           re.findall(r'subject=/?(.*)$',
+                                      out_str, re.MULTILINE)[0])
+        cert_prop = {}
+        for field in subject:
+            if field:
+                cert_field = re.split(r'\s*=\s*', field)
+                cert_prop[cert_field[0].lower()] = cert_field[1]
+        if cert_prop['cn'] and re.search(r'@', cert_prop['cn']):
+            debug('Using cn: ' + cert_prop['cn'])
+            self.username = cert_prop['cn']
+        elif cert_prop['emailaddress'] and \
+                re.search(r'@', cert_prop['emailaddress']):
+            debug('Using email: ' + cert_prop['emailaddress'])
+            self.username = cert_prop['emailaddress']
+        else:
+            self.username = ''
+            self.alert("Unable to extract username "
+                       "from the certificate")
+        return True
 
     def __select_p12_file(self) -> str:
         """
@@ -597,8 +759,7 @@ class InstallerData(object):
             p_count = 0
             pfx_file = ''
             for my_file in my_dir:
-                if my_file.endswith('.p12') or my_file.endswith('*.pfx') or \
-                        my_file.endswith('.P12') or my_file.endswith('*.PFX'):
+                if my_file.endswith(('.p12', '*.pfx', '.P12', '*.PFX')):
                     p_count += 1
                     pfx_file = my_file
             prompt = "personal certificate file (p12 or pfx)"
@@ -628,9 +789,8 @@ class InstallerData(object):
                                              stderr=subprocess.PIPE)
             cert, _ = shell_command.communicate()
         if self.graphics == 'kdialog':
-            command = ['kdialog', '--getopenfilename',
-                       '.', '*.p12 *.P12 *.pfx *.PFX | ' +
-                       Messages.p12_filter, '--title', Messages.p12_title]
+            command = ['kdialog', '--getopenfilename', '.',
+                       '--title=' + Messages.p12_title]
             shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
                                              stderr=subprocess.DEVNULL)
             cert, _ = shell_command.communicate()
@@ -641,6 +801,12 @@ class InstallerData(object):
             shell_command = subprocess.Popen(command, stdout=subprocess.PIPE,
                                              stderr=subprocess.DEVNULL)
             cert, _ = shell_command.communicate()
+        if self.graphics == 'tkinter':
+            from tkinter import filedialog as fd
+            return fd.askopenfilename(title=Messages.p12_title,
+                                      filetypes=(("Certificate file",
+                                                  ("*.p12", "*.P12", "*.pfx",
+                                                   "*.PFX")),))
         return cert.decode('utf-8').strip()
 
     @staticmethod
@@ -672,7 +838,7 @@ class InstallerData(object):
         else:
             while not self.password:
                 self.password = self.prompt_nonempty_string(
-                    0, Messages.enter_import_password)
+                    0, Messages.enter_import_password).encode('utf-8')
                 if not self.__process_p12():
                     self.alert(Messages.incorrect_password)
                     self.password = ''
@@ -732,7 +898,7 @@ class InstallerData(object):
         return True
 
 
-class WpaConf(object):
+class WpaConf:
     """
     Prepare and save wpa_supplicant config file
     """
@@ -750,13 +916,13 @@ class WpaConf(object):
         altsubject_match=\"""" + ";".join(Config.servers) + """\"
         """
 
-        if Config.eap_outer == 'PEAP' or Config.eap_outer == 'TTLS':
+        if Config.eap_outer in ('PEAP', 'TTLS'):
             interface += f"phase2=\"auth={Config.eap_inner}\"\n" \
                          f"\tpassword=\"{user_data.password}\"\n"
             if Config.anonymous_identity != '':
                 interface += f"\tanonymous_identity=\"{Config.anonymous_identity}\"\n"
 
-        if Config.eap_outer == 'TLS':
+        elif Config.eap_outer == 'TLS':
             interface += f"\tprivate_key_passwd=\"{user_data.password}\"\n" \
                          f"\tprivate_key=\"{os.environ.get('HOME')}/.cat_installer/user.p12"
 
@@ -765,8 +931,7 @@ class WpaConf(object):
 
     def create_wpa_conf(self, ssids, user_data: Type[InstallerData]) -> None:
         """Create and save the wpa_supplicant config file"""
-        wpa_conf = get_config_path() + \
-                   '/cat_installer/cat_installer.conf'
+        wpa_conf = get_config_path() + '/cat_installer/cat_installer.conf'
         with open(wpa_conf, 'w') as conf:
             for ssid in ssids:
                 net = self.__prepare_network_block(ssid, user_data)
@@ -807,7 +972,7 @@ class IwdConfiguration:
         EAP-PEAP-Phase2-Method=MSCHAPV2
         EAP-PEAP-Phase2-Identity={username}@{realm}
         EAP-PEAP-Phase2-Password={password}
-        
+
         [Settings]
         AutoConnect=true
         """.format(anonymous_identity=Config.anonymous_identity,
@@ -827,7 +992,7 @@ class IwdConfiguration:
         EAP-TTLS-Phase2-Method=Tunneled-PAP
         EAP-TTLS-Phase2-Identity={username}@{realm}
         EAP-TTLS-Phase2-Password={password}
-        
+
         [Settings]
         AutoConnect=true
         """.format(anonymous_identity=Config.anonymous_identity,
@@ -837,7 +1002,7 @@ class IwdConfiguration:
                    password=user_data.password)
 
 
-class CatNMConfigTool(object):
+class CatNMConfigTool:
     """
     Prepare and save NetworkManager configuration
     """
@@ -870,7 +1035,7 @@ class CatNMConfigTool(object):
         # check NM version
         self.__check_nm_version()
         debug("NM version: " + self.nm_version)
-        if self.nm_version == "0.9" or self.nm_version == "1.0":
+        if self.nm_version in ("0.9", "1.0"):
             self.settings_service_name = self.system_service_name
             self.connection_interface_name = \
                 "org.freedesktop.NetworkManager.Settings.Connection"
@@ -960,7 +1125,7 @@ class CatNMConfigTool(object):
         debug("Adding connection: " + ssid)
         server_alt_subject_name_list = dbus.Array(Config.servers)
         server_name = Config.server_match
-        if self.nm_version == "0.9" or self.nm_version == "1.0":
+        if self.nm_version in ("0.9", "1.0"):
             match_key = 'altsubject-matches'
             match_value = server_alt_subject_name_list
         else:
@@ -972,13 +1137,13 @@ class CatNMConfigTool(object):
             'ca-cert': dbus.ByteArray(
                 "file://{0}\0".format(self.cacert_file).encode('utf8')),
             match_key: match_value}
-        if Config.eap_outer == 'PEAP' or Config.eap_outer == 'TTLS':
+        if Config.eap_outer in ('PEAP', 'TTLS'):
             s_8021x_data['password'] = self.user_data.password
             s_8021x_data['phase2-auth'] = Config.eap_inner.lower()
             if Config.anonymous_identity != '':
                 s_8021x_data['anonymous-identity'] = Config.anonymous_identity
             s_8021x_data['password-flags'] = 0
-        if Config.eap_outer == 'TLS':
+        elif Config.eap_outer == 'TLS':
             s_8021x_data['client-cert'] = dbus.ByteArray(
                 "file://{0}\0".format(self.pfx_file).encode('utf8'))
             s_8021x_data['private-key'] = dbus.ByteArray(
@@ -1029,6 +1194,7 @@ Messages.quit = "Really quit?"
 Messages.username_prompt = "enter your userid"
 Messages.enter_password = "enter password"
 Messages.enter_import_password = "enter your import password"
+Messages.credentials_prompt = "Please, enter your credentials:"
 Messages.incorrect_password = "incorrect password"
 Messages.repeat_password = "repeat your password"
 Messages.passwords_differ = "passwords do not match"
@@ -1044,13 +1210,14 @@ Messages.unknown_version = "Unknown version"
 Messages.dbus_error = "DBus connection problem, a sudo might help"
 Messages.yes = "Y"
 Messages.no = "N"
+Messages.ok = "OK"
 Messages.p12_filter = "personal certificate file (p12 or pfx)"
 Messages.all_filter = "All files"
 Messages.p12_title = "personal certificate file (p12 or pfx)"
-Messages.save_wpa_conf = "NetworkManager configuration failed, but we " \
-    "may generate a wpa_supplicant configuration file if you wish. Be " \
-    "warned that your connection password will be saved in this file as " \
-    "clear text."
+Messages.save_wpa_conf = "DBus module not found - please install " \
+    "dbus-python! NetworkManager configuration failed, but we may generate " \
+    "a wpa_supplicant configuration file if you wish. Be warned that your " \
+    "connection password will be saved in this file as clear text."
 Messages.save_wpa_confirm = "Write the file"
 Messages.wrongUsernameFormat = "Error: Your username must be of the " \
     "form 'xxx@institutionID' e.g. 'john@example.net'!"
@@ -1060,6 +1227,8 @@ Messages.wrong_realm_suffix = "Error: your username must be in the " \
     "form of 'xxx@institutionID' and end with '{}'. Please enter the " \
     "username in the correct format."
 Messages.user_cert_missing = "personal certificate file not found"
+Messages.cat_dir_exists = "Directory {} exists; some of its files may " \
+    "be overwritten"
 Config.instname = "Friedrich-Schiller-Universität Jena"
 Config.profilename = "eduroam"
 Config.url = "https://www.uni-jena.de/itservice.html"
@@ -1082,29 +1251,49 @@ Config.anonymous_identity = "geteduroam@uni-jena.de"
 Config.verify_user_realm_input = True
 Config.tou = ""
 Config.CA = """-----BEGIN CERTIFICATE-----
-MIIEMjCCAxqgAwIBAgIBATANBgkqhkiG9w0BAQUFADB7MQswCQYDVQQGEwJHQjEb
-MBkGA1UECAwSR3JlYXRlciBNYW5jaGVzdGVyMRAwDgYDVQQHDAdTYWxmb3JkMRow
-GAYDVQQKDBFDb21vZG8gQ0EgTGltaXRlZDEhMB8GA1UEAwwYQUFBIENlcnRpZmlj
-YXRlIFNlcnZpY2VzMB4XDTA0MDEwMTAwMDAwMFoXDTI4MTIzMTIzNTk1OVowezEL
-MAkGA1UEBhMCR0IxGzAZBgNVBAgMEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UE
-BwwHU2FsZm9yZDEaMBgGA1UECgwRQ29tb2RvIENBIExpbWl0ZWQxITAfBgNVBAMM
-GEFBQSBDZXJ0aWZpY2F0ZSBTZXJ2aWNlczCCASIwDQYJKoZIhvcNAQEBBQADggEP
-ADCCAQoCggEBAL5AnfRu4ep2hxxNRUSOvkbIgwadwSr+GB+O5AL686tdUIoWMQua
-BtDFcCLNSS1UY8y2bmhGC1Pqy0wkwLxyTurxFa70VJoSCsN6sjNg4tqJVfMiWPPe
-3M/vg4aijJRPn2jymJBGhCfHdr/jzDUsi14HZGWCwEiwqJH5YZ92IFCokcdmtet4
-YgNW8IoaE+oxox6gmf049vYnMlhvB/VruPsUK6+3qszWY19zjNoFmag4qMsXeDZR
-rOme9Hg6jc8P2ULimAyrL58OAd7vn5lJ8S3frHRNG5i1R8XlKdH5kBjHYpy+g8cm
-ez6KJcfA3Z3mNWgQIJ2P2N7Sw4ScDV7oL8kCAwEAAaOBwDCBvTAdBgNVHQ4EFgQU
-oBEKIz6W8Qfs4q8p74Klf9AwpLQwDgYDVR0PAQH/BAQDAgEGMA8GA1UdEwEB/wQF
-MAMBAf8wewYDVR0fBHQwcjA4oDagNIYyaHR0cDovL2NybC5jb21vZG9jYS5jb20v
-QUFBQ2VydGlmaWNhdGVTZXJ2aWNlcy5jcmwwNqA0oDKGMGh0dHA6Ly9jcmwuY29t
-b2RvLm5ldC9BQUFDZXJ0aWZpY2F0ZVNlcnZpY2VzLmNybDANBgkqhkiG9w0BAQUF
-AAOCAQEACFb8AvCb6P+k+tZ7xkSAzk/ExfYAWMymtrwUSWgEdujm7l3sAg9g1o1Q
-GE8mTgHj5rCl7r+8dFRBv/38ErjHT1r0iWAFf2C3BUrz9vHCv8S5dIa2LX1rzNLz
-Rt0vxuBqw8M0Ayx9lt1awg6nCpnBBYurDC/zXDrPbDdVCYfeU0BsWO/8tqtlbgT2
-G9w84FoVxp7Z8VlIMCFlA2zs6SFz7JsDoeA3raAVGI/6ugLOpyypEBMs1OUIJqsi
-l2D4kF501KKaU73yqWjgom7C12yxow+ev+to51byrvLjKzg6CYG1a4XXvi3tPxq3
-smPi9WIsgtRqAEFQ8TmDn5XpNpaYbg==
+MIICGzCCAaGgAwIBAgIQQdKd0XLq7qeAwSxs6S+HUjAKBggqhkjOPQQDAzBPMQsw
+CQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJuZXQgU2VjdXJpdHkgUmVzZWFyY2gg
+R3JvdXAxFTATBgNVBAMTDElTUkcgUm9vdCBYMjAeFw0yMDA5MDQwMDAwMDBaFw00
+MDA5MTcxNjAwMDBaME8xCzAJBgNVBAYTAlVTMSkwJwYDVQQKEyBJbnRlcm5ldCBT
+ZWN1cml0eSBSZXNlYXJjaCBHcm91cDEVMBMGA1UEAxMMSVNSRyBSb290IFgyMHYw
+EAYHKoZIzj0CAQYFK4EEACIDYgAEzZvVn4CDCuwJSvMWSj5cz3es3mcFDR0HttwW
++1qLFNvicWDEukWVEYmO6gbf9yoWHKS5xcUy4APgHoIYOIvXRdgKam7mAHf7AlF9
+ItgKbppbd9/w+kHsOdx1ymgHDB/qo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0T
+AQH/BAUwAwEB/zAdBgNVHQ4EFgQUfEKWrt5LSDv6kviejM9ti6lyN5UwCgYIKoZI
+zj0EAwMDaAAwZQIwe3lORlCEwkSHRhtFcP9Ymd70/aTSVaYgLXTWNLxBo1BfASdW
+tL4ndQavEi51mI38AjEAi/V3bNTIZargCyzuFJ0nN6T5U6VR5CmD1/iQMVtCnwr1
+/q4AaOeMSQ+2b1tbFfLn
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw
+TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
+cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4
+WhcNMzUwNjA0MTEwNDM4WjBPMQswCQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJu
+ZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3JvdXAxFTATBgNVBAMTDElTUkcgUm9vdCBY
+MTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAK3oJHP0FDfzm54rVygc
+h77ct984kIxuPOZXoHj3dcKi/vVqbvYATyjb3miGbESTtrFj/RQSa78f0uoxmyF+
+0TM8ukj13Xnfs7j/EvEhmkvBioZxaUpmZmyPfjxwv60pIgbz5MDmgK7iS4+3mX6U
+A5/TR5d8mUgjU+g4rk8Kb4Mu0UlXjIB0ttov0DiNewNwIRt18jA8+o+u3dpjq+sW
+T8KOEUt+zwvo/7V3LvSye0rgTBIlDHCNAymg4VMk7BPZ7hm/ELNKjD+Jo2FR3qyH
+B5T0Y3HsLuJvW5iB4YlcNHlsdu87kGJ55tukmi8mxdAQ4Q7e2RCOFvu396j3x+UC
+B5iPNgiV5+I3lg02dZ77DnKxHZu8A/lJBdiB3QW0KtZB6awBdpUKD9jf1b0SHzUv
+KBds0pjBqAlkd25HN7rOrFleaJ1/ctaJxQZBKT5ZPt0m9STJEadao0xAH0ahmbWn
+OlFuhjuefXKnEgV4We0+UXgVCwOPjdAvBbI+e0ocS3MFEvzG6uBQE3xDk3SzynTn
+jh8BCNAw1FtxNrQHusEwMFxIt4I7mKZ9YIqioymCzLq9gwQbooMDQaHWBfEbwrbw
+qHyGO0aoSCqI3Haadr8faqU9GY/rOPNk3sgrDQoo//fb4hVC1CLQJ13hef4Y53CI
+rU7m2Ys6xt0nUW7/vGT1M0NPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNV
+HRMBAf8EBTADAQH/MB0GA1UdDgQWBBR5tFnme7bl5AFzgAiIyBpY9umbbjANBgkq
+hkiG9w0BAQsFAAOCAgEAVR9YqbyyqFDQDLHYGmkgJykIrGF1XIpu+ILlaS/V9lZL
+ubhzEFnTIZd+50xx+7LSYK05qAvqFyFWhfFQDlnrzuBZ6brJFe+GnY+EgPbk6ZGQ
+3BebYhtF8GaV0nxvwuo77x/Py9auJ/GpsMiu/X1+mvoiBOv/2X/qkSsisRcOj/KK
+NFtY2PwByVS5uCbMiogziUwthDyC3+6WVwW6LLv3xLfHTjuCvjHIInNzktHCgKQ5
+ORAzI4JMPJ+GslWYHb4phowim57iaztXOoJwTdwJx4nLCgdNbOhdjsnvzqvHu7Ur
+TkXWStAmzOVyyghqpZXjFaH3pO3JLF+l+/+sKAIuvtd7u+Nxe5AW0wdeRlN8NwdC
+jNPElpzVmbUq4JUagEiuTDkHzsxHpFKVK7q4+63SM1N95R1NbdWhscdCb+ZAJzVc
+oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq
+4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA
+mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
+emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
 -----END CERTIFICATE-----
 """
 
