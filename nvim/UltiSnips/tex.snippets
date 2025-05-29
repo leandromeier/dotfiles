@@ -91,9 +91,27 @@ endsnippet
 # endsnippet
 
 # from https://ejmastnak.com/tutorials/vim-latex/ultisnips/#examples
+# context "not math()"
+# snippet "(^|[^a-zA-Z])mm" "Inline LaTeX math" rA
+# `!p snip.rv = match.group(1)`\$ ${1:${VISUAL:}} \$$0
+# endsnippet
 context "not math()"
-snippet "(^|[^a-zA-Z])mm" "Inline LaTeX math" rA
+snippet "(^|[^a-zA-Z])mk" "Inline LaTeX math" rA
 `!p snip.rv = match.group(1)`\$ ${1:${VISUAL:}} \$$0
+endsnippet
+
+snippet dd "display math" bA
+\[
+  $1
+\]
+$0
+endsnippet
+
+snippet mm "display math" bA
+\[
+  $1
+\]
+$0
 endsnippet
 
 snippet \[ "display math" bA
