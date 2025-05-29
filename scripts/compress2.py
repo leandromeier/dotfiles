@@ -52,6 +52,6 @@ if __name__ == "__main__":
                         os.system(command)
 
                         # now join them together
-                        command = f"cd '{newpath2}'; convert `ls -v *.jpg` '{newpath2Pdf}'"
+                        command = f"cd '{newpath2}'; magick `ls -v *.jpg` '{newpath2Pdf}'"
                         print(command)
                         os.system(command)
