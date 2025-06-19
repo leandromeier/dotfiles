@@ -1181,19 +1181,34 @@ snippet iff "if and only if" i
 if and only if $0
 endsnippet
 
+# context "not math()" 
+# snippet Ginv "T-invariant" i
+# \$ ${1:G}\$-invariant $0
+# endsnippet
+
 context "not math()" 
-snippet Tvar "T-variety" i
-\$T\$-variety $0
+snippet Tinv "T-invariant" i
+\$${1:T}\$-invariant $0
 endsnippet
 
 context "not math()" 
+snippet Teq "T-equivariant" i
+\$${1:T}\$-equivariant $0
+endsnippet
+
+context "not math()" 
+snippet Tvar "T-variety" i
+\$${1:T}\$-variety $0
+endsnippet
+
+context "not math()" 
+snippet Tvars "T-varieties" i
+\$${1:T}\$-varieties $0
+endsnippet
+
 context "not math()" 
 snippet pdiv "p-divisor" i
 \$p\$-divisor $0
-endsnippet
-
-snippet Tvars "T-varieties" i
-\$T\$-varieties $0
 endsnippet
 
 context "not math()" 
@@ -1259,6 +1274,10 @@ endsnippet
 
 snippet noth "noetherian" i
 Noetherian
+endsnippet
+
+snippet JNF "Jordan-Normalform" i
+Jordan-Normalform
 endsnippet
 
 context "not math()" 

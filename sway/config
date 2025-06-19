@@ -44,6 +44,8 @@ set $nm alacritty -e nmtui
 set $books alacritty -e ranger
 # open ranger at specific location
 set $peace alacritty -e ranger ~/Peaceful_Ambience
+# locker (swaylock configs)
+set $locker swaylock -f -F -e -k -l 
 
 
 # open specific programs in specific workspaces
@@ -85,9 +87,12 @@ set $bltime 600
 
 # locks your screen after $locktime minutes, and turns it black after $bltime minutes 
 exec swayidle -w \
-          timeout $locktime 'swaylock -f' \
+          timeout $locktime $locker \
           timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f'
+          before-sleep $locker
+          # timeout $locktime 'swaylock -f' \
+          # timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          # before-sleep 'swaylock -f'
 
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # images can be done as follows:
@@ -201,7 +206,9 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
-    bindsym $mod+o exec swaylock -f --grace 6
+    bindsym $mod+o exec $locker
+    # bindsym $mod+o exec swaylock -f -F -e -k
+    # bindsym $mod+o exec swaylock -f --grace 6
     #bindsym $mod+o exec swaylock -C $HOME/.config/swaylock/config 
 #
 # Moving around:
