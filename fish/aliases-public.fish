@@ -32,6 +32,7 @@ alias gd='git diff'
 alias gP='git pull'
 alias gr='git rm'
 alias gl='git log'
+alias gin='nvim .gitignore'
 
 # xournalpp
 alias xoup='xournalpp'
@@ -42,9 +43,12 @@ alias z='zathura'
 ### other actions
 #
 # suspend 
-# alias sn='systemctl suspend'
+alias sn='systemctl suspend'
+function suspend
+  command swaymsg output eDP-1 enable && systemctl suspend
+end
 # not sure if this causes the freezing in swaylock
-alias sn='swaymsg output eDP-1 enable && systemctl suspend'
+# alias sn='swaymsg output eDP-1 enable && systemctl suspend'
 
 # jupyter notebook 
 alias jn='jupyter notebook' 

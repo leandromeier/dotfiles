@@ -44,8 +44,8 @@ set $nm alacritty -e nmtui
 set $books alacritty -e ranger
 # open ranger at specific location
 set $peace alacritty -e ranger ~/Peaceful_Ambience
-# locker (swaylock configs)
-set $locker swaylock -f -F -e -k -l 
+# locker (swaylock configs) for just swaylock, remove grace
+set $locker swaylock -f -F -e -k -l --grace 6
 
 
 # open specific programs in specific workspaces
@@ -77,34 +77,30 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 for_window [app_id="mpv"] open
 # it seems that specifying "fullscreen" makes mpv open in fullscreen as default
 #for_window [app_id="mpv"] fullscreen 
-for_window [app_id="vlc"] fullscreen
+# for_window [app_id="vlc"] fullscreen
 #for_window [class="^(steam_app_*|steam)$"] fullscreen
 for_window [app_id="spotify"] fullscreen
 
 # timeout before suspend. Use loginctl lock-session to lock your screen.
-set $locktime 1200
-set $bltime 600
+set $locktime 20
+set $bltime 15
 
 # locks your screen after $locktime minutes, and turns it black after $bltime minutes 
 exec swayidle -w \
           timeout $locktime $locker \
-          timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          timeout $bltime 'swaymsg "output * dpms off"' \
+          resume 'swaymsg "output * dpms on"' \
           before-sleep $locker
+          #
+          # timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           # timeout $locktime 'swaylock -f' \
           # timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           # before-sleep 'swaylock -f'
 
 # Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# images can be done as follows:
 # output * bg ~/Desktop/background/image3.jpeg fill
 output * bg ~/Documents/dotfiles/sway/background.jpg fit
 # output * bg #1A0C18 solid_color
-#dynamic background, changing automatically after a fixed time interval
-#exec "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
-# this one not sure what the point of '--no-startup-id' is
-#exec --no-startup-id "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
-# this one always executes, i.e. even after reloading the config file
-#exec_always "cd ~/Documents/dotfiles/scripts && ./wallpaper-dynamic.sh"
 
 
 # using mod1 + certain keys looks up the commands in a script
