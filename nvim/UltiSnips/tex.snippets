@@ -271,6 +271,11 @@ endsnippet
 # endsnippet
 
 context "math()"
+snippet mld "mld_x(X,B)" i
+\mld_{$1}\left( $2 \right) $0
+endsnippet
+
+context "math()"
 snippet lgpr "log pair (e.g. X_i, \Delta_i" i
 \left( $1_{$2}, \Delta_{$2} \right) $0
 endsnippet
@@ -368,6 +373,11 @@ endsnippet
 context "math()"
 snippet ^^ "superscript block" iA
 ^{$1}$0
+endsnippet
+
+context "math()"
+snippet inim "inverse image" iA
+^{-1}$0
 endsnippet
 
 context "math()"
@@ -1270,6 +1280,16 @@ endsnippet
 context "not math()" 
 snippet mld "minimal log discrepancy" i
 minimal log discrepancy
+endsnippet
+
+context "not math()" 
+snippet lci "local complete intersection" i
+local complete intersection
+endsnippet
+
+context "not math()" 
+snippet lsc "lower semi-continuity" i
+lower semi-continuity
 endsnippet
 
 snippet noth "noetherian" i
