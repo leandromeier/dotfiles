@@ -11,9 +11,9 @@ source ~/.config/fish/aliases-public.fish
 #set neovim as default editor
 set -gx EDITOR nvim
 
-
-## try to get ssh to work better
-if status is-login
+# try to get ssh to work better
+## fuck if I know why this doesn't work, maybe the os is just too fucked up
+if status is-interactive
     keychain --clear --quiet
 end
 
@@ -25,3 +25,5 @@ end
 if test -f ~/.keychain/(hostname)-fish
     source ~/.keychain/(hostname)-fish
 end
+
+
