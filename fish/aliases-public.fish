@@ -32,6 +32,7 @@ alias gd='git diff'
 alias gP='git pull'
 alias gr='git rm'
 alias gl='git log'
+alias gin='nvim .gitignore'
 
 # xournalpp
 alias xoup='xournalpp'
@@ -42,9 +43,12 @@ alias z='zathura'
 ### other actions
 #
 # suspend 
-# alias sn='systemctl suspend'
+alias sn='systemctl suspend'
+function suspend
+  command swaymsg output eDP-1 enable && systemctl suspend
+end
 # not sure if this causes the freezing in swaylock
-alias sn='swaymsg output eDP-1 enable && systemctl suspend'
+# alias sn='swaymsg output eDP-1 enable && systemctl suspend'
 
 # jupyter notebook 
 alias jn='jupyter notebook' 
@@ -93,3 +97,5 @@ alias updates='sudo pacman -Syu && yay -Syu'
 # compress
 alias compress='python3 compress2.py'
 
+# go to the snippets location (and open the tex.snippets file)
+alias snippets='cd ~/Documents/dotfiles/nvim/UltiSnips && nvim tex.snippets'

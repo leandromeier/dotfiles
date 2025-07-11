@@ -138,7 +138,7 @@ endsnippet
 
 # function signatures and arrows
 context "math()"
-snippet :: "colon" i
+snippet :: "colon" iA
 \colon
 endsnippet
 
@@ -271,6 +271,11 @@ endsnippet
 # endsnippet
 
 context "math()"
+snippet mld "mld_x(X,B)" i
+\mld_{$1}\left( $2 \right) $0
+endsnippet
+
+context "math()"
 snippet lgpr "log pair (e.g. X_i, \Delta_i" i
 \left( $1_{$2}, \Delta_{$2} \right) $0
 endsnippet
@@ -368,6 +373,11 @@ endsnippet
 context "math()"
 snippet ^^ "superscript block" iA
 ^{$1}$0
+endsnippet
+
+context "math()"
+snippet inim "inverse image" iA
+^{-1}$0
 endsnippet
 
 context "math()"
@@ -1053,18 +1063,29 @@ sorting=nty]{biblatex}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 
+\DeclareMathOperator{\cadiv}{CaDiv}
 \DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\coeff}{coeff}
 \DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\Conv}{Conv}
 \DeclareMathOperator{\codim}{codim}
 \let\div\relax
 \DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\ex}{Ex}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\img}{im}
 \DeclareMathOperator{\Loc}{Loc}
-\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\mld}{mld}
+\DeclareMathOperator{\Pol}{Pol}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\tail}{tail}
 \DeclareMathOperator{\TV}{TV}
-\DeclareMathOperator{\vol}{vol}
-\DeclareMathOperator{\dist}{d}
-\DeclareMathOperator{\coeff}{coeff}
+
+\newcommand{\sslash}{\mathbin{/\mkern-6mu/}}
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
 
 
 \begin{document}
@@ -1170,19 +1191,34 @@ snippet iff "if and only if" i
 if and only if $0
 endsnippet
 
+# context "not math()" 
+# snippet Ginv "T-invariant" i
+# \$ ${1:G}\$-invariant $0
+# endsnippet
+
 context "not math()" 
-snippet Tvar "T-variety" i
-\$T\$-variety $0
+snippet Tinv "T-invariant" i
+\$${1:T}\$-invariant $0
 endsnippet
 
 context "not math()" 
+snippet Teq "T-equivariant" i
+\$${1:T}\$-equivariant $0
+endsnippet
+
+context "not math()" 
+snippet Tvar "T-variety" i
+\$${1:T}\$-variety $0
+endsnippet
+
+context "not math()" 
+snippet Tvars "T-varieties" i
+\$${1:T}\$-varieties $0
+endsnippet
+
 context "not math()" 
 snippet pdiv "p-divisor" i
 \$p\$-divisor $0
-endsnippet
-
-snippet Tvars "T-varieties" i
-\$T\$-varieties $0
 endsnippet
 
 context "not math()" 
@@ -1246,8 +1282,22 @@ snippet mld "minimal log discrepancy" i
 minimal log discrepancy
 endsnippet
 
+context "not math()" 
+snippet lci "local complete intersection" i
+local complete intersection
+endsnippet
+
+context "not math()" 
+snippet lsc "lower semi-continuity" i
+lower semi-continuity
+endsnippet
+
 snippet noth "noetherian" i
 Noetherian
+endsnippet
+
+snippet JNF "Jordan-Normalform" i
+Jordan-Normalform
 endsnippet
 
 context "not math()" 
