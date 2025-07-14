@@ -99,3 +99,6 @@ alias compress='python3 compress2.py'
 
 # go to the snippets location (and open the tex.snippets file)
 alias snippets='cd ~/Documents/dotfiles/nvim/UltiSnips && nvim tex.snippets'
+
+# signal hack
+alias signal='signal-desktop --password-store="gnome-libsecret"'
