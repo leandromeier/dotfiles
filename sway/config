@@ -45,7 +45,7 @@ set $books alacritty -e ranger
 # open ranger at specific location
 set $peace alacritty -e ranger ~/Peaceful_Ambience
 # locker (swaylock configs) for just swaylock, remove grace
-set $locker swaylock -f -F -e -k -l --grace 6
+# set $locker swaylock -f -F -e -k -l --grace 6
 
 
 # open specific programs in specific workspaces
@@ -82,15 +82,16 @@ for_window [app_id="mpv"] open
 for_window [app_id="spotify"] fullscreen
 
 # timeout before suspend. Use loginctl lock-session to lock your screen.
-set $locktime 20
-set $bltime 15
+set $locktime 600
+set $bltime 300
 
-# locks your screen after $locktime minutes, and turns it black after $bltime minutes 
+# locks your screen after $locktime seconds, and turns it black after $bltime seconds
 exec swayidle -w \
-          timeout $locktime $locker \
-          timeout $bltime 'swaymsg "output * dpms off"' \
-          resume 'swaymsg "output * dpms on"' \
-          before-sleep $locker
+	timeout $locktime 'swaylock -C /home/leandro/.config/swaylock/config' \
+	timeout $bltime 'swaymsg "output * dpms off"' \
+		resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -C /home/leandro/.config/swaylock/config' 
+#'swaylock -f -c 000000' \
           #
           # timeout $bltime 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           # timeout $locktime 'swaylock -f' \
@@ -202,10 +203,10 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
-    bindsym $mod+o exec $locker
+    bindsym $mod+o exec 'swaylock -C /home/leandro/.config/swaylock/config'
+    # bindsym $mod+o exec $locker
     # bindsym $mod+o exec swaylock -f -F -e -k
     # bindsym $mod+o exec swaylock -f --grace 6
-    #bindsym $mod+o exec swaylock -C $HOME/.config/swaylock/config 
 #
 # Moving around:
 #

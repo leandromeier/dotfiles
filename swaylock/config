@@ -1,5 +1,9 @@
 screenshots
 ignore-empty-password
+show-failed-attempts
+daemonize
+show-keyboard-layout
+indicator-caps-lock
 clock
 indicator
 indicator-radius=90
@@ -10,6 +14,7 @@ key-hl-color=69fdff
 line-color=00000000
 inside-color=00000088
 separator-color=00000000
+grace=6
 fade-in=0.2
 inside-clear-color=abfcb8
 ring-clear-color=abfcb8
