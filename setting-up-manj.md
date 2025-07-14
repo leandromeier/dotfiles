@@ -35,20 +35,22 @@ Install texlive
 # zathura
 Zathura needs a plugin to read pdfs and co. 'sudo pacman -S zathura-pdf-mupdf' for instance
 
-# printing via cups
+# printing via cups (uni jena)
 run
-'sudo systemctl start cups'
-and
 'sudo systemctl enable cups'
+and
+'sudo systemctl start cups'
 Then make sure client.conf is linked to the /etc/cups/ folder and run
 'systemctl restart cups.service'
 Then go to
 'http://localhost:631/'
-Click on "Administration" and "add printer"
 To log in to Admin, use your local laptop's admin credentials
-follow instructions
+Click on "Administration" and "add printer", then choose "LPD/LPR Host or Printer" and 
+Into the field connection, copy 'LPD/LPR Host or Printer'
+Import the file 'fmi-cups-pcl6-mono.ppd' (located under dotfiles)
+alternatively add manually a generic PCL6 driver,
+go check the default settings 
 
-for uni jena office printing, choose mps02, then generic driver and PCL6, and the connection address socket://mps02.mats.uni-jena.de
 
 
 # zoom 

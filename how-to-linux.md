@@ -28,6 +28,9 @@ Start bluez (bluetoothctl)
 'trust ...' to trust desired device (should eliminate the need to re-pair)
 'connect ...' to conect to desired device (will not always work)
 
+### in case connecting via blueman does not work (keeps disconnecting when pairing)
+in the file /etc/bluetooth/input.conf change the line `UserspaceHID=true` to `UserspaceHID=false`
+
 
 ## How to spellcheck in vim
 start: set spell
