@@ -19,7 +19,7 @@ set $term alacritty -e fish
 set $browser MOZ_ENABLE_WAYLAND=1 firefox 
 #set $browser firefox
 # Your preferred file manager
-set $filemanager dolphin
+set $fileman dolphin
 # Your preferred application launchers
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -167,7 +167,7 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+d exec $menu                 # D-menu
 
     bindsym $mod+b exec $browser              # Browser
-    bindsym $mod+Shift+f exec $filemanager    # File manager
+    bindsym $mod+Shift+f exec $fileman    # File manager
     bindsym $mod+Shift+s exec $signal         # signal
     bindsym $mod+Shift+x exec $xournal              # xournalpp
 
