@@ -104,4 +104,5 @@ alias snippets='cd ~/Documents/dotfiles/nvim/UltiSnips && nvim tex.snippets'
 alias signal='signal-desktop --password-store="gnome-libsecret"'
 
 # alias for unlocking ssh key (part of the way at least)
-alias unlssh='ssh-agent /usr/bin/fish'# && ssh-add ~/.ssh/id_ed25519' 
+alias unlssh='ssh-agent /usr/bin/fish'
+# && ssh-add ~/.ssh/id_ed25519
