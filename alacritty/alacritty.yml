@@ -8,19 +8,17 @@ key_bindings:
   - { key: J, mods: Alt, action: ScrollLineDown }
   - { key: U, mods: Alt, action: ScrollPageUp }
   - { key: D, mods: Alt, action: ScrollPageDown }
-font:
-  normal: 
-    # family: DejaVu Serif
-    # style: Book
-    family: Adwaita Sans
-    style: Regular
-  bold: 
-    family: DejaVu Sans 
-    style: Bold 
-  italic: 
-    family: DejaVu Serif
-    style: Italic
-  size: 14.0
+# font:
+#   normal: 
+#     family: Adwaita Sans
+#     style: Regular
+#   bold: 
+#   family: DejaVu Sans 
+#     style: Bold 
+#   italic: 
+#     family: DejaVu Serif
+#     style: Italic
+#   size: 14.0
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
 window:
