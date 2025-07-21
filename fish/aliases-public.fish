@@ -43,12 +43,11 @@ alias z='zathura'
 ### other actions
 #
 # suspend 
-alias sn='systemctl suspend'
-function suspend
+# alias sn='systemctl suspend'
+#somehow suspend fails to lock properly, probably due to the grace period in swaylock
+function sn
   command swaymsg output eDP-1 enable && systemctl suspend
 end
-# not sure if this causes the freezing in swaylock
-# alias sn='swaymsg output eDP-1 enable && systemctl suspend'
 
 # jupyter notebook 
 alias jn='jupyter notebook' 
