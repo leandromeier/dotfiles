@@ -54,7 +54,7 @@ alias jn='jupyter notebook'
 alias nj='jupyter notebook'
 
 # call arxiv-downloader script with parameters
-alias axu='arxiv-downloader'
+alias axu='cd /home/leandro/math/articles && ./arxiv-downloader'
 
 # toggle main display (Sway)
 alias tog='swaymsg output eDP-1 toggle'
