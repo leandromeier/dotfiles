@@ -11,5 +11,7 @@ source ~/.config/fish/aliases-public.fish
 #set neovim as default editor
 set -gx EDITOR nvim
 
-
-
+# works to autostart sway at login
+if status is-login
+  dbus-run-session sway
+end

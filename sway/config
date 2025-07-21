@@ -107,7 +107,6 @@ output * bg ~/Documents/dotfiles/sway/background.jpg fit
 # using mod1 + certain keys looks up the commands in a script
 bindsym $mod1+a exec "./Documents/dotfiles/scripts/shortcut.sh a"
 bindsym $mod1+b exec "./Documents/dotfiles/scripts/shortcut.sh b"
-#bindsym $mod1+b exec cd ~/math/books && alacritty -e ranger
 
 
 # Calls a script checking whether an external monitor is connected
@@ -167,9 +166,9 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+d exec $menu                 # D-menu
 
     bindsym $mod+b exec $browser              # Browser
-    bindsym $mod+Shift+f exec $fileman    # File manager
+    bindsym $mod+Shift+f exec $fileman        # File manager
     bindsym $mod+Shift+s exec $signal         # signal
-    bindsym $mod+Shift+x exec $xournal              # xournalpp
+    bindsym $mod+Shift+x exec $xournal        # xournalpp
 
     bindsym $mod+shift+t exec $thund          # thunderbird 
     bindsym $mod+shift+v exec $spot           # spotify
@@ -204,9 +203,6 @@ for_window [app_id="org.gnome.Settings"] floating enable
 
     # Lock using swaylock
     bindsym $mod+o exec 'swaylock -C /home/leandro/.config/swaylock/config'
-    # bindsym $mod+o exec $locker
-    # bindsym $mod+o exec swaylock -f -F -e -k
-    # bindsym $mod+o exec swaylock -f --grace 6
 #
 # Moving around:
 #
@@ -323,11 +319,7 @@ client.unfocused          $bg     $bg     $fg   $bg       $bg
 
 #
 # Status Bar:
-#
 exec --no-startup-id waybar
-
-#start synoloy drive client
-# exec synology-drive
 
 #start nm-applet (for wifi symbol)
 exec_always nm-applet
