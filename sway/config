@@ -86,8 +86,9 @@ set $locktime 600
 set $bltime 300
 
 # locks your screen after $locktime seconds, and turns it black after $bltime seconds
+# we want a short grace period here but not in systemctl suspend, hence it's not in the config file
 exec swayidle -w \
-	timeout $locktime 'swaylock -C /home/leandro/.config/swaylock/config' \
+	timeout $locktime 'swaylock --grace 6 -C /home/leandro/.config/swaylock/config' \
 	timeout $bltime 'swaymsg "output * dpms off"' \
 		resume 'swaymsg "output * dpms on"' \
 	before-sleep 'swaylock -C /home/leandro/.config/swaylock/config' 
@@ -202,7 +203,8 @@ for_window [app_id="org.gnome.Settings"] floating enable
     bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
     # Lock using swaylock
-    bindsym $mod+o exec 'swaylock -C /home/leandro/.config/swaylock/config'
+    # we want a short grace period here but not in systemctl suspend, hence it's not in the config file
+    bindsym $mod+o exec 'swaylock --grace 2 -C /home/leandro/.config/swaylock/config'
 #
 # Moving around:
 #
