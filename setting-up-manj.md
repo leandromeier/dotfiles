@@ -15,7 +15,7 @@ see https://docs.github.com/en/authentication/connecting-to-github-with-ssh/chec
 ## customize mirror pool: 
 'sudo pacman-mirrors --country Germany,Denmark,Netherlands,France,Austria,Switzerland && sudo pacman -Syyu'
 ## get colors:
-go edit the file at '/etc/pacman.conf', there's a commented out line 'Color', uncomment that
+Go edit the file at '/etc/pacman.conf', there's a commented out line 'Color', uncomment that. Also to get yay to have colors.
 
 # yay
 Before you attempt to install yay, or do something like 'sudo pacman -S --needed base-devel git', do a system update and check whether the above command wants to install anything called sudo or pacman or so. This will likely result in disaster so don't do it.
