@@ -105,3 +105,8 @@ alias signal='signal-desktop --password-store="gnome-libsecret"'
 # alias for unlocking ssh key (part of the way at least)
 alias unlssh='ssh-agent /usr/bin/fish'
 # && ssh-add ~/.ssh/id_ed25519
+
+# yt-dlp
+alias yt-audio='yt-dlp -x --audio-format mp3'
+alias yt-video='yt-dlp -f "[height<=480]"'
+alias yt-video-best='yt-dlp -f "bv"'
