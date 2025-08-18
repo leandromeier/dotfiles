@@ -1,0 +1,13 @@
+# Lines starting with # are comments
+
+# Always extract audio to mp3
+# -x --audio-format mp3
+
+# Copy the mtime
+--mtime
+
+# Use this proxy
+--proxy 127.0.0.1:3128
+
+# Save all videos under Audiobooks directory in your home directory
+-o ~/Audiobooks/%(title)s.%(ext)s
