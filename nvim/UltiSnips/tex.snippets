@@ -465,12 +465,13 @@ snippet dirsum "direct sum" w
 endsnippet
 
 context "math()"
-snippet int "integral" w
+snippet intt "integral" w
 \int_{$1}^{$2} $3 \, d$0
 endsnippet
 
+priority 100
 context "math()"
-snippet UUU "bigcup" i
+snippet Union "bigcup" i
 \bigcup_{$1}^{$2} $0
 endsnippet
 
@@ -839,10 +840,10 @@ snippet vph "varphi" iA
 \varphi
 endsnippet
 
-context "math()"
-snippet rr "rho" iA
-\rho
-endsnippet
+# context "math()"
+# snippet rr "rho" iA
+# \rho
+# endsnippet
 
 
 # emphasize environment
