@@ -45,16 +45,14 @@ alias z='zathura'
 # suspend 
 # alias sn='systemctl suspend'
 #somehow suspend fails to lock properly, probably due to the grace period in swaylock
+# add a 2s wait between enabling primary monitor and suspend, maybe this will fix the bug with swaylock and universal time?
 function sn
-  command swaymsg output eDP-1 enable && systemctl suspend
+  command swaymsg output eDP-1 enable && sleep 2 && systemctl suspend
 end
 
 # jupyter notebook 
 alias jn='jupyter notebook' 
 alias nj='jupyter notebook'
-
-# call arxiv-downloader script with parameters
-alias axu='cd /home/leandro/math/articles && ./arxiv-downloader'
 
 # toggle main display (Sway)
 alias tog='swaymsg output eDP-1 toggle'
