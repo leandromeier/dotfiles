@@ -108,3 +108,6 @@ alias unlssh='ssh-agent /usr/bin/fish'
 alias yt-audio='yt-dlp -x --audio-format mp3'
 alias yt-video='yt-dlp -f "[height<=480]"'
 alias yt-video-best='yt-dlp -f "bv"'
+
+# arxiv-downloader
+alias arx='arxiv-downloader'

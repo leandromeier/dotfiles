@@ -99,3 +99,12 @@ to set a value for feature 10: (here value = 70)
 'ddcutil setvcp 10 70'
 
 
+## manually installing packages 
+### from github
+1. clone the git repo
+2. make sure there is a setup.py file. If not, need to find out what to do
+3. run "sudo python setup.py install"
+    to update: 
+    run the same command (after pulling the changes)
+
+
