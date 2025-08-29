@@ -82,8 +82,10 @@ for_window [app_id="mpv"] open
 for_window [app_id="spotify"] fullscreen
 
 # timeout before suspend. Use loginctl lock-session to lock your screen.
-set $locktime 600
+set $locktime 1200 
+# 20 minutes
 set $bltime 300
+# 5 minutes
 
 # locks your screen after $locktime seconds, and turns it black after $bltime seconds
 # we want a short grace period here but not in systemctl suspend, hence it's not in the config file
