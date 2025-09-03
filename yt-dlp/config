@@ -7,7 +7,7 @@
 --mtime
 
 # Use this proxy
---proxy 127.0.0.1:3128
+# --proxy 127.0.0.1:3128
 
-# Save all videos under Audiobooks directory in your home directory
--o ~/Audiobooks/%(title)s.%(ext)s
+# Save all videos in yt-dlp-downloads directory in your home directory
+-o ~/yt-dlp-downloads/%(title)s.%(ext)s
