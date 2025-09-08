@@ -29,7 +29,8 @@ set $launcher fuzzel
 # Your preferred mixing program
 set $mixer pavucontrol
 # your preferred messenger application
-set $signal 'signal-desktop'
+set $signal 'signal-desktop --password-store="gnome-libsecret"'
+# set $signal 'signal-desktop'
 # your preferred note-taking application
 set $xournal 'xournalpp'
 # your preferred email program
