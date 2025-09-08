@@ -42,21 +42,21 @@ if __name__ == "__main__":
                     for root, dirs, files in
                     os.walk(path) for name in files]
         # trackingFolder = abspath + "/tracking"
-        trackingFile =  abspath + "_tracking.csv"
-        mergedFile =  abspath + "_merged.pdf"
+        trackingFile =  abspath + "/tracking.csv"
+        mergedFile =  abspath + "/merged.pdf"
 
         # open file, create if it does not exist
         pageList = open(trackingFile, "a")
-
-        # if not os.path.exists(trackingFolder):
-        #     os.mkdir(trackingFolder)
-
 
         # write file lengths into separate file
         for f in files:
             print("reading length of {}".format(f))
             # creating a pdf reader object
             reader = PdfReader(format(f))
+            # additionally, remember the name of the original file
+            print("current ", format(f))
+            pageList.write(format(f))
+            pageList.write(",")
             pageList.write(str(len(reader.pages)))
             pageList.write(",")
 
