@@ -11,6 +11,9 @@ sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress o
 # ssh
 see https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys
 
+# git
+install 'less' in order to get git log etc to work
+
 # pacman
 ## customize mirror pool: 
 'sudo pacman-mirrors --country Germany,Denmark,Netherlands,France,Austria,Switzerland && sudo pacman -Syyu'
