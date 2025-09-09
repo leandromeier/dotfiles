@@ -3,57 +3,94 @@
 # that are given by a csv file 
 
 # created by: Leandro Meier
+
+
 import os, sys, re
 import pypdf
 import csv
 import string
-import fitz
 # fitz is in the library python-pymupdf
+# import fitz
 # import pdfreader
 from pypdf import PdfReader, PdfWriter
 from pathlib import Path
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
+    if len(sys.argv) <= 1 :
         print("merge.py [path]")
-        print("Short python script to split a pdf into a number of pdfs")
-        print("per page numbers specified in a separate csv file")
-        print("e.g. merge.py '/path/to/folder'   ")
+        print("Short python script to split a pdf into a number of pdfs per page numbers specified in a separate csv file")
+        print("e.g. unmerge.py '/path/to/folder' ")
+        print("the folder passed as an argument must contain a merged pdf file \n'merged.pdf' as well as a file 'tracking.csv' containing the data to split by \nin the form of lines [name, pagenumber] where pagenumber is the number of pages \nof the original file (to split back to)")
+        sys.exit()
         
     for path in sys.argv[1:]:
-        if os.path.exists(path) == False:
+        if not os.path.exists(path):
             print("Path doesn't exist: {}".format(path))
-            continue
+            sys.exit()
     else:
         abspath = os.path.abspath(path)
         mergedPath =  abspath + "/merged.pdf"
         trackingPath =  abspath + "/tracking.csv"
         print("Unmerging file {}".format(mergedPath))
         mergedFile = open(mergedPath) 
-        # print("opened file")
-        pages = [3,1,6,2] #to be replaced by actual list
         reader = PdfReader(mergedPath)
+        with open(trackingPath, mode ='r') as trackingFile:
+            csvFile = csv.reader(trackingFile)
+            start = 0
+            end = 0
+            for line in csvFile:
+                # if not len(line) == 2:
+                #     print("Are you sure this is the correct file?")
+                try:
+                    [fileName, page] = line
+                except ValueError:
+                    print("Are you sure this is the correct tracking data?")
+                    sys.exit()
+                try:
+                    p = int(page)
+                except ValueError:
+                    print('Something went wrong, page number not an integer')
+                    sys.exit()
+                print("Fetching original pages for " + fileName)
+                end = end + p
+                writer = PdfWriter()
+                outputPath = fileName
+                for i in range(start, end):
+                    try:
+                        writer.add_page(reader.pages[i])
+                    except IndexError:
+                        print("Page index out of bounds, check your page numbers")
+                        sys.exit()
+                    with open(outputPath, "wb") as newFile:
+                        writer.write(newFile)
+                start = start + p
 
 
-        # pdf counts pages starting at 0
-        start = 0
-        end = 0
-        k = 1
-        for p in pages:
-            end = end + p
-            writer = PdfWriter()
-            outputPath = abspath + "/file_" + str(k)+ ".pdf"
-            print(outputPath)
-            print(str(start))
-            print(str(end))
-            for i in range(start, end):
-                print(i)
-                writer.add_page(reader.pages[i])
-                with open(outputPath, "wb") as newFile:
-                    writer.write(newFile)
-            start = start + p
-            k = k+1
+
+
+
+
+
+
+        # # pdf counts pages starting at 0
+        # start = 0
+        # end = 0
+        # k = 1
+        # for p in pages:
+        #     end = end + p
+        #     writer = PdfWriter()
+        #     outputPath = abspath + "/file_" + str(k)+ ".pdf"
+        #     # print(outputPath)
+        #     # print(str(start))
+        #     # print(str(end))
+        #     for i in range(start, end):
+        #         # print(i)
+        #         writer.add_page(reader.pages[i])
+        #         with open(outputPath, "wb") as newFile:
+        #             writer.write(newFile)
+        #     start = start + p
+        #     k = k+1
 
 
 
