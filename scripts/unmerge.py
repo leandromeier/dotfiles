@@ -32,22 +32,29 @@ if __name__ == "__main__":
         print("Unmerging file {}".format(mergedPath))
         mergedFile = open(mergedPath) 
         # print("opened file")
-        pages = [1,3,4] #to be replaced by actual list
+        pages = [3,1,6,2] #to be replaced by actual list
         reader = PdfReader(mergedPath)
 
 
-
+        # pdf counts pages starting at 0
+        start = 0
+        end = 0
+        k = 1
         for p in pages:
-            k = 0
+            end = end + p
             writer = PdfWriter()
-            # outputPath = mergedFile.split('.pdf')[0] + str(k) + '.pdf'
             outputPath = abspath + "/file_" + str(k)+ ".pdf"
             print(outputPath)
-            for i in range(k+1,k+p+1):
+            print(str(start))
+            print(str(end))
+            for i in range(start, end):
+                print(i)
                 writer.add_page(reader.pages[i])
-                k += 1
-                with open(outputPath, "a") as newFile:
+                with open(outputPath, "wb") as newFile:
                     writer.write(newFile)
+            start = start + p
+            k = k+1
+
 
 
 
