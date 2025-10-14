@@ -1034,6 +1034,7 @@ endsnippet
 
 snippet tempmain "template for a main document" b
 \documentclass[a4paper]{$1}
+% \usepackage[]{subfiles}
 \usepackage[backend=bibtex,
 url=false,
 eprint=false,
@@ -1048,44 +1049,57 @@ sorting=nty]{biblatex}
 \email{\href{mailto:${6:leandro.meier@uni-jena.de}}{$6}}
 \subjclass[2020]{$7}
 \keywords{$8}
-
 \date{${9:Draft version \today}}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% packages
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{anyfontsize}
 \usepackage{enumerate}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{tikz-cd}
+%todo:delete xcolor
+\usepackage[]{xcolor}
 \usepackage[hidelinks]{hyperref}
+\usepackage[toc, page]{appendix}
 
-\setlength\parindent{0pt}
-
-% no thmstyle set -> default is plain
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% theorems with numbering
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
 
-%definitions and examples should not be cursive
+% theorems without numbering
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{conjecture*}{Conjecture}
+
+% definitions and examples, different styling
 \theoremstyle{definition} 
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% operators
 \DeclareMathOperator{\cadiv}{CaDiv}
-\DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\coeff}{coeff}
-\DeclareMathOperator{\Cone}{Cone}
-\DeclareMathOperator{\Conv}{Conv}
+\DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\codim}{codim}
-\let\div\relax
-\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\Cone}{Cone}
+\let\d\relax
+\DeclareMathOperator{\d}{discrep}
 \DeclareMathOperator{\ex}{Ex}
+\DeclareMathOperator{\face}{face}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\img}{im}
+\let\int\relax
+\DeclareMathOperator{\int}{int}
 \DeclareMathOperator{\Loc}{Loc}
 \DeclareMathOperator{\mld}{mld}
 \DeclareMathOperator{\Pol}{Pol}
@@ -1093,13 +1107,17 @@ sorting=nty]{biblatex}
 \DeclareMathOperator{\supp}{Supp}
 \DeclareMathOperator{\tail}{tail}
 \DeclareMathOperator{\TV}{TV}
-
 \newcommand{\sslash}{\mathbin{/\mkern-6mu/}}
 \newcommand{\nocontentsline}[3]{}
 \newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% styling
+\setlength\parindent{0pt}
 
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% actual document
 \begin{document}
 \maketitle
 \tableofcontents
