@@ -54,10 +54,8 @@ Import the file 'fmi-cups-pcl6-mono.ppd' (located under dotfiles)
 alternatively add manually a generic PCL6 driver,
 go check the default settings 
 
-
-
 # zoom 
-manual install:    
+## manual install:    
 1. Download the TAR.XZ installer file from our Download Center.
 2. Open the download location using a file manager.
 3. Right click in the file manager and click Terminal to open the terminal in the current location.
@@ -65,9 +63,10 @@ manual install:
   "sudo pacman -U zoom_x86_64.pkg.tar.xz"
 5. Enter your admin password and continue the installation when prompted.
    Pacman will also download and install the required dependencies
-
-Uninstalling:
+## Uninstalling:
 run "sudo pacman -Rs zoom"
 
-
+# TLP
+even if some permanent charge thresholds are set, tlp as a package might not be installed. 
+If sudo tlp start fails, check whether tlp is installed
 
