@@ -49,7 +49,7 @@ Then go to
 'http://localhost:631/'
 To log in to Admin, use your local laptop's admin credentials
 Click on "Administration" and "add printer", then choose "LPD/LPR Host or Printer" and 
-Into the field connection, copy 'LPD/LPR Host or Printer'
+Into the field connection, copy 'socket://mps02.mats.uni-jena.de'
 Import the file 'fmi-cups-pcl6-mono.ppd' (located under dotfiles)
 alternatively add manually a generic PCL6 driver,
 go check the default settings 

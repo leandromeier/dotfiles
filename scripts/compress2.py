@@ -32,12 +32,15 @@ if __name__ == "__main__":
                 if os.path.exists(subfolderPath) == False:
                     os.mkdir(subfolderPath)
                 if os.path.exists(newpath) == False:
-                    command = "ghostscript -sDEVICE=pdfwrite -dCompatibilityLevel=1.3 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile='{}' '{}'".format(
+                    command = "ghostscript -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile='{}' '{}'".format(
+                            #hiher CompatibilityLevel means higher quality, i.e. bigger file, less compression
+                    # command = "ghostscript -sDEVICE=pdfwrite -dCompatibilityLevel=1.3 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile='{}' '{}'".format(
                             newpath, f)
                     os.system(command)
 
-                # if the file size is bigger than 5mb, try a different compressing method
-                if os.path.getsize(newpath) > 5 * 1024 * 1024:
+                # if the file size is bigger than 4mb, try a different compressing method
+                if os.path.getsize(newpath) > 4 * 1024 * 1024:
+                # if os.path.getsize(newpath) > 5 * 1024 * 1024:
                     newpath2 = os.path.join(newAbspath, res[1] + "2")
                     if os.path.exists(newpath2) == False:
                         os.mkdir(newpath2)
