@@ -82,6 +82,9 @@ to get battery info: 'sudo tlp-stat -b'
 settings may be stored permanently (beyond current OS)
 edit the file under /etc/tlp.conf to set start and stop charge thresholds
 Default: start 75, stop 80
+Alternatively, in bash, run 'START_CHARGE_THRESH_BAT0=65' to start charging BAT1 at 65 percent
+and analogous commands for BAT1 and stop thresholds. 
+However, these might only be temporary thresholds.
 see also https://linrunner.de/tlp/index.html
 
 ## adjust brightness using ddcutil
