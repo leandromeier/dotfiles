@@ -1,0 +1,359 @@
+#  sway config
+#  leandromeier, 2023
+#  ~/.config/sway/config
+
+### Output configuration
+#
+# Monitor configuration
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+# coordinates need to be non-negative
+output eDP-1 resolution 1920x1080 position 0 0
+# output HDMI-A-2  resolution 2560x1440 position 1920 0 scale 1 
+# output HDMI-A-2  resolution 2560x1440 position 1920,0
+output DP-3  resolution 2560x1440 position 1920,0
+
+
+# Your preferred terminal emulator
+set $term alacritty -e fish
+# Your preferred browser
+set $browser MOZ_ENABLE_WAYLAND=1 firefox 
+#set $browser firefox
+# Your preferred file manager
+set $fileman dolphin
+# Your preferred application launchers
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $launcher fuzzel
+#set $launcher rofi -show drun -show-icons -drun-match-fields name drun-display-format {name}
+# Your preferred mixing program
+set $mixer pavucontrol
+# your preferred messenger application
+set $signal 'signal-desktop --password-store="gnome-libsecret"'
+# set $signal 'signal-desktop'
+# your preferred note-taking application
+set $xournal 'xournalpp'
+# your preferred email program
+set $thund MOZ_ENABLE_WAYLAND=1 thunderbird 
+# spotify
+set $spot 'spotify'
+# preferred bluetooth manager
+set $blth 'blueman-manager'
+# preferred network manager
+set $nm alacritty -e nmtui
+# open ranger in a terminal in the books folder
+set $books alacritty -e ranger
+# open ranger at specific location
+set $peace alacritty -e ranger ~/Peaceful_Ambience
+# locker (swaylock configs) for just swaylock, remove grace
+# set $locker swaylock -f -F -e -k -l --grace 6
+
+
+# open specific programs in specific workspaces
+# the syntax is 
+# assign <match_criteria> <workspace_name>
+assign [app_id="thunderbird"] "9"
+
+
+# Logo key. Use Mod1 for Alt.
+# Logo key. Use Mod4 for super/windows key.
+# Logo key. Use Mod5 for Alt Gr.
+set $mod Mod4
+set $mod1 Mod1
+
+
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+### Idle configuration
+# 
+#::::Inhibit Idle if a window is fullscreen:::;
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
+
+#::::::::::fullscreen apps:::::::::
+for_window [app_id="mpv"] open
+# it seems that specifying "fullscreen" makes mpv open in fullscreen as default
+#for_window [app_id="mpv"] fullscreen 
+# for_window [app_id="vlc"] fullscreen
+#for_window [class="^(steam_app_*|steam)$"] fullscreen
+for_window [app_id="spotify"] fullscreen
+
+# timeout before suspend. Use loginctl lock-session to lock your screen.
+set $locktime 1200 
+# 20 minutes
+set $bltime 300
+# 5 minutes
+
+# locks your screen after $locktime seconds, and turns it black after $bltime seconds
+# we want a short grace period here but not in systemctl suspend, hence it's not in the config file
+exec swayidle -w \
+	timeout $locktime 'swaylock --grace 6 -C /home/leandro/.config/swaylock/config' \
+	timeout $bltime 'swaymsg "output * dpms off"' \
+		resume 'swaymsg "output * dpms on"' \
+	before-sleep 'swaylock -C /home/leandro/.config/swaylock/config' 
+
+# Wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg ~/Documents/dotfiles/sway/background.jpg fit
+
+
+# using mod1 + certain keys looks up the commands in a script
+bindsym $mod1+a exec "./Documents/dotfiles/scripts/shortcut.sh a"
+bindsym $mod1+b exec "./Documents/dotfiles/scripts/shortcut.sh b"
+
+
+# Calls a script checking whether an external monitor is connected
+# if yes, toggles primary screen
+bindsym $mod1+s exec  "./Documents/dotfiles/scripts/monitor-off.sh"
+# calls a script turning only the primary on 
+bindsym $mod1+m exec  "./Documents/dotfiles/scripts/monitor-external-off.sh"
+
+### Input configuration
+# Mouse
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+#
+
+# Keyboard
+# old:
+input type:keyboard { 
+  xkb_layout "ch"
+  xkb_variant "de_nodeadkeys"
+  xkb_options "caps:swapescape"
+}
+# new:
+# input * { 
+#   xkb_layout ch
+#   xkb_variant de_nodeadkeys
+#   xkb_options caps:swapescape
+# }
+
+#change to 'map_to_output eDP-1' to get the graphics tablet to map to primary monitor
+#change to 'map_to_output DP-3' to get the graphics tablet to map to secondary monitor
+# use 'swaymsg -t get_outputs' to get output list
+  #map_to_output eDP-1
+  #map_to_output DP-4
+input type:tablet_tool {
+  map_to_output eDP-1
+}
+
+#enable floating for selected applications
+for_window [app_id="org.gnome.Settings"] floating enable
+# while this enables the settings to float, it does not solve the access unlock problem
+
+
+### Key bindings
+#
+# Basics:
+#
+    # Start applications
+    bindsym $mod+Return exec $term            # Terminal
+    bindsym $mod+t exec $term                 # Terminal
+    bindsym $mod+space exec $launcher         # Launcher
+    bindsym $mod+d exec $menu                 # D-menu
+
+    bindsym $mod+b exec $browser              # Browser
+    bindsym $mod+Shift+f exec $fileman        # File manager
+    bindsym $mod+Shift+s exec $signal         # signal
+    bindsym $mod+Shift+x exec $xournal        # xournalpp
+
+    bindsym $mod+shift+t exec $thund          # thunderbird 
+    bindsym $mod+shift+v exec $spot           # spotify
+    bindsym $mod+v exec $mixer                # pavucontrol
+    bindsym $mod+shift+b exec $blth           # blueman
+
+    bindsym $mod+p exec $peace
+    bindsym $mod+n exec $nm                   # nmtui 
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Screenshots 
+    # full screen
+    bindsym $mod+c exec grim -t jpeg ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+    # region select
+    bindsym $mod+shift+c exec grim -t jpeg -g "$(slurp)" ~/Documents/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+
+    # Lock using swaylock
+    # we want a short grace period here but not in systemctl suspend, hence it's not in the config file
+    bindsym $mod+o exec 'swaylock --grace 2 -C /home/leandro/.config/swaylock/config'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1 
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+
+# Layout stuff:
+#
+    # "split" the current object of your focus
+    bindsym $mod+i splith
+    bindsym $mod+minus splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+    # Popup behaviour during fullscreen
+    popup_during_fullscreen smart
+
+    # # Toggle the current focus between tiling and floating mode
+    # bindsym $mod+Shift+space floating toggle
+
+    # # Swap focus between the tiling area and the floating area
+    # bindsym $mod+escape focus mode_toggle
+
+    # # Move focus to the parent container
+    # bindsym $mod+a focus parent
+
+
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 20px
+    bindsym $down resize grow height 20px
+    bindsym $up resize shrink height 20px
+    bindsym $right resize grow width 20px
+
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 5px
+    bindsym Down resize grow height 5px
+    bindsym Up resize shrink height 5px 
+    bindsym Right resize grow width 5px 
+
+    #bindsym $mod+Shift+$left shrink width 1px
+    #bindsym $mod+Shift+$down grow height 1px
+    #bindsym $mod+Shift+$up shrink height 1px
+    #bindsym $mod+Shift+$right grow width 1px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Hide Title bar
+default_border pixel 3
+hide_edge_borders smart
+
+set $bg #000000
+set $fg #ffffff
+set $br #40e0d0
+#set $br #940BAD
+
+#class                    border  backgr. text  indicator child_border
+client.focused            $br     $br     $fg   $br       $br
+client.focused_inactive   $bg     $bg     $fg   $bg       $bg
+client.unfocused          $bg     $bg     $fg   $bg       $bg
+
+
+#
+# Status Bar:
+exec --no-startup-id waybar
+
+#start nm-applet (for wifi symbol)
+exec_always nm-applet
+
+#start gammastep (adjust color temp automatically for day/night)
+exec_always gammastep
+
+#start bluetooth service
+exec systemctl enable bluetooth.service
+
+#hide cursor when idle (after approx. 5-6 seconds)
+seat * hide_cursor 8000
+
+#hide cursor when typing
+seat * hide_cursor when-typing enable
+
+
+#
+# Media keys
+#
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% 
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% 
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
+
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle   #toggle mute mic
+
+
+# Brightness controls
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-                      #brightness down
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%                        #brightness up
+# bindsym Shift+XF86MonBrightnessDown exec brightnessctl set 1%-                #brightness down fine
+# bindsym Shift+XF86MonBrightnessUp exec brightnessctl set +1%                  #brightness up fine
+
+# screen sharing
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+include /etc/sway/config.d/*
+
