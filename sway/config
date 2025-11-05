@@ -143,7 +143,7 @@ input type:keyboard {
   #map_to_output eDP-1
   #map_to_output DP-4
 input type:tablet_tool {
-  map_to_output eDP-1
+  map_to_output DP-3
 }
 
 #enable floating for selected applications
