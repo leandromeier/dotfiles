@@ -1,5 +1,6 @@
 ### Navigation
 alias d='cd'
+alias dup='cd ..'
 alias q='exit'
 alias :q='exit'
 
