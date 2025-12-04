@@ -1,6 +1,9 @@
 ### Navigation
-alias d='cd'
-alias dup='cd ..'
+# alias d='cd'
+function d
+    cd $argv && lsd  -la
+end
+alias dup='cd .. && lsd -la'
 alias q='exit'
 alias :q='exit'
 
@@ -17,6 +20,7 @@ alias o='vim -mR'
 # ls
 alias ls='lsd'
 alias s='lsd -la'
+
 
 # ranger
 alias r='ranger'

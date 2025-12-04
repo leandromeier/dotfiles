@@ -65,7 +65,6 @@ To execute, run '/.filename.sh'.
 to copy text content under a url to a file
 'curl -fLo path/to/file <url>
 
-
 ## connect to FSU (FMI) net via openconnect
 'sudo openconnect -b --useragent 'AnyConnect' --user=to75teh@uni-jena.de --pid-file=/var/run/vpn.pid --timestamp --syslog vpn.sci.uni-jena.de'
 
@@ -101,7 +100,6 @@ to get more info on feature 10
 to set a value for feature 10: (here value = 70)
 'ddcutil setvcp 10 70'
 
-
 ## manually installing packages 
 ### from github
 1. clone the git repo
@@ -109,5 +107,11 @@ to set a value for feature 10: (here value = 70)
 3. run "sudo python setup.py install"
     to update: 
     run the same command (after pulling the changes)
+
+## formatting usb drives
+0. run lsblk to see drives
+1. unmount the drive: 'sudo umount /dev/[device_name]'
+1.5. run lsblk again to see that step 1 worked
+2. to format in FAT32 (maximum compatibility): 'sudo mkfs.vfat /dev/[device_name]'
 
 
