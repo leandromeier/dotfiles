@@ -1256,6 +1256,16 @@ snippet nbhd "neighborhood" i
 neighborhood $0
 endsnippet
 
+context "not math()" 
+snippet nvol "normalized volume" i
+normalized volume $0
+endsnippet
+
+context "not math()" 
+snippet Kss "K-semistab" i
+$K$-semistability $0
+endsnippet
+
 #auto correct 'i' to 'I' outside math mode
 context "not math()"
 snippet i "i" 
@@ -1416,7 +1426,7 @@ snippet cite "cite" w
 endsnippet
 
 context "not math()"
-snippet ref "ref" i
+snippet ref "ref" w
 \ref{$1} $0
 endsnippet
 
@@ -1441,9 +1451,3 @@ snippet specch "special character" i
 \\$1{$2} $0
 endsnippet
 
-
-#oberwolfach stuff
-context "not math()"
-snippet it "emph{}" w
-\textit{${1:${VISUAL}}}$0
-endsnippet
