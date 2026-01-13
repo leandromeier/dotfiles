@@ -113,5 +113,5 @@ to set a value for feature 10: (here value = 70)
 1. unmount the drive: 'sudo umount /dev/[device_name]'
 1.5. run lsblk again to see that step 1 worked
 2. to format in FAT32 (maximum compatibility): 'sudo mkfs.vfat /dev/[device_name]'
-
+Make sure the package 'dosfstool' is installed if mkfs.vfat is not known
 
