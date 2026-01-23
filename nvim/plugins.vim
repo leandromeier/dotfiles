@@ -34,6 +34,8 @@ Plug 'lervag/vimtex'
 Plug 'itchyny/lightline.vim'
 " supertab (to avoid ycm and ultisnips clashing)
 "Plug 'ervandew/supertab'
+" vim-tex-labels (labels in a side pane)
+Plug 'Xunius/vim-tex-labels'
 "
 call plug#end()
 " plugin configuration
