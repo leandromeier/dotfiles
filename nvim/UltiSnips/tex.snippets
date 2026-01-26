@@ -515,7 +515,7 @@ endsnippet
 
 context "math()"
 snippet Spc "Spec ( )" i
-\Specc \left( $1 \right) $0
+\Spec_{$1} \left( $2 \right) $0
 endsnippet
 
 context "math()"
@@ -532,8 +532,13 @@ endsnippet
 
 context "math()"
 snippet Pol "Pol( )" i
-\Pol_{$1}^{+}\left( $2, $3\right) $0
+\Pol_{\mathbb{Q}}^{+}\left( N, \sigma \right) $0
 endsnippet
+
+# context "math()"
+# snippet Pol "Pol( )" i
+# \Pol_{$1}^{+}\left( $2, $3\right) $0
+# endsnippet
 
 context "math()"
 snippet cadiv "CaDiv( )" i
