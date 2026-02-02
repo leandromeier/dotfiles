@@ -898,16 +898,33 @@ snippet abss "| |" i
 endsnippet
 
 
-#intervals (using the package interval)
+#intervals (not using any package)
+context "math()"
+snippet intr "[-,-)" w
+\left[ $1, $2 \right) $0
+endsnippet
+
 context "math()"
 snippet rinter "[-,-)" w
-\\rinterval{$1}{$2} $0
+\left[ $1, $2 \right) $0
 endsnippet
 
 context "math()"
 snippet linter "(-,-]" w
-\\linterval{$1}{$2} $0
+\left( $1, $2 \right] $0
 endsnippet
+
+
+#intervals (using the package interval)
+# context "math()"
+# snippet rinter "[-,-)" w
+# \\rinterval{$1}{$2} $0
+# endsnippet
+
+# context "math()"
+# snippet linter "(-,-]" w
+# \\linterval{$1}{$2} $0
+# endsnippet
 
 
 # styling
