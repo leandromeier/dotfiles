@@ -36,6 +36,8 @@ Plug 'itchyny/lightline.vim'
 "Plug 'ervandew/supertab'
 " vim-tex-labels (labels in a side pane)
 Plug 'Xunius/vim-tex-labels'
+" NERDTree for browsing files from vim
+Plug 'preservim/nerdtree'
 "
 call plug#end()
 " plugin configuration

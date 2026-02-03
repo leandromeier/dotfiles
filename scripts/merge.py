@@ -36,13 +36,22 @@ if __name__ == "__main__":
                 print("Path doesn't exist: {}".format(path))
                 continue
 
+
+        #helper function to trim off excess '/' at the end
+        def trim_slash(s):
+            if s[len(s)-1] == "/":
+                return s[ :len(s)-1 ]
+            return s
+
+        argFolderName = trim_slash(sys.argv[1])
         abspath = os.path.abspath(path)
         print("Merging files in {}".format(abspath))
         files = [os.path.abspath(os.path.join(root, name)) 
                     for root, dirs, files in
                     os.walk(path) for name in files]
-        trackingFile =  abspath + "/tracking.csv"
-        mergedFile =  abspath + "/merged.pdf"
+        trackingFile =  abspath + "/" + argFolderName + "_tracking.csv"
+        #todo: with regex, determine the name of the folder. or just take the argument name that was passed to this program
+        mergedFile =  abspath + "/" + argFolderName + "_merged.pdf"
         # open file, create if it does not exist
         pageList = open(trackingFile, "a")
         result = fitz.open()
@@ -61,3 +70,8 @@ if __name__ == "__main__":
         result.save(mergedFile)
         # merge files
         # for pdf in files:
+
+
+
+
+
