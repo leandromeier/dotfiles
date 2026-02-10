@@ -77,6 +77,7 @@ are stored under .local/state/nvim/swap
 ## tlp
 to start: 'sudo tlp start'
 to get status: tlp-stat -s'
+to charge BAT0 fully once: 'sudo tlp fullcharge BAT0'
 to get battery info: 'sudo tlp-stat -b'
 settings may be stored permanently (beyond current OS)
 edit the file under /etc/tlp.conf to set start and stop charge thresholds
