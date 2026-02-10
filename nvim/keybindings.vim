@@ -11,6 +11,7 @@ inoremap <C-l> <esc>:write<CR>a
 
 " opening things
 nnoremap <leader>op :NERDTreeToggle<CR>
+nnoremap <leader>nn :NERDTreeToggle<CR>
 nnoremap <leader>ot :silent !alacritty &<CR>
 
 " windows
@@ -73,11 +74,16 @@ let cmdline_map_send_and_stay  = '<LocalLeader><Enter>'
 
  
 " easycomplete
-nnoremap <leader>e :EasyCompleteEnable<CR>
-nnoremap <leader>d :EasyCompleteDisable<CR>
+" nnoremap <leader>e :EasyCompleteEnable<CR>
+" nnoremap <leader>d :EasyCompleteDisable<CR>
 "nnoremap <C-k> :EasyCompleteNextDiagnostic<CR>
 "nnoremap <C-j> :EasyCompletePreviousDiagnostic<CR>
 "noremap gr EasyCompleteReference<C>
 "noremap gd :EasyCompleteGotoDefinition<CR>
 "noremap rn :EasyCompleteRename<CR>
 "noremap gb :BackToOriginalBuffer<CR>
+"
+"
+" spellcheck
+nnoremap <leader>de :set spell spelllang=de
+nnoremap <leader>en :set spell spelllang=en

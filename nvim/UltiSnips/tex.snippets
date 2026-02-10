@@ -266,7 +266,7 @@ endsnippet
 
 context "math()"
 snippet homco "homogeneous coordinates" i
-[$1_{$2} : \dots : $1_{$3}]
+\left[$1_{$2} : \dots : $1_{$3}\right]
 endsnippet
 
 # context "math()"
@@ -823,7 +823,7 @@ snippet bfm "boldsymbol" iA
 endsnippet
 
 context "math()"
-snippet text "\text{}" wA
+snippet txt "\text{}" wA
 \text{ ${1:${VISUAL}} } $0
 endsnippet
 
@@ -898,16 +898,33 @@ snippet abss "| |" i
 endsnippet
 
 
-#intervals (using the package interval)
+#intervals (not using any package)
+context "math()"
+snippet intr "[-,-)" w
+\left[ $1, $2 \right) $0
+endsnippet
+
 context "math()"
 snippet rinter "[-,-)" w
-\\rinterval{$1}{$2} $0
+\left[ $1, $2 \right) $0
 endsnippet
 
 context "math()"
 snippet linter "(-,-]" w
-\\linterval{$1}{$2} $0
+\left( $1, $2 \right] $0
 endsnippet
+
+
+#intervals (using the package interval)
+# context "math()"
+# snippet rinter "[-,-)" w
+# \\rinterval{$1}{$2} $0
+# endsnippet
+
+# context "math()"
+# snippet linter "(-,-]" w
+# \\linterval{$1}{$2} $0
+# endsnippet
 
 
 # styling
@@ -1234,22 +1251,32 @@ endsnippet
 
 context "not math()" 
 snippet Tinv "T-invariant" i
-\$${1:T}\$-invariant $0
+\$T\$-invariant $0
+endsnippet
+
+context "not math()" 
+snippet Ginv "G-invariant" i
+\$${1:G}\$-invariant $0
 endsnippet
 
 context "not math()" 
 snippet Teq "T-equivariant" i
-\$${1:T}\$-equivariant $0
+\$T\$-equivariant $0
+endsnippet
+
+context "not math()" 
+snippet Geq "G-equivariant" i
+\$${1:G}\$-equivariant $0
 endsnippet
 
 context "not math()" 
 snippet Tvar "T-variety" i
-\$${1:T}\$-variety $0
+\$T\$-variety $0
 endsnippet
 
 context "not math()" 
 snippet Tvars "T-varieties" i
-\$${1:T}\$-varieties $0
+\$T\$-varieties $0
 endsnippet
 
 context "not math()" 
