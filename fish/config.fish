@@ -15,3 +15,11 @@ set -gx EDITOR nvim
 if status is-login
   dbus-run-session sway
 end
+
+# keychain
+# this will ask to unlock the .ssh key the first time you open a terminal 
+# per login, then it'll be unlocked for all following (fish shell) terminal instances
+if type -q keychain
+    SHELL=(which fish) keychain --quiet --eval id_ed25519 | source
+end
+
