@@ -116,3 +116,7 @@ alias yt-video-best='yt-dlp -f "bv"'
 
 # arxiv-downloader
 alias arx='arxiv-downloader'
+
+# tlp
+alias fullcharge0='sudo tlp fullcharge BAT0'
+alias fullcharge1='sudo tlp fullcharge BAT1'
