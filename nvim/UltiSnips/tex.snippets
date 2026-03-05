@@ -1462,13 +1462,18 @@ endsnippet
 
 # citations and references
 context "not math()"
-snippet pcite "parencite" i
-\parencite{$1} $0
+snippet pcite "cite" i
+\cite[$2]{$1} $0
 endsnippet
 
 context "not math()"
 snippet cite "cite" w
-\cite{$1} $0
+\cite[$2]{$1} $0
+endsnippet
+
+context "not math()"
+snippet tcite "theorem-cite" w
+{\cite[$2]{$1}} $0
 endsnippet
 
 context "not math()"
