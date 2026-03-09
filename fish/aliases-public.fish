@@ -16,6 +16,8 @@ alias vim='nvim '
 # readonly alias
 alias vr='vim -mR'
 alias o='vim -mR'
+# vimdiff in nvim
+alias vimdiff='nvim -d'
 
 # ls
 alias ls='lsd'
