@@ -40,3 +40,6 @@ let g:clipboard = {
 
 " hide the double insert mode. This mostly fixes the flickering text issue with vimtex, now it's only the cursor flickering
 set noshowmode
+
+" customize the behavior of vim-tex-labels
+let g:vim_tex_label_context_lines = 1
