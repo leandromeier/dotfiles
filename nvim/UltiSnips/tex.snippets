@@ -1502,3 +1502,17 @@ snippet specch "special character" i
 \\$1{$2} $0
 endsnippet
 
+context "not math()"
+snippet aufg "aufgabe" i
+\begin{aufgabe}[$1]
+  \color{white} 
+  \tiny
+  .\\
+  \normalsize
+  \color{black} 
+  $2
+\end{aufgabe}
+\medskip
+$0
+endsnippet
+
