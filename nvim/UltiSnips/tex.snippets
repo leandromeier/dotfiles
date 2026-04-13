@@ -1547,16 +1547,46 @@ snippet specch "special character" i
 endsnippet
 
 context "not math()"
+snippet AI "AI prompt" i
+\color{white} 
+\tiny
+.\\\\
+\normalsize
+\color{black} 
+$0
+endsnippet
+
+context "not math()"
 snippet aufg "aufgabe" i
 \begin{aufgabe}[$1]
   \color{white} 
   \tiny
-  .\\
+  .\\\\
   \normalsize
   \color{black} 
   $2
 \end{aufgabe}
 \medskip
 $0
+endsnippet
+
+context "not math()" 
+snippet mds "medskip" i
+\\medskip
+endsnippet
+
+context "not math()" 
+snippet Rbas "R-Basis" i
+\$${1:R}\$-Basis $0
+endsnippet
+
+context "not math()" 
+snippet Rmod "R-Modul" i
+\$${1:R}\$-Modul $0
+endsnippet
+
+context "not math()" 
+snippet Rmn "R-Moduln" i
+\$${1:R}\$-Moduln $0
 endsnippet
 
