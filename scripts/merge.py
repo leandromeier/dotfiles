@@ -36,7 +36,6 @@ if __name__ == "__main__":
                 print("Path doesn't exist: {}".format(path))
                 continue
 
-
         #helper function to trim off excess '/' at the end
         def trim_slash(s):
             if s[len(s)-1] == "/":
@@ -59,7 +58,12 @@ if __name__ == "__main__":
             res = re.search("{}/([^/]+)".format(abspath), f)
             subfolderPath = os.path.join(abspath, res[1])
             # it is easier to save the new filenames here than in unmerge.py
-            newFilename = os.path.join(subfolderPath, Path(f).stem + "_corrected.pdf")
+            filePath = Path(f).stem
+            # remove "," from filenames since they interfere with ',' as separator in csv
+            for i, char in enumerate(filePath):
+                if char == ",":
+                    filePath = filePath[:i] + "_" + filePath[i+1:]
+            newFilename = os.path.join(subfolderPath, filePath + "_corrected.pdf")
             print("Merging {}".format(f))
             reader = PdfReader(format(f))
             # save name and length to csv file
@@ -68,8 +72,6 @@ if __name__ == "__main__":
             with fitz.open(f) as mfile:
                 result.insert_pdf(mfile)
         result.save(mergedFile)
-        # merge files
-        # for pdf in files:
 
 
 
