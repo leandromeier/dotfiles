@@ -70,3 +70,17 @@ run "sudo pacman -Rs zoom"
 even if some permanent charge thresholds are set, tlp as a package might not be installed. 
 If sudo tlp start fails, check whether tlp is installed
 
+# Restore USB as empty
+" To restore the USB drive as an empty, usable storage device after using the Arch ISO image, the ISO 9660 filesystem signature needs to be removed by running wipefs --all /dev/disk/by-id/usb-My_flash_drive as root, before repartitioning and reformatting the USB drive. " from https://wiki.archlinux.org/title/USB_flash_installation_medium
+
+1. 'wipefs --all /dev/sd[x]'
+2. 'sudo parted /dev/sdX'
+3. (parted) 'print'
+4. (parted) 'mklabel', then answer label type 'msdos'
+5. (parted) 'mkpart', then answer partition type (primary) and file system type (eg ext4), as well as Start (0%) and End (100%)
+6. (parted) 'print' again to see what we created
+7. (parted) 'align-check' to check partition alignment
+8. Reformat: makefs.ext4 /dev/sdX
+
+If no permission to write etc. exists afterwards, try to fix access rights by running
+'sudo chown -R USER:USER /path/to/mountpoint/'
