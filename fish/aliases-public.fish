@@ -4,6 +4,7 @@ function d
     cd $argv && lsd  -la
 end
 alias dup='cd .. && lsd -la'
+alias up='cd .. && lsd -la'
 alias q='exit'
 alias :q='exit'
 
