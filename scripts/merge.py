@@ -27,8 +27,6 @@ if __name__ == "__main__":
         
         # todos:
         # check if the merging and csv files exist already
-        # maybe: deal with different file sizes (one eternal page vs several ones)
-        # maybe: incorporate compression before merging
 
     else:
         for path in sys.argv[1:]:

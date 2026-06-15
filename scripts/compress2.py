@@ -7,7 +7,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("compress.py [path]")
         print("This script compresses moodle submissions directories using ghostscript's pdfwrite")
-        print("e.g. compress.py '/path/to/submission_folder' creates a new folder\nnamed '/path/to/submission_folder_compressed' with all the compressed pdf files.")
+        print("e.g. compress.py '/path/to/submission_folder' creates a new folder\nnamed '/path/to/submission_folder_compressed' with the same subfolder strucutre, containing the compressed pdf files.")
     else:
         for path in sys.argv[1:]:
             if os.path.exists(path) == False:
