@@ -307,6 +307,16 @@ snippet aset "{ ... }" iA
 endsnippet
 
 context "math()"
+snippet 0set "{ 0,...,k}" wA
+\\nset{$1} $0
+endsnippet
+
+context "math()"
+snippet 1set "{ 1, ... , k}" wA
+\\mset{$1} $0
+endsnippet
+
+context "math()"
 snippet ems "\emptyset" iA
 \emptyset $0
 endsnippet
@@ -764,7 +774,7 @@ endsnippet
 priority 10
 context "math()"
 snippet "hat" "hat" ri
-\hat{$1}$0
+\widehat{$1}$0
 endsnippet
 
 priority 10
@@ -816,7 +826,7 @@ endsnippet
 priority 70
 context "math()"
 snippet "([a-zA-Z])hat" "hat" riA
-\hat{`!p snip.rv=match.group(1)`}
+\widehat{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 70
