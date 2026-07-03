@@ -780,7 +780,7 @@ endsnippet
 priority 10
 context "math()"
 snippet "tilde" "tilde" ri
-\tilde{$1}$0
+\widetilde{$1}$0
 endsnippet
 
 # regex fonts and overhead symbols
@@ -802,7 +802,7 @@ endsnippet
 priority 70
 context "math()"
 snippet "([a-zA-Z])tilde" "tilde" riA
-\tilde{`!p snip.rv=match.group(1)`}
+\widetilde{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 70
@@ -1636,3 +1636,14 @@ snippet Rmn "R-Moduln" i
 \$${1:R}\$-Moduln $0
 endsnippet
 
+context "math()"
+snippet jac "Jacoby symbol" i
+\left( 
+  \begin{array}{c}
+	$1 \\\\
+	\\hline
+	$2
+  \end{array}
+\right)
+$0
+endsnippet
