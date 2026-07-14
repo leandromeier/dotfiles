@@ -15,7 +15,7 @@ ideally run something like
 where 
     -t specifies the ed25519 key type
     -C is a comment to help identify the key (usually email address)
-    -f specifies the file name (convention: MM_YYYY of creation)
+    -f specifies the file name. However, then you need to tell the ssh agent what the name is (if it's not the default one)
 
 # git
 install 'less' in order to get git log etc to work
