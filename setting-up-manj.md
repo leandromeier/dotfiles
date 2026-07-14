@@ -10,6 +10,12 @@ sudo dd bs=4M if=/path/to/manjaro.iso of=/dev/sd[drive letter] status=progress o
 
 # ssh
 see https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys
+ideally run something like
+'ssh-keygen -t ed25519 -C "example@example.com" -f ~/.ssh/id_ed25519_example'
+where 
+    -t specifies the ed25519 key type
+    -C is a comment to help identify the key (usually email address)
+    -f specifies the file name (convention: MM_YYYY of creation)
 
 # git
 install 'less' in order to get git log etc to work
