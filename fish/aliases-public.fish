@@ -123,3 +123,6 @@ alias arx='arxiv-downloader'
 # tlp
 alias fullcharge0='sudo tlp fullcharge BAT0'
 alias fullcharge1='sudo tlp fullcharge BAT1'
+
+# untar
+alias untar='tar -xvf'
