@@ -116,3 +116,5 @@ to set a value for feature 10: (here value = 70)
 2. to format in FAT32 (maximum compatibility): 'sudo mkfs.vfat /dev/[device_name]'
 Make sure the package 'dosfstool' is installed if mkfs.vfat is not known
 
+## markdown to pdf
+pandoc input.md -o output.pdf
