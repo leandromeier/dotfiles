@@ -20,13 +20,17 @@ The following decompresses as well but does not remember folder structure of the
 
 
 ## How to connect a device to this laptop via bluetooth, using bluez
-Start bluez (bluetoothctl)
+run 'bluetoothctl' to start bluez
 'power on'
 'pairable on'
 'scan on'
 'pair ...' to pair with desired device
 'trust ...' to trust desired device (should eliminate the need to re-pair)
 'connect ...' to conect to desired device (will not always work)
+### other commands in bluez
+- 'devices' to get a list of connected devices
+- 'remove <MAC-address<'
+
 
 ### in case connecting via blueman does not work (keeps disconnecting when pairing)
 in the file /etc/bluetooth/input.conf change the line `UserspaceHID=true` to `UserspaceHID=false`
@@ -60,6 +64,7 @@ Of course, replacing the 7 and 5's by other digits yields other results, cf. htt
 Write a script: create a file 'filename.sh'. Its first line must consist only of '#!/bin/bash'.
 To make it executable, go into bash and run 'chmod +x filename.sh'.
 To execute, run '/.filename.sh'.
+To execute from anywhere: put it into path, or just make up a fish alias
 
 ## curl
 to copy text content under a url to a file

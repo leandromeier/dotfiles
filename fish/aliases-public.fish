@@ -126,3 +126,6 @@ alias fullcharge1='sudo tlp fullcharge BAT1'
 
 # untar
 alias untar='tar -xvf'
+
+# call the script that fixes Bose bluetooth connection
+alias fixbl='~/Documents/dotfiles/scripts/fix_bluetooth_audio.sh'
