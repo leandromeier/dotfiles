@@ -123,3 +123,27 @@ Make sure the package 'dosfstool' is installed if mkfs.vfat is not known
 
 ## markdown to pdf
 pandoc input.md -o output.pdf
+
+## yay exit codes (AI summary, unofficial)
+Common yay/pacman exit codes:
+
+    0: Success
+    1: Unknown error
+    2: Operation not permitted
+    3: Invalid argument
+    4: Argument not found
+    5: Invalid operation
+    6: Database not found
+    7: Package not found
+    8: Target not found
+    9: Local database mismatch
+    10: Configuration error
+    11: Transaction error
+    12: GPG error
+    13: Lock error
+    14: Download error
+    15: Package integrity error
+    16: Free space error
+    17: Package upgrade on hold or Package is on hold (need to verify)
+    18: Refresh database error
+    19: Unknown error (sometimes

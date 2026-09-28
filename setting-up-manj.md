@@ -90,3 +90,13 @@ If sudo tlp start fails, check whether tlp is installed
 
 If no permission to write etc. exists afterwards, try to fix access rights by running
 'sudo chown -R USER:USER /path/to/mountpoint/'
+
+
+# Installing additional fonts (e.g. for LibreOffice Writer)
+
+1. Find the font you want and download it to your computer. Make sure you extract/save it where you can easily find it. The file should be with the extension ttf or otf.
+2. Open your file manager and navigate to the font file. Right-click the font and choose “Copy.” Now, go to the system font directory, typically located at “/usr/share/fonts/” or “~/.fonts/” at your home directory.
+3. In the font directory, right-click and select “Paste” to copy the font file into the directory.
+4. In some cases, you may need to update the font cache for the system to recognize the newly installed font. Open a terminal and enter the following command: “fc-cache -f -v“.
+5. Close and reopen LibreOffice or OpenOffice to access the installed font in your office suite.
+
