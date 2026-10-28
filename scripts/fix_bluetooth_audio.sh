@@ -6,6 +6,14 @@
 # Device MAC address (replace with your actual MAC)
 DEVICE_MAC="BC:87:FA:48:42:CA"  
 
+# I added a conditional, but forcing a connection directly does not seem to work
+# if the headphones are still connected to another device
+# if bluetoothctl info "$DEVICE_MAC" |
+#   grep -q 'Connected: yes'; then
+#   echo "Disconnecting headphones..."
+#   bluetoothctl disconnect "$DEVICE_MAC"
+#   sleep 1
+# fi
 echo "Disconnecting headphones..."
 bluetoothctl disconnect "$DEVICE_MAC"
 sleep 1
